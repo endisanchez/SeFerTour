@@ -22,9 +22,9 @@ Route::get('/endika', function () {
 });
 
 Route::get('/ivan', function () {
-    return view('indexEndika');
+    return view('indexIvan');
 });
 
 Route::get('/jon', function () {
-    return view('indexEndika');
+    return view('indexJon');
 });
