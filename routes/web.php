@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/endika', function () {
+    return view('indexEndika');
+});
+
+Route::get('/ivan', function () {
+    return view('indexEndika');
+});
+
+Route::get('/jon', function () {
+    return view('indexEndika');
+});
