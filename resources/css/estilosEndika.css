@@ -81,7 +81,7 @@ a:hover, a:focus {
  }
 
  #animaciontitulo:hover, #animaciontitulo:focus {
-     background-size: 25% 2px;
+     background-size: 22% 2px;
  }
 
  #titulo {
@@ -93,7 +93,7 @@ a:hover, a:focus {
  }
 
  #titulo:hover, #titulo:focus {
-     background-size: 25% 2px;
+     background-size: 22% 2px;
  }
 
  footer {
@@ -107,45 +107,45 @@ a:hover, a:focus {
 
  /* XS */
  @media only screen and (max-width: 576px) {
-   #titulo {
-     transition: none;
+   #animaciontitulo {
+       background-image: none;
    }
 
-   #titulo:hover, #titulo:focus {
-
+   #titulo {
+       background-image: none;
    }
  }
 
  /* SM */
  @media only screen and (min-width: 576px) and (max-width: 767px) {
-   #titulo {
-     
+   #animaciontitulo {
+       background-image: none;
    }
 
-   #titulo:hover, #titulo:focus {
-
+   #titulo {
+       background-image: none;
    }
  }
 
  /* MD */
  @media only screen and (min-width: 768px) and (max-width: 991px) {
-   #titulo {
-
+   #animaciontitulo {
+       background-image: none;
    }
 
-   #titulo:hover, #titulo:focus {
-
+   #titulo {
+       background-image: none;
    }
  }
 
  /* LG */
  @media only screen and (min-width: 992px) and (max-width: 1199px) {
-   #titulo {
-
+   #animaciontitulo {
+       background-image: none;
    }
 
-   #titulo:hover, #titulo:focus {
-
+   #titulo {
+       background-image: none;
    }
  }
 

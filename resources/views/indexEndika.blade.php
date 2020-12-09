@@ -73,8 +73,7 @@
         </div>
       </div>
       <div class="row d-flex mt-5">
-
-        <div class="flip-card col-12 col-xl-4 mb-5">
+        <div class="flip-card col-12 col-md-4 mb-5">
           <div class="flip-card-inner">
             <div class="flip-card-front mb-5 text-center">
               <div class="card-body">
@@ -86,13 +85,14 @@
             <div class="flip-card-back text-dark text-center">
               <div class="card-body">
                 <p class="card-text"><strong>Descubre sitios que te gusten en nuestra web.</strong></p>
-                <img class="img-fluid w-lg-100 rounded mb-2" src="img/sft1.jpg" alt="Card image cap">
+                <p>Visita la página de tours para descubrir nuevos lugares a los que viajar y de los que aprender.</p>
+                <img class="img-fluid mt-xl-3 rounded mb-2" src="img/sft1.jpg" alt="Card image cap">
               </div>
             </div>
           </div>
         </div>
 
-        <div class="flip-card col-12 col-xl-4 mb-5">
+        <div class="flip-card col-12 col-md-4 mb-5">
           <div class="flip-card-inner">
             <div class="flip-card-front text-center">
               <div class="card-body">
@@ -101,16 +101,17 @@
               </div>
             </div>
 
-            <div class="flip-card-back text-dark text-center bg-info">
+            <div class="flip-card-back text-dark text-center">
               <div class="card-body">
-                <p class="card-text strong"><strong>Aprende todo lo posible de los sitios que visites.</strong></p>
-                <img class="img-fluid w-lg-100 rounded mb-2" src="img/sft2.jpg" alt="Card image cap">
+                <p class="card-text"><strong>Aprende todo lo posible de los sitios que visites.</strong></p>
+                <p>Dicen que cada día se aprende algo nuevo, ponlo en práctica reservando uno de nuestros tours.</p>
+                <img class="img-fluid mt-xl-3 rounded mb-2" src="img/sft2.jpg" alt="Card image cap">
               </div>
             </div>
           </div>
         </div>
 
-        <div class="flip-card col-12 col-xl-4 mb-5">
+        <div class="flip-card col-12 col-md-4 mb-5">
           <div class="flip-card-inner">
             <div class="flip-card-front text-center">
               <div class="card-body">
@@ -121,8 +122,9 @@
 
             <div class="flip-card-back text-dark text-center">
               <div class="card-body">
-                <p class="card-text strong"><strong>Explora nuevos lugares que visitar.</strong></p>
-                <img class="img-fluid w-lg-100 rounded mb-2" src="img/sft3.jpg" alt="Card image cap">
+                <p class="card-text"><strong>Explora nuevos lugares que visitar.</strong></p>
+                <p>¿Quieres saber todo sobre el lugar al que vas a viajar? ¡Reserva tu tour ya y disfruta de la experiencia!</p>
+                <img class="img-fluid mt-xl-3 rounded mb-2" src="img/sft3.jpg" alt="Card image cap">
               </div>
             </div>
           </div>
