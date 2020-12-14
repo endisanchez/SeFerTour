@@ -131,7 +131,7 @@
 
           <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>Una empresa peque�a, dedicada a dar tours gartuitos por diferentes partes de espa�a y con la posibilidad
+          <p>Una empresa pequeña, dedicada a dar tours gartuitos por diferentes partes de españa y con la posibilidad
             de darse a conocer como guia.
           </p>
 
@@ -181,8 +181,7 @@
 
       </div>
     </div>
-
-    <div class="text-center py-3">� 2020 Copyright:
+    <div class="text-center py-3">© 2020 Copyright:
       <a href="#"> SeFerTour</a>
     </div>
 
