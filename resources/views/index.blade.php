@@ -32,7 +32,7 @@
                 <a class="nav-link text-white" data-toggle="dropdown" href="#" role="button" ><img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                  <a class="dropdown-item" href="#">Inicia Sesion</a>
+                  <a class="dropdown-item" href="{{ url('login') }}">Inicia Sesion</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Registrarse</a>
                 </div>
