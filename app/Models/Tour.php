@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Tour extends Model
 {
     use HasFactory;
+
+    public function cliente()
+	  {
+    	return $this->belongsToMany('App\Models\Cliente');
+	  }
+
 }
