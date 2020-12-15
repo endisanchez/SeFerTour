@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     use HasFactory;
+
+    public function usuario()
+    {
+      return $this->belongsTo('App\Models\Usuario');
+    }
+
+    public function tour()
+	  {
+    	return $this->belongsToMany('App\Models\Tour');
+	  }
+    
 }

@@ -22,6 +22,7 @@ class CreateUsuariosTable extends Migration
             $table->string('foto')->nullable(true);
             $table->string('usuario');
             $table->string('contraseña');
+            $table->timestamps();
         });
     }
 

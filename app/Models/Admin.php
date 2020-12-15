@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Admin extends Model
 {
     use HasFactory;
+
+    public function usuario()
+    {
+      return $this->belongsTo('App\Models\Usuario');
+    }
 }
