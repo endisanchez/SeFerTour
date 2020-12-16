@@ -30,6 +30,8 @@
               <li class="nav-item text-white">
                 <a class="nav-link text-white" href="#" id="link"><strong>Visitas guiadas</strong></a>
               </li>
+              <li><a href="#">En</a></li>
+              <li><a href="#">Es</a></li>
               <li class="nav-item dropdown d-flex flex-row-reverse">
                 <a class="nav-link text-white" data-toggle="dropdown" href="#" role="button" ><img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
                 </a>
@@ -85,6 +87,9 @@
         <div class="mt-4">
           <p>Aqui podras encontrar los tours preferidos por los visitantes</p>
         </div>
+        <div class="jumbotron container">
+        <p>{{ trans('welcome.home') }}</p>
+    </div>
       </div>
         <div class="row">
           <div class="col-lg-4 col-12 pt-2">
