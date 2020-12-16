@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../resources/css/estilo.css">
-    <title>SeFerTour</title>
-
+    <link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../resources/css/estilo.css">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+    <title>Login</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <body>
   <header>
@@ -34,11 +34,7 @@
                 <a class="nav-link text-white" data-toggle="dropdown" href="#" role="button" ><img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-
-                  
-
-                  <a class="dropdown-item" href="{{ url('login') }}">Inicia Sesion</a>
-
+                  <a class="dropdown-item" href="#">Inicia Sesion</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Registrarse</a>
                 </div>
@@ -49,83 +45,101 @@
     </nav>
   </header>
 
-    <section id="seccion" class="container-fluid text-light">
-      <div class="row">
-        <div class="col-12 mt-4">
-          <h1>Reserva tu tour</h1>
-          <div class="text-light mt-4">
-            <p>Encuantra el mejor tour con los mejores guias, GRATIS</p>
-          </div>
-        </div>
-        <div id="formulario" class="col-8">
-          <form>
-            <div class="form-group">
-              <label for="lugar">Donde</label>
-              <input type="text" class="form-control" id="lugar" placeholder="Lugar">
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="fecha">Cuando</label>
-                <input type="date" class="form-control" id="fecha">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="personas">Cuantos</label>
-                <input type="number" min="1" class="form-control" id="personas" placeholder="Personas">
-              </div>
-            </div>
-            <button type="submit" class="btn mt-2" id="botonFormulario"><strong>Buscar</strong></button>
-          </form>
-        </div>
-      </div>
-    </section>
 
-    <section class="container-fluid text-center p-3" id="topVisitas">
-      <div>
-        <h1>Mejores Tours</h1>
-        <div class="mt-4">
-          <p>Aqui podras encontrar los tours preferidos por los visitantes</p>
+ 
+ 
+ 
+ 
+  <div class="container">
+	<div class="row">
+        <div class="span12">
+    		<div class="" id="loginModal">
+              <div class="modal-header">
+                
+                <h3>Ya tienes una cuenta?</h3>
+              </div>
+              <div class="modal-body">
+                <div class="well">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#login" data-toggle="tab">Iniciar Sesión</a></li>
+                    <li><a href="#create" data-toggle="tab">Registrarse</a></li>
+                  </ul>
+                  <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane active in" id="login">
+                      <form class="form-horizontal" action='' method="POST">
+                        <fieldset>
+                          <div id="legend">
+                            <legend class="">Iniciar Sesión</legend>
+                          </div>    
+                          <div class="control-group">
+                            
+                            <label class="control-label"  for="username">Nombre de usuario</label>
+                            <div class="controls">
+                              <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+                            </div>
+                          </div>
+     
+                          <div class="control-group">
+                            
+                            <label class="control-label" for="password">Contraseña</label>
+                            <div class="controls">
+                              <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+                            </div>
+                          </div>
+     
+     
+                          <div class="control-group">
+                            
+                            <div class="controls">
+                              <button class="btn btn-success">Siguiente</button>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </form>                
+                    </div>
+                    
+                    
+                    
+                    
+                    <div class="tab-pane active-in" id="create">
+                      <form id="tab">
+                      <div id="legend">
+                            <legend class="">Registrarse</legend>
+                          </div>   
+                        <label>Tipo de usuario</label>
+                        <select value="" class="input-xlarge"> 
+                        <option>Cliente</option>
+                        <option>Guia</option>
+                        <option>Administrador</option>
+                        </select>
+                        <label>Nombre</label>
+                        <input type="text" value="" class="input-xlarge">
+                        <label>Email</label>
+                        <input type="text" value="" class="input-xlarge">
+                        <label> Verificar Email</label>
+                        <input type="text" value="" class="input-xlarge">
+                        <label> Contraseña</label>
+                        <input type="text" value="" class="input-xlarge">
+                        
+     
+                        <div>
+                          <button class="btn btn-primary">Crear cuenta</button>
+                        </div>
+                      </form>
+                    </div>
+                </div>
+              </div>
+            </div>
         </div>
-      </div>
-        <div class="row">
-          <div class="col-lg-4 col-12 pt-2">
-            <a href="#">
-              <div class="card bg-dark text-white" id="fondo">
-                <img class="card-img" src="imagenes/oficina2r.jpg" alt="Card image"  width="110%"/>
-                <div class="card-img-overlay">
-                  <p class="letrasCard">MADRID</p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-4 col-12 pt-2">
-            <a href="#">
-              <div class="card bg-dark text-white" id="fondo">
-                <img class="card-img" src="imagenes/oficina4r.jpg" alt="Card image"/>
-                <div class="card-img-overlay">
-                  <p class="letrasCard">BARCELONA</p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-4 col-12 pt-2">
-            <a href="#">
-              <div class="card bg-dark text-white" id="fondo">
-                <img class="card-img" src="imagenes/oficina3r.jpg" alt="Card image"/>
-                <div class="card-img-overlay">
-                  <p class="letrasCard">SEVILLA</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
+	</div>
+</div>
 
-    <section id="video">
-      <h1>Vive experiencias</h1>
-      <video preload="auto" loop="" autoplay="" muted="" width="75%" class="my-5">
-        <source src="imagenes/videoMuestra.mp4" type="video/mp4">
-      </video>
-    </section>
+
+
+
+
+
+
 
   <footer class="page-footer font-small bg-dark text-light">
 
@@ -137,11 +151,7 @@
 
           <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-
-         
-
           <p>Una empresa pequeña, dedicada a dar tours gartuitos por diferentes partes de españa y con la posibilidad
-
             de darse a conocer como guia.
           </p>
 
@@ -192,19 +202,11 @@
       </div>
     </div>
 
-
-    
-
-    <div class="text-center py-3">© 2020 Copyright:
-
+    <div class="text-center py-3">� 2020 Copyright:
       <a href="#"> SeFerTour</a>
     </div>
 
   </footer>
 
 </body>
-
 </html>
-
-
-
