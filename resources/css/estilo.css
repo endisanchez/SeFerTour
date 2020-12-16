@@ -69,53 +69,6 @@ hr {
     background-color: #C40B0B;
 }
 
-
-
-/* XS /
- @media only screen and (max-width: 576px) {
-   #animaciontitulo {
-       background-image: none;
-   }
-
-   #titulo {
-       background-image: none;
-   }
- }
-
- / SM /
- @media only screen and (min-width: 576px) and (max-width: 767px) {
-   #animaciontitulo {
-       background-image: none;
-   }
-
-   #titulo {
-       background-image: none;
-   }
- }
-
- / MD /
- @media only screen and (min-width: 768px) and (max-width: 991px) {
-   #animaciontitulo {
-       background-image: none;
-   }
-
-   #titulo {
-       background-image: none;
-   }
- }
-
- / LG /
- @media only screen and (min-width: 992px) and (max-width: 1199px) {
-   #animaciontitulo {
-       background-image: none;
-   }
-
-   #titulo {
-       background-image: none;
-   }
- }
-
- / XL */
  @media only screen and (min-width: 0px) and (max-width: 900px) {
     #seccion {
         background-image: url("../../public/imagenes/fondo.jpg");
