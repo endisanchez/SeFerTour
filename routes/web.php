@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('index');
 });
 
+
+
+Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
