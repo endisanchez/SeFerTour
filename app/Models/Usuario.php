@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\Usuario as Authenticatable;
 class Usuario extends Authenticatable
 {
     use HasFactory;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -23,6 +22,15 @@ class Usuario extends Authenticatable
         'usuario',
         'contraseña',
         'tipo'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
     ];
 
     public function guia()

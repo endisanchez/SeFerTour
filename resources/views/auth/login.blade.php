@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="csrf-token" content="{{ csrf_token() }}" /> -->
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resources/css/estilo.css">
-    <!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css"> -->
     <title>Login</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -70,7 +70,10 @@
                   </ul>
                   <div id="myTabContent" class="tab-content">
                     <div class="tab-pane active in" id="login">
+
+                      <!-- INICIO DE SESION -->
                       <form class="form-horizontal" action='' method="POST">
+                        @csrf
                         <fieldset>
                           <div id="legend">
                             <legend class="">Iniciar Sesión</legend>
@@ -100,32 +103,115 @@
                       </form>
                     </div>
 
+
+                    <!-- REGISTRO -->
                     <div class="tab-pane active-in" id="create">
-                      <form id="tab">
-                      <div id="legend">
-                            <legend class="">Registrarse</legend>
-                          </div>
-                        <label>Tipo de usuario</label>
-                        <select value="" class="input-xlarge">
-                        <option>Cliente</option>
-                        <option>Guia</option>
-                        <option>Administrador</option>
-                        </select>
-                        <br>
-                        <label>Nombre</label>
-                        <input type="text" value="" class="input-xlarge"><br>
-                        <label>Email</label>
-                        <input type="text" value="" class="input-xlarge"><br>
-                        <label> Verificar Email</label>
-                        <input type="text" value="" class="input-xlarge"><br>
-                        <label> Contraseña</label>
-                        <input type="text" value="" class="input-xlarge"><br>
+                      <form method="POST" action="{{ route('register') }}">
+                       @csrf
+                       <div id="legend">
+                           <legend class="">Registrarse</legend>
+                         </div>
+
+                       <label for="nombre" class="col-md-4 col-form-label ">{{ __('Nombre') }}</label>
+                       <div class="col-md-6">
+                               <input id="nombre" type="text" class="form-control @error('name') is-invalid @enderror input-xlarge" name="nombre" value="{{ old('name') }}" required autocomplete="nombre" autofocus>
+
+                               @error('nombre')
+                                   <span class="invalid-feedback" role="alert">
+                                       <strong>{{ $message }}</strong>
+                                   </span>
+                               @enderror
+                           </div>
+
+                         <label for="email" class="col-md-4 col-form-label ">{{ __('Apellido') }}</label>
+
+                         <div class="col-md-6">
+                             <input id="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror input-xlarge" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido">
+
+                             @error('apellido')
+                                 <span class="invalid-feedback" role="alert">
+                                   <strong>{{ $message }}</strong>
+                                 </span>
+                             @enderror
+                         </div>
+
+                         <label for="dni" class="col-md-4 col-form-label ">{{ __('DNI') }}</label>
+
+                         <div class="col-md-6">
+                            <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror input-xlarge" name="dni" value="{{ old('dni') }}" required autocomplete="dni">
+
+                             @error('dni')
+                                 <span class="invalid-feedback" role="alert">
+                                   <strong>{{ $message }}</strong>
+                                 </span>
+                             @enderror
+                         </div>
+
+                           <label for="email" class="col-md-4 col-form-label ">{{ __('E-Mail') }}</label>
+
+                           <div class="col-md-6">
+                               <input id="email" type="email" class="form-control @error('email') is-invalid @enderror input-xlarge" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                             @error('email')
+                                 <span class="invalid-feedback" role="alert">
+                                     <strong>{{ $message }}</strong>
+                                 </span>
+                              @enderror
+                           </div>
+
+                           <label for="usuario" class="col-md-4 col-form-label ">{{ __('Usuario') }}</label>
+
+                         <div class="col-md-6">
+                           <input id="usuario" type="text" class="form-control @error('usuario') is-invalid @enderror input-xlarge" name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario">
+
+                           @error('usuario')
+                               <span class="invalid-feedback" role="alert">
+                                 <strong>{{ $message }}</strong>
+                               </span>
+                           @enderror
+                         </div>
+
+                           <label for="password" class="col-md-4 col-form-label ">{{ __('Contraseña') }}</label>
+
+                           <div class="col-md-6">
+                               <input id="password" type="password" class="form-control @error('password') is-invalid @enderror input-xlarge" name="password" required autocomplete="new-password">
+
+                               @error('password')
+                                   <span class="invalid-feedback" role="alert">
+                                       <strong>{{ $message }}</strong>
+                                   </span>
+                               @enderror
+                           </div>
+
+                           <label for="password-confirm" class="col-md-4 col-form-label ">{{ __('Confirmar contraseña') }}</label>
+
+                           <div class="col-md-6">
+                               <input id="password-confirm" type="password" class="form-control input-xlarge" name="password_confirmation" required autocomplete="new-password">
+                           </div>
+
+                           <label for="tipo" class="col-md-4 col-form-label ">{{ __('Tipo') }}</label>
+
+                           <div class="col-md-6">
+                               <select id="tipo" type="text" class="form-control @error('tipo') is-invalid @enderror input-xlarge" name="tipo" value="{{ old('tipo') }}" required autocomplete="tipo">
+                               <option>Cliente</option>
+                               <option>Guia</option>
+
+                               </select>
+                               @error('tipo')
+                                   <span class="invalid-feedback" role="alert">
+                                       <strong>{{ $message }}</strong>
+                                   </span>
+                               @enderror
+                           </div><br>
+
+                           <div class="col-md-6 offset-md-4">
+                               <button type="submit" class="btn btn-primary">
+                                   {{ __('Registrarse') }}
+                               </button>
+                           </div>
 
 
-                        <div>
-                          <button class="btn btn-primary">Crear cuenta</button>
-                        </div>
-                      </form>
+                   </form>
                     </div>
                 </div>
               </div>
