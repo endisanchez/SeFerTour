@@ -28,15 +28,8 @@
               <li class="nav-item text-white">
                 <a class="nav-link text-white" href="#" id="link"><strong>{{ trans('texto.visit_guiadas') }}</strong></a>
               </li>
-              <li class="nav-item dropdown d-flex flex-row-reverse">
-                <a class="nav-link text-white" data-toggle="dropdown" role="button" id="link" ><strong>{{ trans('texto.idioma') }}</strong></a>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <a class="dropdown-item" href="{{ url('lang', ['es']) }}">ES</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{{ url('lang', ['en']) }}">EN</a>
-                </div>
-              </li>
-              <li><a class="dropdown-item" href="{{ url('lang', ['es']) }}"><img class="img-fluid" src="imagenes/espania.png" alt="españa"></a></li>
+              <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="imagenes/espania.png" alt="españa" width="25px" height="25px"></a></li>
+              <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="imagenes/ingles.png" alt="unitedKingdom" width="25px" height="25px"></a></li>
               <li class="nav-item dropdown d-flex flex-row-reverse">
                 <a class="nav-link text-white" data-toggle="dropdown" href="#" role="button" ><img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
                 </a>
