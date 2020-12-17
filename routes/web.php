@@ -18,8 +18,19 @@ Route::get('/', function () {
 });
 
 
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/', function () {
+        return view('index');
+    });
+    Route::get('lang/{lang}', function ($lang) {
+        session(['lang' => $lang]);
+        return \Redirect::back();
+    })->where([
+        'lang' => 'en|es'
+    ]);
+});
 
-Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
+//Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
 
 Auth::routes();
 
