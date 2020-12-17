@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resources/css/estilo.css">
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+    <!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css"> -->
     <title>Login</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 
 <body>
   <header>
@@ -25,16 +24,22 @@
           <div class="collapse navbar-collapse " id="opciones">
             <ul class="navbar-nav ml-auto d-flex float-right text-right">
               <li class="nav-item active">
-                <a class="nav-link text-white" href="#" id="link"><strong>Inicio</strong></a>
+                <a class="nav-link text-white" href="{{ route('inicio') }}" id="link"><strong>Inicio</strong></a>
               </li>
               <li class="nav-item text-white">
                 <a class="nav-link text-white" href="#" id="link"><strong>Visitas guiadas</strong></a>
               </li>
+              <li><a href="#">En</a></li>
+              <li><a href="#">Es</a></li>
               <li class="nav-item dropdown d-flex flex-row-reverse">
                 <a class="nav-link text-white" data-toggle="dropdown" href="#" role="button" ><img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                  <a class="dropdown-item" href="#">Inicia Sesion</a>
+
+
+
+                  <a class="dropdown-item" href="{{ url('login') }}">Inicia Sesion</a>
+
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Registrarse</a>
                 </div>
@@ -46,19 +51,18 @@
   </header>
 
 
- 
- 
- 
- 
-  <div class="container">
+
+
+
+
+  <div class="container-fluid">
 	<div class="row">
-        <div class="span12">
+        <div class="col-12">
     		<div class="" id="loginModal">
               <div class="modal-header">
-                
                 <h3>Ya tienes una cuenta?</h3>
               </div>
-              <div class="modal-body">
+              <div class="modal-body col-12">
                 <div class="well">
                   <ul class="nav nav-tabs">
                     <li class="active"><a href="#login" data-toggle="tab">Iniciar Sesión</a></li>
@@ -70,58 +74,54 @@
                         <fieldset>
                           <div id="legend">
                             <legend class="">Iniciar Sesión</legend>
-                          </div>    
+                          </div>
+
                           <div class="control-group">
-                            
-                            <label class="control-label"  for="username">Nombre de usuario</label>
+                            <label class="control-label" for="username">Nombre de usuario</label>
                             <div class="controls">
                               <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
                             </div>
                           </div>
-     
+
                           <div class="control-group">
-                            
                             <label class="control-label" for="password">Contraseña</label>
                             <div class="controls">
                               <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
                             </div>
                           </div>
-     
-     
+
                           <div class="control-group">
-                            
                             <div class="controls">
                               <button class="btn btn-success">Siguiente</button>
                             </div>
                           </div>
                         </fieldset>
-                      </form>                
+
+                      </form>
                     </div>
-                    
-                    
-                    
-                    
+
                     <div class="tab-pane active-in" id="create">
                       <form id="tab">
                       <div id="legend">
                             <legend class="">Registrarse</legend>
-                          </div>   
+                          </div>
                         <label>Tipo de usuario</label>
-                        <select value="" class="input-xlarge"> 
+                        <select value="" class="input-xlarge">
                         <option>Cliente</option>
                         <option>Guia</option>
                         <option>Administrador</option>
                         </select>
+                        <br>
                         <label>Nombre</label>
-                        <input type="text" value="" class="input-xlarge">
+                        <input type="text" value="" class="input-xlarge"><br>
                         <label>Email</label>
-                        <input type="text" value="" class="input-xlarge">
+                        <input type="text" value="" class="input-xlarge"><br>
                         <label> Verificar Email</label>
-                        <input type="text" value="" class="input-xlarge">
+                        <input type="text" value="" class="input-xlarge"><br>
                         <label> Contraseña</label>
-                        <input type="text" value="" class="input-xlarge">
-                        
-     
+                        <input type="text" value="" class="input-xlarge"><br>
+
+
                         <div>
                           <button class="btn btn-primary">Crear cuenta</button>
                         </div>

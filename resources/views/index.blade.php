@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resources/css/estilo.css">
+
     <title>SeFerTour</title>
 
 </head>
@@ -37,7 +37,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
 
-                  
+
 
                   <a class="dropdown-item" href="{{ url('login') }}">Inicia Sesion</a>
 
@@ -143,7 +143,7 @@
           <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
 
-         
+
 
           <p>Una empresa pequeña, dedicada a dar tours gartuitos por diferentes partes de españa y con la posibilidad
 
@@ -198,7 +198,7 @@
     </div>
 
 
-    
+
 
     <div class="text-center py-3">© 2020 Copyright:
 
@@ -210,6 +210,3 @@
 </body>
 
 </html>
-
-
-
