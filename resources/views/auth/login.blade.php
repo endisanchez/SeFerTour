@@ -24,24 +24,23 @@
           <div class="collapse navbar-collapse " id="opciones">
             <ul class="navbar-nav ml-auto d-flex float-right text-right">
               <li class="nav-item active">
-                <a class="nav-link text-white" href="{{ route('home') }}" id="link"><strong>Inicio</strong></a>
+                <a class="nav-link text-white" href="{{ url('/') }}" id="link"><strong>{{ trans('texto.inicio') }}</strong></a>
               </li>
               <li class="nav-item text-white">
-                <a class="nav-link text-white" href="#" id="link"><strong>Visitas guiadas</strong></a>
+                <a class="nav-link text-white" href="#" id="link"><strong>{{ trans('texto.visit_guiadas') }}</strong></a>
               </li>
-              <li><a href="#">En</a></li>
-              <li><a href="#">Es</a></li>
+
+              <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="imagenes/espania.png" alt="españa" width="25px" height="25px"></a></li>
+              <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="imagenes/ingles.png" alt="unitedKingdom" width="25px" height="25px"></a></li>
+
               <li class="nav-item dropdown d-flex flex-row-reverse">
-                <a class="nav-link text-white" data-toggle="dropdown" href="#" role="button" ><img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
+                <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" ><img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
 
-
-
-                  <a class="dropdown-item" href="{{ url('login') }}">Inicia Sesion</a>
-
+                  <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.inicio_sesion') }}</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Registrarse</a>
+                  <a class="dropdown-item" href="#">{{ trans('texto.registrar') }}</a>
                 </div>
               </li>
             </ul>
@@ -61,14 +60,14 @@
             <div class="modal-body col-12">
               <div class="well">
                 <ul class="nav nav-tabs">
-                  <li class="active"><a href="#login" data-toggle="tab">Iniciar Sesión</a></li>
+                  <li><a href="#login" data-toggle="tab">Iniciar Sesión</a></li>
                   <li><a href="#create" data-toggle="tab">Registrarse</a></li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
                   <div class="tab-pane active in" id="login">
 
                     <!-- INICIO DE SESION -->
-                    <form class="form-horizontal" action="{{ route('home') }}" method="POST">
+                    <form class="form-horizontal" action="{{ url('/') }}" method="POST">
                       @csrf
                       <fieldset>
                         <div id="legend">
