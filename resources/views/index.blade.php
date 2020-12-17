@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../resources/css/estilo.css">
 
     <title>SeFerTour</title>
-
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -25,24 +24,25 @@
           <div class="collapse navbar-collapse " id="opciones">
             <ul class="navbar-nav ml-auto d-flex float-right text-right">
               <li class="nav-item active">
-                <a class="nav-link text-white" href="#" id="link"><strong>Inicio</strong></a>
+                <a class="nav-link text-white" href="#" id="link"><strong>{{ trans('texto.inicio') }}</strong></a>
               </li>
               <li class="nav-item text-white">
-                <a class="nav-link text-white" href="#" id="link"><strong>Visitas guiadas</strong></a>
+                <a class="nav-link text-white" href="#" id="link"><strong>{{ trans('texto.visit_guiadas') }}</strong></a>
               </li>
-              <li><a href="#">En</a></li>
-              <li><a href="#">Es</a></li>
+
+              <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="imagenes/espania.png" alt="españa" width="25px" height="25px"></a></li>
+              <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="imagenes/ingles.png" alt="unitedKingdom" width="25px" height="25px"></a></li>
+
               <li class="nav-item dropdown d-flex flex-row-reverse">
                 <a class="nav-link text-white" data-toggle="dropdown" href="#" role="button" ><img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
 
-
-
                   <a class="dropdown-item" href="{{ url('login') }}">Inicia Sesion</a>
 
+                  <a class="dropdown-item" href="#">{{ trans('texto.inicio_sesion') }}</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Registrarse</a>
+                  <a class="dropdown-item" href="#">{{ trans('texto.registrar') }}</a>
                 </div>
               </li>
             </ul>
@@ -54,28 +54,28 @@
     <section id="seccion" class="container-fluid text-light">
       <div class="row">
         <div class="col-12 mt-4">
-          <h1>Reserva tu tour</h1>
+          <h1>{{ trans('texto.reserva') }}</h1>
           <div class="text-light mt-4">
-            <p>Encuantra el mejor tour con los mejores guias, GRATIS</p>
+            <p>{{ trans('texto.encuentra') }}</p>
           </div>
         </div>
         <div id="formulario" class="col-8">
           <form>
             <div class="form-group">
-              <label for="lugar">Donde</label>
+              <label for="lugar">{{ trans('texto.donde') }}</label>
               <input type="text" class="form-control" id="lugar" placeholder="Lugar">
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="fecha">Cuando</label>
+                <label for="fecha">{{ trans('texto.cuando') }}</label>
                 <input type="date" class="form-control" id="fecha">
               </div>
               <div class="form-group col-md-6">
-                <label for="personas">Cuantos</label>
+                <label for="personas">{{ trans('texto.cuantos') }}</label>
                 <input type="number" min="1" class="form-control" id="personas" placeholder="Personas">
               </div>
             </div>
-            <button type="submit" class="btn mt-2" id="botonFormulario"><strong>Buscar</strong></button>
+            <button type="submit" class="btn mt-2" id="botonFormulario"><strong>{{ trans('texto.buscar') }}</strong></button>
           </form>
         </div>
       </div>
@@ -83,9 +83,9 @@
 
     <section class="container-fluid text-center p-3" id="topVisitas">
       <div>
-        <h1>Mejores Tours</h1>
+        <h1>{{ trans('texto.mejores') }}</h1>
         <div class="mt-4">
-          <p>Aqui podras encontrar los tours preferidos por los visitantes</p>
+          <p>{{ trans('texto.mejores_texto') }}</p>
         </div>
         <div class="jumbotron container">
         <p>{{ trans('welcome.home') }}</p>
@@ -126,7 +126,7 @@
       </section>
 
     <section id="video">
-      <h1>Vive experiencias</h1>
+      <h1>{{ trans('texto.experiencias') }}</h1>
       <video preload="auto" loop="" autoplay="" muted="" width="75%" class="my-5">
         <source src="imagenes/videoMuestra.mp4" type="video/mp4">
       </video>
@@ -142,20 +142,14 @@
 
           <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-
-
-
-          <p>Una empresa pequeña, dedicada a dar tours gartuitos por diferentes partes de españa y con la posibilidad
-
-            de darse a conocer como guia.
-          </p>
+          <p>{{ trans('texto.descripcion') }}</p>
 
         </div>
 
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 
 
-          <h6 class="text-uppercase font-weight-bold">Redes sociales</h6>
+          <h6 class="text-uppercase font-weight-bold">{{ trans('texto.redes') }}</h6>
           <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>
             <a href="#"><img src="imagenes/insta.png" alt="insta" width="20%"></a> Instagram
@@ -171,13 +165,13 @@
 
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
 
-          <h6 class="text-uppercase font-weight-bold">Enlaces</h6>
+          <h6 class="text-uppercase font-weight-bold">{{ trans('texto.enlaces') }}</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>
-            <a href="#!">Cuenta</a>
+            <a href="#!">{{ trans('texto.cuenta') }}</a>
           </p>
           <p>
-            <a href="#!">Registrarse</a>
+            <a href="#!">{{ trans('texto.registrar') }}</a>
           </p>
 
         </div>
@@ -185,7 +179,7 @@
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
 
-          <h6 class="text-uppercase font-weight-bold">Contacto</h6>
+          <h6 class="text-uppercase font-weight-bold">{{ trans('texto.contacto') }}</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>Donostia, Gipuzkoa</p>
           <p>info@sefertour.com</p>
@@ -197,16 +191,11 @@
       </div>
     </div>
 
-
-
-
     <div class="text-center py-3">© 2020 Copyright:
-
       <a href="#"> SeFerTour</a>
     </div>
 
   </footer>
 
 </body>
-
 </html>

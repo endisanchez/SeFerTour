@@ -3,9 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
-use Illuminate\Http\Request;
 use App;
+use Illuminate\Http\Request;
+
 class LangMiddleware
 {
     /**
