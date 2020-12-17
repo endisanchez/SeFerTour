@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta name="csrf-token" content="{{ csrf_token() }}" /> -->
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resources/css/estilo.css">
     <title>Login</title>
@@ -24,7 +24,7 @@
           <div class="collapse navbar-collapse " id="opciones">
             <ul class="navbar-nav ml-auto d-flex float-right text-right">
               <li class="nav-item active">
-                <a class="nav-link text-white" href="{{ route('inicio') }}" id="link"><strong>Inicio</strong></a>
+                <a class="nav-link text-white" href="{{ route('home') }}" id="link"><strong>Inicio</strong></a>
               </li>
               <li class="nav-item text-white">
                 <a class="nav-link text-white" href="#" id="link"><strong>Visitas guiadas</strong></a>
@@ -50,181 +50,172 @@
     </nav>
   </header>
 
-
-
-
-
-
-  <div class="container-fluid">
-	<div class="row">
+  <section class="form">
+    <div class="container-fluid">
+      <div class="row">
         <div class="col-12">
-    		<div class="" id="loginModal">
-              <div class="modal-header">
-                <h3>Ya tienes una cuenta?</h3>
-              </div>
-              <div class="modal-body col-12">
-                <div class="well">
-                  <ul class="nav nav-tabs">
-                    <li class="active"><a href="#login" data-toggle="tab">Iniciar Sesión</a></li>
-                    <li><a href="#create" data-toggle="tab">Registrarse</a></li>
-                  </ul>
-                  <div id="myTabContent" class="tab-content">
-                    <div class="tab-pane active in" id="login">
+          <div class="" id="loginModal">
+            <div class="modal-header">
+              <h3>Ya tienes una cuenta?</h3>
+            </div>
+            <div class="modal-body col-12">
+              <div class="well">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#login" data-toggle="tab">Iniciar Sesión</a></li>
+                  <li><a href="#create" data-toggle="tab">Registrarse</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                  <div class="tab-pane active in" id="login">
 
-                      <!-- INICIO DE SESION -->
-                      <form class="form-horizontal" action='' method="POST">
-                        @csrf
-                        <fieldset>
-                          <div id="legend">
-                            <legend class="">Iniciar Sesión</legend>
+                    <!-- INICIO DE SESION -->
+                    <form class="form-horizontal" action="{{ route('home') }}" method="POST">
+                      @csrf
+                      <fieldset>
+                        <div id="legend">
+                          <legend class="">Iniciar Sesión</legend>
+                        </div>
+
+                        <div class="control-group">
+                          <label class="control-label" for="email">E-Mail</label>
+                          <div class="controls">
+                            <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
                           </div>
+                        </div>
 
-                          <div class="control-group">
-                            <label class="control-label" for="username">Nombre de usuario</label>
-                            <div class="controls">
-                              <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-                            </div>
+                        <div class="control-group">
+                          <label class="control-label" for="contraseña">Contraseña</label>
+                          <div class="controls">
+                            <input type="password" id="contraseña" name="contraseña" placeholder="" class="input-xlarge">
                           </div>
+                        </div><br>
 
-                          <div class="control-group">
-                            <label class="control-label" for="password">Contraseña</label>
-                            <div class="controls">
-                              <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
-                            </div>
+                        <div class="control-group">
+                          <div class="controls">
+                            <button class="btn btn-success">Siguiente</button>
                           </div>
+                        </div>
+                      </fieldset>
 
-                          <div class="control-group">
-                            <div class="controls">
-                              <button class="btn btn-success">Siguiente</button>
-                            </div>
-                          </div>
-                        </fieldset>
-
-                      </form>
-                    </div>
+                    </form>
+                  </div>
 
 
-                    <!-- REGISTRO -->
-                    <div class="tab-pane active-in" id="create">
-                      <form method="POST" action="{{ route('register') }}">
-                       @csrf
-                       <div id="legend">
-                           <legend class="">Registrarse</legend>
-                         </div>
+                  <!-- REGISTRO -->
+                  <div class="tab-pane active-in" id="create">
+                    <form method="POST" action="{{ route('register') }}">
+                      @csrf
+                      <div id="legend">
+                        <legend class="">Registrarse</legend>
+                      </div>
 
-                       <label for="nombre" class="col-md-4 col-form-label ">{{ __('Nombre') }}</label>
-                       <div class="col-md-6">
-                               <input id="nombre" type="text" class="form-control @error('name') is-invalid @enderror input-xlarge" name="nombre" value="{{ old('name') }}" required autocomplete="nombre" autofocus>
+                      <label for="nombre" class="col-md-4 col-form-label">{{ __('Nombre') }}</label>
+                      <div class="col-md-6">
+                        <input id="nombre" type="text" class="form-control @error('name') is-invalid @enderror input-xlarge" name="nombre" value="{{ old('name') }}" required autocomplete="nombre" autofocus>
 
-                               @error('nombre')
-                                   <span class="invalid-feedback" role="alert">
-                                       <strong>{{ $message }}</strong>
-                                   </span>
-                               @enderror
-                           </div>
+                        @error('nombre')
+                        <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                      </div>
 
-                         <label for="email" class="col-md-4 col-form-label ">{{ __('Apellido') }}</label>
+                      <label for="email" class="col-md-4 col-form-label ">{{ __('Apellido') }}</label>
 
-                         <div class="col-md-6">
-                             <input id="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror input-xlarge" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido">
+                      <div class="col-md-6">
+                        <input id="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror input-xlarge" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido">
 
-                             @error('apellido')
-                                 <span class="invalid-feedback" role="alert">
-                                   <strong>{{ $message }}</strong>
-                                 </span>
-                             @enderror
-                         </div>
+                        @error('apellido')
+                        <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                      </div>
 
-                         <label for="dni" class="col-md-4 col-form-label ">{{ __('DNI') }}</label>
+                      <label for="dni" class="col-md-4 col-form-label ">{{ __('DNI') }}</label>
 
-                         <div class="col-md-6">
-                            <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror input-xlarge" name="dni" value="{{ old('dni') }}" required autocomplete="dni">
+                      <div class="col-md-6">
+                        <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror input-xlarge" name="dni" value="{{ old('dni') }}" required autocomplete="dni">
 
-                             @error('dni')
-                                 <span class="invalid-feedback" role="alert">
-                                   <strong>{{ $message }}</strong>
-                                 </span>
-                             @enderror
-                         </div>
+                        @error('dni')
+                        <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                      </div>
 
-                           <label for="email" class="col-md-4 col-form-label ">{{ __('E-Mail') }}</label>
+                      <label for="email" class="col-md-4 col-form-label ">{{ __('E-Mail') }}</label>
 
-                           <div class="col-md-6">
-                               <input id="email" type="email" class="form-control @error('email') is-invalid @enderror input-xlarge" name="email" value="{{ old('email') }}" required autocomplete="email">
+                      <div class="col-md-6">
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror input-xlarge" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                             @error('email')
-                                 <span class="invalid-feedback" role="alert">
-                                     <strong>{{ $message }}</strong>
-                                 </span>
-                              @enderror
-                           </div>
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                      </div>
 
-                           <label for="usuario" class="col-md-4 col-form-label ">{{ __('Usuario') }}</label>
+                      <label for="usuario" class="col-md-4 col-form-label ">{{ __('Usuario') }}</label>
 
-                         <div class="col-md-6">
-                           <input id="usuario" type="text" class="form-control @error('usuario') is-invalid @enderror input-xlarge" name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario">
+                      <div class="col-md-6">
+                        <input id="usuario" type="text" class="form-control @error('usuario') is-invalid @enderror input-xlarge" name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario">
 
-                           @error('usuario')
-                               <span class="invalid-feedback" role="alert">
-                                 <strong>{{ $message }}</strong>
-                               </span>
-                           @enderror
-                         </div>
+                        @error('usuario')
+                        <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                      </div>
 
-                           <label for="password" class="col-md-4 col-form-label ">{{ __('Contraseña') }}</label>
+                      <label for="password" class="col-md-4 col-form-label ">{{ __('Contraseña') }}</label>
 
-                           <div class="col-md-6">
-                               <input id="password" type="password" class="form-control @error('password') is-invalid @enderror input-xlarge" name="password" required autocomplete="new-password">
+                      <div class="col-md-6">
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror input-xlarge" name="password" required autocomplete="new-password">
 
-                               @error('password')
-                                   <span class="invalid-feedback" role="alert">
-                                       <strong>{{ $message }}</strong>
-                                   </span>
-                               @enderror
-                           </div>
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                      </div>
 
-                           <label for="password-confirm" class="col-md-4 col-form-label ">{{ __('Confirmar contraseña') }}</label>
+                      <label for="password-confirm" class="col-md-4 col-form-label ">{{ __('Confirmar contraseña') }}</label>
 
-                           <div class="col-md-6">
-                               <input id="password-confirm" type="password" class="form-control input-xlarge" name="password_confirmation" required autocomplete="new-password">
-                           </div>
+                      <div class="col-md-6">
+                        <input id="password-confirm" type="password" class="form-control input-xlarge" name="password_confirmation" required autocomplete="new-password">
+                      </div>
 
-                           <label for="tipo" class="col-md-4 col-form-label ">{{ __('Tipo') }}</label>
+                      <label for="tipo" class="col-md-4 col-form-label ">{{ __('Tipo') }}</label>
 
-                           <div class="col-md-6">
-                               <select id="tipo" type="text" class="form-control @error('tipo') is-invalid @enderror input-xlarge" name="tipo" value="{{ old('tipo') }}" required autocomplete="tipo">
-                               <option>Cliente</option>
-                               <option>Guia</option>
+                      <div class="col-md-6">
+                        <select id="tipo" type="text" class="form-control @error('tipo') is-invalid @enderror input-xlarge" name="tipo" value="{{ old('tipo') }}" required autocomplete="tipo">
+                          <option>Cliente</option>
+                          <option>Guia</option>
 
-                               </select>
-                               @error('tipo')
-                                   <span class="invalid-feedback" role="alert">
-                                       <strong>{{ $message }}</strong>
-                                   </span>
-                               @enderror
-                           </div><br>
+                        </select>
+                        @error('tipo')
+                        <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                      </div><br>
 
-                           <div class="col-md-6 offset-md-4">
-                               <button type="submit" class="btn btn-primary">
-                                   {{ __('Registrarse') }}
-                               </button>
-                           </div>
+                      <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary">
+                          {{ __('Registrarse') }}
+                        </button>
+                      </div>
 
-
-                   </form>
-                    </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
         </div>
-	</div>
-</div>
+      </div>
 
-
-
-
-
-
+  </section>
 
 
   <footer class="page-footer font-small bg-dark text-light">
