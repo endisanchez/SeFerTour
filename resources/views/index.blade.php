@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resources/css/estilo.css">
+
     <title>SeFerTour</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -28,12 +29,17 @@
               <li class="nav-item text-white">
                 <a class="nav-link text-white" href="#" id="link"><strong>{{ trans('texto.visit_guiadas') }}</strong></a>
               </li>
+
               <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="imagenes/espania.png" alt="españa" width="25px" height="25px"></a></li>
               <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="imagenes/ingles.png" alt="unitedKingdom" width="25px" height="25px"></a></li>
+
               <li class="nav-item dropdown d-flex flex-row-reverse">
                 <a class="nav-link text-white" data-toggle="dropdown" href="#" role="button" ><img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
+
+                  <a class="dropdown-item" href="{{ url('login') }}">Inicia Sesion</a>
+
                   <a class="dropdown-item" href="#">{{ trans('texto.inicio_sesion') }}</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">{{ trans('texto.registrar') }}</a>
@@ -81,6 +87,9 @@
         <div class="mt-4">
           <p>{{ trans('texto.mejores_texto') }}</p>
         </div>
+        <div class="jumbotron container">
+        <p>{{ trans('welcome.home') }}</p>
+    </div>
       </div>
         <div class="row">
           <div class="col-lg-4 col-12 pt-2">
@@ -181,6 +190,7 @@
 
       </div>
     </div>
+
     <div class="text-center py-3">© 2020 Copyright:
       <a href="#"> SeFerTour</a>
     </div>
