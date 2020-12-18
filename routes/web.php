@@ -17,9 +17,17 @@ Route::get('/', function () {
     return view('index');
 })->name('inicio');
 
-
-
-Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/', function () {
+        return view('index');
+    });
+    Route::get('lang/{lang}', function ($lang) {
+        session(['lang' => $lang]);
+        return \Redirect::back();
+    })->where([
+        'lang' => 'en|es'
+    ]);
+});
 
 Auth::routes();
 

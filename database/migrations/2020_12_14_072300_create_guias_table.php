@@ -17,7 +17,7 @@ class CreateGuiasTable extends Migration
             $table->id();
             $table->string('idioma');
             $table->unsignedBigInteger('id_usuario');
-            $table->foreign('id_usuario')->references('id')->on('usuarios')->onDelete('cascade');
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

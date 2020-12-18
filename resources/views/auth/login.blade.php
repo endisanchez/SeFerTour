@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta name="csrf-token" content="{{ csrf_token() }}" /> -->
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resources/css/estilo.css">
     <title>Login</title>
@@ -24,24 +24,23 @@
           <div class="collapse navbar-collapse " id="opciones">
             <ul class="navbar-nav ml-auto d-flex float-right text-right">
               <li class="nav-item active">
-                <a class="nav-link text-white" href="{{ route('inicio') }}" id="link"><strong>Inicio</strong></a>
+                <a class="nav-link text-white" href="{{ url('/') }}" id="link"><strong>{{ trans('texto.inicio') }}</strong></a>
               </li>
               <li class="nav-item text-white">
-                <a class="nav-link text-white" href="#" id="link"><strong>Visitas guiadas</strong></a>
+                <a class="nav-link text-white" href="#" id="link"><strong>{{ trans('texto.visit_guiadas') }}</strong></a>
               </li>
-              <li><a href="#">En</a></li>
-              <li><a href="#">Es</a></li>
+
+              <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="imagenes/espania.png" alt="españa" width="25px" height="25px"></a></li>
+              <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="imagenes/ingles.png" alt="unitedKingdom" width="25px" height="25px"></a></li>
+
               <li class="nav-item dropdown d-flex flex-row-reverse">
-                <a class="nav-link text-white" data-toggle="dropdown" href="#" role="button" ><img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
+                <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" ><img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
 
-
-
-                  <a class="dropdown-item" href="{{ url('login') }}">Inicia Sesion</a>
-
+                  <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.inicio_sesion') }}</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Registrarse</a>
+                  <a class="dropdown-item" href="{{ url('register') }}">{{ trans('texto.registrar') }}</a>
                 </div>
               </li>
             </ul>
@@ -50,181 +49,75 @@
     </nav>
   </header>
 
+  <div class="container-fluid my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Login') }}</div>
 
-
-
-
-
-  <div class="container-fluid">
-	<div class="row">
-        <div class="col-12">
-    		<div class="" id="loginModal">
-              <div class="modal-header">
-                <h3>Ya tienes una cuenta?</h3>
-              </div>
-              <div class="modal-body col-12">
-                <div class="well">
-                  <ul class="nav nav-tabs">
-                    <li class="active"><a href="#login" data-toggle="tab">Iniciar Sesión</a></li>
-                    <li><a href="#create" data-toggle="tab">Registrarse</a></li>
-                  </ul>
-                  <div id="myTabContent" class="tab-content">
-                    <div class="tab-pane active in" id="login">
-
-                      <!-- INICIO DE SESION -->
-                      <form class="form-horizontal" action='' method="POST">
+                <div class="card-body">
+                    <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        <fieldset>
-                          <div id="legend">
-                            <legend class="">Iniciar Sesión</legend>
-                          </div>
 
-                          <div class="control-group">
-                            <label class="control-label" for="username">Nombre de usuario</label>
-                            <div class="controls">
-                              <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                          </div>
+                        </div>
 
-                          <div class="control-group">
-                            <label class="control-label" for="password">Contraseña</label>
-                            <div class="controls">
-                              <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                          </div>
+                        </div>
 
-                          <div class="control-group">
-                            <div class="controls">
-                              <button class="btn btn-success">Siguiente</button>
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                    <label class="form-check-label" for="remember">
+                                        {{ __('Remember Me') }}
+                                    </label>
+                                </div>
                             </div>
-                          </div>
-                        </fieldset>
+                        </div>
 
-                      </form>
-                    </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Login') }}
+                                </button>
 
-
-                    <!-- REGISTRO -->
-                    <div class="tab-pane active-in" id="create">
-                      <form method="POST" action="{{ route('register') }}">
-                       @csrf
-                       <div id="legend">
-                           <legend class="">Registrarse</legend>
-                         </div>
-
-                       <label for="nombre" class="col-md-4 col-form-label ">{{ __('Nombre') }}</label>
-                       <div class="col-md-6">
-                               <input id="nombre" type="text" class="form-control @error('name') is-invalid @enderror input-xlarge" name="nombre" value="{{ old('name') }}" required autocomplete="nombre" autofocus>
-
-                               @error('nombre')
-                                   <span class="invalid-feedback" role="alert">
-                                       <strong>{{ $message }}</strong>
-                                   </span>
-                               @enderror
-                           </div>
-
-                         <label for="email" class="col-md-4 col-form-label ">{{ __('Apellido') }}</label>
-
-                         <div class="col-md-6">
-                             <input id="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror input-xlarge" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido">
-
-                             @error('apellido')
-                                 <span class="invalid-feedback" role="alert">
-                                   <strong>{{ $message }}</strong>
-                                 </span>
-                             @enderror
-                         </div>
-
-                         <label for="dni" class="col-md-4 col-form-label ">{{ __('DNI') }}</label>
-
-                         <div class="col-md-6">
-                            <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror input-xlarge" name="dni" value="{{ old('dni') }}" required autocomplete="dni">
-
-                             @error('dni')
-                                 <span class="invalid-feedback" role="alert">
-                                   <strong>{{ $message }}</strong>
-                                 </span>
-                             @enderror
-                         </div>
-
-                           <label for="email" class="col-md-4 col-form-label ">{{ __('E-Mail') }}</label>
-
-                           <div class="col-md-6">
-                               <input id="email" type="email" class="form-control @error('email') is-invalid @enderror input-xlarge" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                             @error('email')
-                                 <span class="invalid-feedback" role="alert">
-                                     <strong>{{ $message }}</strong>
-                                 </span>
-                              @enderror
-                           </div>
-
-                           <label for="usuario" class="col-md-4 col-form-label ">{{ __('Usuario') }}</label>
-
-                         <div class="col-md-6">
-                           <input id="usuario" type="text" class="form-control @error('usuario') is-invalid @enderror input-xlarge" name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario">
-
-                           @error('usuario')
-                               <span class="invalid-feedback" role="alert">
-                                 <strong>{{ $message }}</strong>
-                               </span>
-                           @enderror
-                         </div>
-
-                           <label for="password" class="col-md-4 col-form-label ">{{ __('Contraseña') }}</label>
-
-                           <div class="col-md-6">
-                               <input id="password" type="password" class="form-control @error('password') is-invalid @enderror input-xlarge" name="password" required autocomplete="new-password">
-
-                               @error('password')
-                                   <span class="invalid-feedback" role="alert">
-                                       <strong>{{ $message }}</strong>
-                                   </span>
-                               @enderror
-                           </div>
-
-                           <label for="password-confirm" class="col-md-4 col-form-label ">{{ __('Confirmar contraseña') }}</label>
-
-                           <div class="col-md-6">
-                               <input id="password-confirm" type="password" class="form-control input-xlarge" name="password_confirmation" required autocomplete="new-password">
-                           </div>
-
-                           <label for="tipo" class="col-md-4 col-form-label ">{{ __('Tipo') }}</label>
-
-                           <div class="col-md-6">
-                               <select id="tipo" type="text" class="form-control @error('tipo') is-invalid @enderror input-xlarge" name="tipo" value="{{ old('tipo') }}" required autocomplete="tipo">
-                               <option>Cliente</option>
-                               <option>Guia</option>
-
-                               </select>
-                               @error('tipo')
-                                   <span class="invalid-feedback" role="alert">
-                                       <strong>{{ $message }}</strong>
-                                   </span>
-                               @enderror
-                           </div><br>
-
-                           <div class="col-md-6 offset-md-4">
-                               <button type="submit" class="btn btn-primary">
-                                   {{ __('Registrarse') }}
-                               </button>
-                           </div>
-
-
-                   </form>
-                    </div>
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </form>
                 </div>
-              </div>
             </div>
         </div>
-	</div>
+    </div>
 </div>
-
-
-
-
-
-
 
 
   <footer class="page-footer font-small bg-dark text-light">
