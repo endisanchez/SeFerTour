@@ -38,9 +38,35 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
 
+<<<<<<< HEAD
+                  @if(Auth::user())
+                    <a class="dropdown-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    
+                      <b>{{ Auth::user()->usuario }}</b>
+                      
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                      {{ trans('texto.salir') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                  @else
+                    <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.inicio_sesion') }}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ url('register') }}">{{ trans('texto.registrar') }}</a>
+                  @endif
+=======
                   <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.inicio_sesion') }}</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">{{ trans('texto.registrar') }}</a>
+>>>>>>> master
                 </div>
               </li>
             </ul>
@@ -194,4 +220,8 @@
   </footer>
 
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> master

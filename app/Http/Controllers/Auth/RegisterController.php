@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\Models\Usuario;
+use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -50,8 +50,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'nombre' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:usuarios'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -60,18 +60,23 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Models\Usuario
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
-        return Usuario::create([
-            'nombre' => $data['nombre'],
+        return User::create([
+            'name' => $data['name'],
             'apellido' => $data['apellido'],
             'dni' => $data['dni'],
             'email' => $data['email'],
+            'foto' => $data['foto'],
             'usuario' => $data['usuario'],
+<<<<<<< HEAD
+            'password' => Hash::make($data['password']),
+=======
             'contraseña' => bcrypt($data['password']),
             'tipo' => $data['tipo'],
+>>>>>>> master
         ]);
     }
 }

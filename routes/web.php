@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-})->name('home');
-
+})->name('inicio');
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', function () {
@@ -32,4 +31,4 @@ Route::group(['middleware' => ['web']], function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
