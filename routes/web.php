@@ -32,3 +32,4 @@ Route::group(['middleware' => ['web']], function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::view('/tours', 'tours');
