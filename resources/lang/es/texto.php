@@ -23,10 +23,7 @@ return [
     'enlaces' => 'Enlaces',
     'cuenta' => 'Cuenta',
     'contacto' => 'Contacto',
-<<<<<<< HEAD
     'salir' => 'Cerrar Sesión',
-=======
->>>>>>> master
-    
+
 
 ];
