@@ -23,7 +23,10 @@ return [
     'enlaces' => 'Links',
     'cuenta' => 'Acount',
     'contacto' => 'Contact',
+<<<<<<< HEAD
     'salir' => 'Log Out',
+=======
+>>>>>>> master
 
 
 
