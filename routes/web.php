@@ -31,5 +31,8 @@ Route::group(['middleware' => ['web']], function () {
 
 Auth::routes();
 
+Route::get('/tours/{provincia}', '\App\Http\Controllers\TourController@toursProvincia')->name('provincia');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::view('/tours', 'tours');
