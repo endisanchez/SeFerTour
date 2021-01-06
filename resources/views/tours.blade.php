@@ -52,10 +52,10 @@
   </header>
 
   <!-- mapa -->
-  <section class="d-none d-xl-block">
+  <section>
       <center>
         <h1 class="my-4">Selecciona el lugar que quieres descubrir</h1>
-        <map name="idx30_map">
+        <map name="idx30_map" class="d-none d-xl-block">
           <area shape="POLY" href=".\COMUNIDAD\INDEX-999.HTML" coords="614,707,614,612,810,612,810,707,614,707,810,707,810,612,614,612 ">
 
           <area shape="POLY" href="{{ route('provincia', 'CastillaYLeon') }}" coords="252,276,251,279,247,280,244,277,240,274,236,272,232,271,226,269,220,272,216,276,213,279,208,277,204,274,200,271,196,269,191,268,186,266,186,266,186,263,189,258,193,255,195,250,198,244,198,239,191,236,186,234,182,233,179,228,178,222,178,215,175,212,170,212,167,212,162,211,157,209,152,209,147,206,147,206,148,201,150,196,152,192,155,190,161,189,161,189,167,190,172,190,177,192,182,190,185,190,190,188,194,190,196,195,200,195,204,193,209,195,213,196,216,195,219,196,224,198,227,195,231,195,231,199,234,199,237,201,242,203,242,203,244,207,245,212,247,207,251,211,254,214,252,215,254,218,254,222,251,225,255,226,252,230,247,231,249,236,254,239,252,244,256,245,256,250,254,252,252,257,252,263,254,269,254,272,252,276 ">
@@ -181,17 +181,31 @@
           <area shape="POLY" href="{{ route('provincia', 'PaisVasco') }}" coords="391,115,395,112,397,112,402,112,405,115,406,119,410,122,414,123,419,126,422,123,424,120,426,120,429,121,429,121,430,125,435,125,437,125,441,128,445,128,448,131,448,131,448,136,448,141,447,144,445,144,445,147,447,149,447,152,446,153,443,152,440,152,437,155,437,157,440,158,442,161,440,165,439,167,439,167,436,166,433,168,429,169,424,168,422,165,422,161,419,160,417,165,414,161,412,157,412,157,410,153,407,152,404,149,400,149,396,146,396,144,396,141,393,141,390,142,388,139,391,136,395,136,400,136,401,133,402,133,405,131,405,130,402,126,399,126,399,126,395,126,394,126,391,123,390,120,391,115 ">
 
         </map>
+
+        <form method="post">
+            <div class="row my-5 d-block d-xl-none">
+              <div id="formulario">
+                <form>
+                    <!-- SELECT DE LA API PUBLICA CON TODAS LAS COMUNIDADES -->
+                    <div class="rounded my-3">
+                      <select class="rounded col-8 p-2">
+                        <option class="text-center">Comunidad1</option>
+                        <option class="text-center">Comunidad2</option>
+                      </select>
+                    </div>
+                  <button type="submit" class="btn my-2" id="botonFormulario"><strong>{{ trans('texto.buscar') }}</strong></button>
+                </form>
+              </div>
+            </div>
+        </form>
+
       </center>
   </section>
 
   <!-- tours -->
   <section class="container-fluid">
-
       <div id="accordion">
         @if(isset($tours))
-        @empty($tours)
-          <p>No hay tours</p>
-        @endempty
           @foreach($tours as $tour)
           <div class="card my-5 container">
             <div class="card-header row" id="headingOne">
@@ -210,9 +224,12 @@
             </div>
           </div>
           @endforeach
+          @empty($tours)
+          <p>No hay tours</p>
+          @endempty
         @endif
       </div>
-  </section>
+    </section>
 
   <footer class="page-footer font-small bg-dark text-light">
 
@@ -221,17 +238,12 @@
       <div class="row mt-5">
 
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-
           <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>Una empresa pequeña, dedicada a dar tours gartuitos por diferentes partes de españa y con la posibilidad
-            de darse a conocer como guia.
-          </p>
-
+          <p>Una empresa pequeña, dedicada a dar tours gartuitos por diferentes partes de españa y con la posibilidad de darse a conocer como guia.</p>
         </div>
 
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
 
           <h6 class="text-uppercase font-weight-bold">Redes sociales</h6>
           <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
