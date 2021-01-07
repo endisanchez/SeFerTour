@@ -72,6 +72,7 @@ class RegisterController extends Controller
             'foto' => $data['foto'],
             'usuario' => $data['usuario'],
             'password' => Hash::make($data['password']),
+            'tipo' => $data['tipo'],
         ]);
     }
 }
