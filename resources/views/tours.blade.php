@@ -12,12 +12,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="{{ url('../resources/js/peticionComunidades.js') }}"></script>
 
 <body>
   <header>
     <nav class="navbar navbar-expand-sm navbar-dark static-top">
         <div class="container-fluid">
-            <img src="imagenes/logoanimado_blanco.gif" alt="logo" width="25%">
+            <img src="{{url('imagenes/logoanimado_blanco.gif')}}" alt="logo" width="25%">
             <button class="navbar-toggler text-black" type="button" data-toggle="collapse" data-target="#opciones">
               <img class="img-fluid "src="imagenes/menu.png" alt="menu" width="30">
             </button>
@@ -30,11 +31,11 @@
                 <a class="nav-link text-white" href="{{ url('/tours') }}" id="link"><strong>{{ trans('texto.visit_guiadas') }}</strong></a>
               </li>
 
-              <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="imagenes/espania.png" alt="españa" width="25px" height="25px"></a></li>
-              <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="imagenes/ingles.png" alt="unitedKingdom" width="25px" height="25px"></a></li>
+              <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="{{url('imagenes/espania.png') }}" alt="españa" width="25px" height="25px"></a></li>
+              <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="{{url('imagenes/ingles.png')}}" alt="unitedKingdom" width="25px" height="25px"></a></li>
 
               <li class="nav-item dropdown d-flex flex-row-reverse">
-                <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" ><img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
+                <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" ><img src="{{url('imagenes/perfil.png')}}" alt="logo" width="25px" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
 
@@ -206,9 +207,7 @@
                 <form>
                     <!-- SELECT DE LA API PUBLICA CON TODAS LAS COMUNIDADES -->
                     <div class="rounded my-3">
-                      <select class="rounded col-8 p-2">
-                        <option class="text-center">Comunidad1</option>
-                        <option class="text-center">Comunidad2</option>
+                      <select id="selectcoms" class="rounded col-8 p-2">
                       </select>
                     </div>
                   <button type="submit" class="btn my-2" id="botonFormulario"><strong>{{ trans('texto.buscar') }}</strong></button>
