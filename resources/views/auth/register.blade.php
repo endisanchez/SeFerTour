@@ -27,7 +27,7 @@
                 <a class="nav-link text-white" href="{{ url('/') }}" id="link"><strong>{{ trans('texto.inicio') }}</strong></a>
               </li>
               <li class="nav-item text-white">
-                <a class="nav-link text-white" href="#" id="link"><strong>{{ trans('texto.visit_guiadas') }}</strong></a>
+                <a class="nav-link text-white" href="{{ url('/tours') }}" id="link"><strong>{{ trans('texto.visit_guiadas') }}</strong></a>
               </li>
 
               <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="imagenes/espania.png" alt="españa" width="25px" height="25px"></a></li>
@@ -38,9 +38,29 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
 
-                  <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.inicio_sesion') }}</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{{ url('register') }}">{{ trans('texto.registrar') }}</a>
+                  @if(Auth::user())
+                    <a class="dropdown-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+
+                      <b>{{ Auth::user()->usuario }}</b>
+
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                      {{ trans('texto.salir') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                  @else
+                    <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.inicio_sesion') }}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ url('register') }}">{{ trans('texto.registrar') }}</a>
+                  @endif
                 </div>
               </li>
             </ul>
