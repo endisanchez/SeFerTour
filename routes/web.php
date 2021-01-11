@@ -35,4 +35,9 @@ Route::get('/tours/{provincia}', '\App\Http\Controllers\TourController@toursProv
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::put('/perfil', '\App\Http\Controllers\PerfilController@editarPerfil' )->name('editarPerfil');
+
 Route::view('/tours', 'tours');
+
+Route::view('/perfil', 'perfil');
+
