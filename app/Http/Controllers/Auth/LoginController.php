@@ -42,10 +42,9 @@ class LoginController extends Controller
 
     if(!$user->email_verified_at){
       \Auth::logout();
-      return view('Auth/verify');
+      return redirect('/verify');
     } else {
-      \Auth::logout();
-      return view('index');
+      return redirect('/');
     }
   }
 }
