@@ -29,7 +29,7 @@ Route::group(['middleware' => ['web']], function () {
     ]);
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/tours/{provincia}', '\App\Http\Controllers\TourController@toursProvincia')->name('provincia');
 
@@ -40,4 +40,6 @@ Route::put('/perfil', '\App\Http\Controllers\PerfilController@editarPerfil' )->n
 Route::view('/tours', 'tours');
 
 Route::view('/perfil', 'perfil');
+
+Route::view('/verify', 'Auth/verify');
 

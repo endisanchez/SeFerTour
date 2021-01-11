@@ -17,7 +17,7 @@
   <header>
     <nav class="navbar navbar-expand-sm navbar-dark static-top">
         <div class="container-fluid">
-            <img src="{{ url('imagenes/logoanimado_blanco.gif') }}" alt="logo" width="25%">
+            <img src="{{url('imagenes/logoanimado_blanco.gif')}}" alt="logo" width="25%">
             <button class="navbar-toggler text-black" type="button" data-toggle="collapse" data-target="#opciones">
               <img class="img-fluid "src="{{ url('imagenes/menu.png') }}" alt="menu" width="30">
             </button>
@@ -27,22 +27,40 @@
                 <a class="nav-link text-white" href="{{ url('/') }}" id="link"><strong>{{ trans('texto.inicio') }}</strong></a>
               </li>
               <li class="nav-item text-white">
-                <a class="nav-link text-white" href="#" id="link"><strong>{{ trans('texto.visit_guiadas') }}</strong></a>
+                <a class="nav-link text-white" href="{{ url('/tours') }}" id="link"><strong>{{ trans('texto.visit_guiadas') }}</strong></a>
               </li>
 
-              <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="{{ url('imagenes/espania.png') }}" alt="españa" width="25px" height="25px"></a></li>
-              <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="{{ url('imagenes/ingles.png') }}" alt="unitedKingdom" width="25px" height="25px"></a></li>
+              <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="{{url('imagenes/espania.png') }}" alt="españa" width="25px" height="25px"></a></li>
+              <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="{{url('imagenes/ingles.png')}}" alt="unitedKingdom" width="25px" height="25px"></a></li>
 
               <li class="nav-item dropdown d-flex flex-row-reverse">
-                <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" ><img src="{{ url('imagenes/perfil.png') }}" alt="logo" width="25px" class="rounded-circle">
+                <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" ><img src="{{url('imagenes/perfil.png')}}" alt="logo" width="25px" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
 
-                  <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.inicio_sesion') }}</a>
-                  <div class="dropdown-divider"></div>
+                  @if(Auth::user())
+                    <a class="dropdown-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 
-                  <a class="dropdown-item" href="{{ url('register') }}">{{ trans('texto.registrar') }}</a>
+                      <b>{{ Auth::user()->usuario }}</b>
 
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                      {{ trans('texto.salir') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                  @else
+                    <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.inicio_sesion') }}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ url('register') }}">{{ trans('texto.registrar') }}</a>
+                  @endif
                 </div>
               </li>
             </ul>
@@ -183,22 +201,37 @@
         </map>
 
         <form method="post">
+          @csrf
             <div class="row my-5 d-block d-xl-none">
               <div id="formulario">
                 <form>
-                    <!-- SELECT DE LA API PUBLICA CON TODAS LAS COMUNIDADES -->
-                    <div class="rounded my-3">
-                      <select class="rounded col-8 p-2">
-                        <option class="text-center">Comunidad1</option>
-                        <option class="text-center">Comunidad2</option>
+                    <div class="rounded my-4">
+                      <select onchange="window.location.href=this.value;" class="rounded col-8 p-2">
+                        <option value="Andalucia">Andalucia</option>
+                        <option value="Aragon">Aragon</option>
+                        <option value="Asturias">Asturias</option>
+                        <option value="IslasBaleares">Islas Baleares</option>
+                        <option value="Canarias">Canarias</option>
+                        <option value="Cantabria">Cantabria</option>
+                        <option value="CastillaYLeon">Castilla Y Leon</option>
+                        <option value="CastillaLaMancha">Castilla La Mancha</option>
+                        <option value="Cataluña">Cataluña</option>
+                        <option value="Valencia">Valencia</option>
+                        <option value="Extremadura">Extremadura</option>
+                        <option value="Galicia">Galicia</option>
+                        <option value="Madrid">Madrid</option>
+                        <option value="Murcia">Murcia</option>
+                        <option value="Navarra">Navarra</option>
+                        <option value="PaisVasco">Pais Vasco</option>
+                        <option value="LaRioja">La Rioja</option>
+                        <option value="Ceuta">Ceuta</option>
+                        <option value="Melilla">Melilla</option>
                       </select>
                     </div>
-                  <button type="submit" class="btn my-2" id="botonFormulario"><strong>{{ trans('texto.buscar') }}</strong></button>
                 </form>
               </div>
             </div>
         </form>
-
       </center>
   </section>
 
@@ -210,16 +243,19 @@
           <div class="card my-5 container">
             <div class="card-header row" id="headingOne">
               <h5 class="mb-0 row col-12">
-                <button class="btn btn-link col-2" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <img src="{{ url('imagenes/perfil.png') }}" width="100%" class="rounded-circle">
+                <button class="btn btn-link col-2" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="rounded-circle">
+                  <img src="{{ url('imagenes/facebook.png') }}" width="100%" class="rounded-circle">
                 </button>
                 <p class="col-10 display-4 my-auto">{{$tour->nombre}}</p>
               </h5>
             </div>
 
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
-                {{$tour->nombre}}
+                    <p><b>Lugar: </b>{{$tour->ciudad}} , {{$tour->comunidad}}</p>
+                    <p><b>Hora: </b>{{$tour->hora}}</p>
+                    <p><b>Idioma: </b>{{$tour->idioma_tour}}</p>
+                    <button class="btn mt-2" id="botonFormulario" onclick="window.location.href='{{ url('/register') }}'"><strong>Reservar Tour</strong></button>
               </div>
             </div>
           </div>
