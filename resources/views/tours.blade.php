@@ -12,7 +12,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="{{ url('../resources/js/peticionComunidades.js') }}"></script>
 
 <body>
   <header>
@@ -20,7 +19,7 @@
         <div class="container-fluid">
             <img src="{{url('imagenes/logoanimado_blanco.gif')}}" alt="logo" width="25%">
             <button class="navbar-toggler text-black" type="button" data-toggle="collapse" data-target="#opciones">
-              <img class="img-fluid "src="imagenes/menu.png" alt="menu" width="30">
+              <img class="img-fluid "src="{{ url('imagenes/menu.png') }}" alt="menu" width="30">
             </button>
           <div class="collapse navbar-collapse " id="opciones">
             <ul class="navbar-nav ml-auto d-flex float-right text-right">
@@ -202,20 +201,37 @@
         </map>
 
         <form method="post">
+          @csrf
             <div class="row my-5 d-block d-xl-none">
               <div id="formulario">
                 <form>
-                    <!-- SELECT DE LA API PUBLICA CON TODAS LAS COMUNIDADES -->
-                    <div class="rounded my-3">
-                      <select id="selectcoms" class="rounded col-8 p-2">
+                    <div class="rounded my-4">
+                      <select onchange="window.location.href=this.value;" class="rounded col-8 p-2">
+                        <option value="Andalucia">Andalucia</option>
+                        <option value="Aragon">Aragon</option>
+                        <option value="Asturias">Asturias</option>
+                        <option value="IslasBaleares">Islas Baleares</option>
+                        <option value="Canarias">Canarias</option>
+                        <option value="Cantabria">Cantabria</option>
+                        <option value="CastillaYLeon">Castilla Y Leon</option>
+                        <option value="CastillaLaMancha">Castilla La Mancha</option>
+                        <option value="Cataluña">Cataluña</option>
+                        <option value="Valencia">Valencia</option>
+                        <option value="Extremadura">Extremadura</option>
+                        <option value="Galicia">Galicia</option>
+                        <option value="Madrid">Madrid</option>
+                        <option value="Murcia">Murcia</option>
+                        <option value="Navarra">Navarra</option>
+                        <option value="PaisVasco">Pais Vasco</option>
+                        <option value="LaRioja">La Rioja</option>
+                        <option value="Ceuta">Ceuta</option>
+                        <option value="Melilla">Melilla</option>
                       </select>
                     </div>
-                  <button type="submit" class="btn my-2" id="botonFormulario"><strong>{{ trans('texto.buscar') }}</strong></button>
                 </form>
               </div>
             </div>
         </form>
-
       </center>
   </section>
 
@@ -227,16 +243,19 @@
           <div class="card my-5 container">
             <div class="card-header row" id="headingOne">
               <h5 class="mb-0 row col-12">
-                <button class="btn btn-link col-2" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <img src="{{ url('imagenes/perfil.png') }}" width="100%" class="rounded-circle">
+                <button class="btn btn-link col-2" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="rounded-circle">
+                  <img src="{{ url('imagenes/facebook.png') }}" width="100%" class="rounded-circle">
                 </button>
                 <p class="col-10 display-4 my-auto">{{$tour->nombre}}</p>
               </h5>
             </div>
 
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
-                {{$tour->nombre}}
+                    <p><b>Lugar: </b>{{$tour->ciudad}} , {{$tour->comunidad}}</p>
+                    <p><b>Hora: </b>{{$tour->hora}}</p>
+                    <p><b>Idioma: </b>{{$tour->idioma_tour}}</p>
+                    <button class="btn mt-2" id="botonFormulario" onclick="window.location.href='{{ url('/register') }}'"><strong>Reservar Tour</strong></button>
               </div>
             </div>
           </div>
