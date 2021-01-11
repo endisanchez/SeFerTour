@@ -11,6 +11,9 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="{{ url('../resources/js/perfilEditar.js') }}"></script>
 
 
 <body>
@@ -76,84 +79,60 @@
     </nav>
   </header>
 
-    <section id="seccion" class="container-fluid text-light">
-      <div class="row">
-        <div class="col-12 mt-4">
-          <h1>{{ trans('texto.reserva') }}</h1>
-          <div class="text-light mt-4">
-            <p>{{ trans('texto.encuentra') }}</p>
-          </div>
-        </div>
-        <div id="formulario" class="col-8">
-          <form>
-            <div class="form-group">
-              <label for="lugar">{{ trans('texto.donde') }}</label>
-              <input type="text" class="form-control" id="lugar" placeholder="Lugar">
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="fecha">{{ trans('texto.cuando') }}</label>
-                <input type="date" class="form-control" id="fecha">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="personas">{{ trans('texto.cuantos') }}</label>
-                <input type="number" min="1" class="form-control" id="personas" placeholder="Personas">
-              </div>
-            </div>
-            <button type="submit" class="btn mt-2" id="botonFormulario"><strong>{{ trans('texto.buscar') }}</strong></button>
-          </form>
-        </div>
-      </div>
-    </section>
+    <div class="pt-3">
+        <center><img src="imagenes/{{ Auth::user()->foto }}" alt="perfil" width="100" height="100" class="rounded-circle"></center>
+    </div>
+    <div class="card container my-5" id="infoperfil">
+        <div class="card-body">
 
-    <section class="container-fluid text-center p-3" id="topVisitas">
-      <div>
-        <h1>{{ trans('texto.mejores') }}</h1>
-        <div class="mt-4">
-          <p>{{ trans('texto.mejores_texto') }}</p>
+            <h5 class="card-title text-center">{{ Auth::user()->usuario }}</h5>
+            <p class="text-muted text-small mb-2">Nombre</p>
+            <p class="mb-3">{{ Auth::user()->name }}</p>
+            <p class="text-muted text-small mb-2">Apellido</p>
+            <p class="mb-3">{{ Auth::user()->apellido }}</p>
+            <p class="text-muted text-small mb-2">DNI</p>
+            <p class="mb-3">{{ Auth::user()->dni }}</p>
+            <p class="text-muted text-small mb-2">Email</p>
+            <p class="mb-3">{{ Auth::user()->email }}</p>
+            <p class="text-muted text-small mb-2">Tipo</p>
+            <p class="mb-3">{{ Auth::user()->tipo }}</p>
+
+            <form class="mb-3">
+                <button type="button" onclick="muestraContenido()" class="btn mt-4 btn-primary">Editar</button>
+            </form>
         </div>
     </div>
-      </div>
-        <div class="row">
-          <div class="col-lg-4 col-12 pt-2">
-            <a href="#">
-              <div class="card bg-dark text-white" id="fondo">
-                <img class="card-img" src="imagenes/oficina2r.jpg" alt="Card image"  width="110%"/>
-                <div class="card-img-overlay">
-                  <p class="letrasCard">MADRID</p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-4 col-12 pt-2">
-            <a href="#">
-              <div class="card bg-dark text-white" id="fondo">
-                <img class="card-img" src="imagenes/oficina4r.jpg" alt="Card image"/>
-                <div class="card-img-overlay">
-                  <p class="letrasCard">BARCELONA</p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-4 col-12 pt-2">
-            <a href="#">
-              <div class="card bg-dark text-white" id="fondo">
-                <img class="card-img" src="imagenes/oficina3r.jpg" alt="Card image"/>
-                <div class="card-img-overlay">
-                  <p class="letrasCard">SEVILLA</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
 
-    <section id="video">
-      <h1>{{ trans('texto.experiencias') }}</h1>
-      <video preload="auto" loop="" autoplay="" muted="" width="75%" class="my-5">
-        <source src="imagenes/videoMuestra.mp4" type="video/mp4">
-      </video>
-    </section>
+    <div class="card container my-5" id="editPerfil">
+      <div class="card-body">
+
+          <form action="{{ route('editarPerfil') }}" method="POST" class="mb-3 mr-3">
+            @method('PUT')
+            @csrf
+            <input type="hidden" name="id" value="{{ Auth::user()->id }}">
+            <p class="text-muted text-small mb-2">Nombre</p>
+            <input type="text" class="mb-3" name="nombre" value="{{ Auth::user()->name }}">
+            <p class="text-muted text-small mb-2">Apellido</p>
+            <input type="text" class="mb-3" name="apellido" value="{{ Auth::user()->apellido }}">
+            <p class="text-muted text-small mb-2">Usuario</p>
+            <input type="text" class="mb-3" name="usuario" value="{{ Auth::user()->usuario }}">
+            <p class="text-muted text-small mb-2">Foto</p>
+            <input id="foto" type="file" name="foto" class="mb-3 form-control @error('foto') is-invalid @enderror" name="foto" value="{{ old('foto') }}" autocomplete="foto" accept="image/*" autofocus>
+            <p class="text-muted text-small mb-2">DNI</p>
+            <input type="text" class="mb-3" name="dni" value="{{ Auth::user()->dni }}">         
+            <p class="text-muted text-small mb-2">Email</p>
+            <input type="email" class="mb-3" name="email" value="{{ Auth::user()->email }}">
+            <p class="text-muted text-small mb-2">Tipo</p>
+            <input type="text" disabled class="mb-3" name="tipo" value="{{ Auth::user()->tipo }}">
+
+            <button type="submit" class="btn mt-4 btn-primary d-flex">Guardar</button>
+            <button type="button" onclick="muestraEdit()" class="btn mt-4 btn-primary">Cancelar</button>
+
+          </form>    
+      </div>
+  </div>
+    
+
 
   <footer class="page-footer font-small bg-dark text-light">
 
