@@ -7,8 +7,7 @@ class TourController extends Controller
 {
 
   public function toursProvincia($provincia) {
-    $tours = App\Models\Tour::where('provincia', '=', $provincia)->get();
-    // dd($tours);
+    $tours = App\Models\Tour::where('comunidad', '=', $provincia)->get();
     return view("tours")->with("tours", $tours);
   }
 

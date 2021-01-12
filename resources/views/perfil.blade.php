@@ -80,7 +80,11 @@
   </header>
 
     <div class="pt-3">
-        <center><img src="imagenes/{{ Auth::user()->foto }}" alt="perfil" width="100" height="100" class="rounded-circle"></center>
+      @if(Auth::user()->foto)
+      <center><img src="imagenes/{{ Auth::user()->foto }}" alt="perfil" width="100" height="100" class="rounded-circle"></center>
+      @else
+      <center><img src="{{ url('imagenes/perfil.png') }}" alt="perfil" width="100" height="100" class="rounded-circle"></center>
+      @endif
     </div>
     <div class="card container my-5" id="infoperfil">
         <div class="card-body">
@@ -119,7 +123,7 @@
             <p class="text-muted text-small mb-2">Foto</p>
             <input id="foto" type="file" name="foto" class="mb-3 form-control @error('foto') is-invalid @enderror" name="foto" value="{{ old('foto') }}" autocomplete="foto" accept="image/*" autofocus>
             <p class="text-muted text-small mb-2">DNI</p>
-            <input type="text" class="mb-3" name="dni" value="{{ Auth::user()->dni }}">         
+            <input type="text" class="mb-3" name="dni" value="{{ Auth::user()->dni }}">
             <p class="text-muted text-small mb-2">Email</p>
             <input type="email" class="mb-3" name="email" value="{{ Auth::user()->email }}">
             <p class="text-muted text-small mb-2">Tipo</p>
@@ -128,10 +132,10 @@
             <button type="submit" class="btn mt-4 btn-primary d-flex">Guardar</button>
             <button type="button" onclick="muestraEdit()" class="btn mt-4 btn-primary">Cancelar</button>
 
-          </form>    
+          </form>
       </div>
   </div>
-    
+
 
 
   <footer class="page-footer font-small bg-dark text-light">

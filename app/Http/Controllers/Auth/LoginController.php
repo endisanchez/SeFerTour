@@ -37,15 +37,5 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
-    protected function authenticated($request, $user){
-
-    if(!$user->email_verified_at){
-      \Auth::logout();
-      return view('Auth/verify');
-    } else {
-      \Auth::logout();
-      return view('index');
-    }
-  }
+  
 }

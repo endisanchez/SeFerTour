@@ -17,9 +17,9 @@
   <header>
     <nav class="navbar navbar-expand-sm navbar-dark static-top">
         <div class="container-fluid">
-            <img src="imagenes/logoanimado_blanco.gif" alt="logo" width="25%">
+            <img src="{{url ('imagenes/logoanimado_blanco.gif') }}" alt="logo" width="25%">
             <button class="navbar-toggler text-black" type="button" data-toggle="collapse" data-target="#opciones">
-              <img class="img-fluid "src="imagenes/menu.png" alt="menu" width="30">
+              <img class="img-fluid "src="{{ url('imagenes/menu.png') }}" alt="menu" width="30">
             </button>
           <div class="collapse navbar-collapse " id="opciones">
             <ul class="navbar-nav ml-auto d-flex float-right text-right">
@@ -30,8 +30,8 @@
                 <a class="nav-link text-white" href="{{ url('/tours') }}" id="link"><strong>{{ trans('texto.visit_guiadas') }}</strong></a>
               </li>
 
-              <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="imagenes/espania.png" alt="españa" width="25px" height="25px"></a></li>
-              <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="imagenes/ingles.png" alt="unitedKingdom" width="25px" height="25px"></a></li>
+              <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="{{url ('imagenes/espania.png')}}" alt="españa" width="25px" height="25px"></a></li>
+              <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="{{url ('imagenes/ingles.png')}}" alt="unitedKingdom" width="25px" height="25px"></a></li>
 
               <li class="nav-item dropdown d-flex flex-row-reverse">
                 @if(Auth::user())
@@ -40,7 +40,7 @@
                   </a>
                 @else
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
-                    <img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
+                    <img src="{{url('imagenes/perfil.png')}}" alt="logo" width="25px" class="rounded-circle">
                   </a>
                 @endif
                 <div class="dropdown-menu dropdown-menu-right">
@@ -118,7 +118,7 @@
           <div class="col-lg-4 col-12 pt-2">
             <a href="#">
               <div class="card bg-dark text-white" id="fondo">
-                <img class="card-img" src="imagenes/oficina2r.jpg" alt="Card image"  width="110%"/>
+                <img class="card-img" src="{{url('imagenes/oficina2r.jpg')}}" alt="Card image"  width="110%"/>
                 <div class="card-img-overlay">
                   <p class="letrasCard">MADRID</p>
                 </div>
@@ -128,7 +128,7 @@
           <div class="col-lg-4 col-12 pt-2">
             <a href="#">
               <div class="card bg-dark text-white" id="fondo">
-                <img class="card-img" src="imagenes/oficina4r.jpg" alt="Card image"/>
+                <img class="card-img" src="{{url('imagenes/oficina4r.jpg')}}" alt="Card image"/>
                 <div class="card-img-overlay">
                   <p class="letrasCard">BARCELONA</p>
                 </div>
@@ -138,7 +138,7 @@
           <div class="col-lg-4 col-12 pt-2">
             <a href="#">
               <div class="card bg-dark text-white" id="fondo">
-                <img class="card-img" src="imagenes/oficina3r.jpg" alt="Card image"/>
+                <img class="card-img" src="{{url ('imagenes/oficina3r.jpg')}}" alt="Card image"/>
                 <div class="card-img-overlay">
                   <p class="letrasCard">SEVILLA</p>
                 </div>
@@ -151,7 +151,7 @@
     <section id="video">
       <h1>{{ trans('texto.experiencias') }}</h1>
       <video preload="auto" loop="" autoplay="" muted="" width="75%" class="my-5">
-        <source src="imagenes/videoMuestra.mp4" type="video/mp4">
+        <source src="{{url('imagenes/videoMuestra.mp4')}}" type="video/mp4">
       </video>
     </section>
 
@@ -175,13 +175,13 @@
           <h6 class="text-uppercase font-weight-bold">{{ trans('texto.redes') }}</h6>
           <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>
-            <a href="#"><img src="imagenes/insta.png" alt="insta" width="20%"></a> Instagram
+            <a href="#"><img src="{{url ('imagenes/insta.png')}}" alt="insta" width="20%"></a> Instagram
           </p>
           <p>
-            <a href="#"><img src="imagenes/facebook.png" alt="facebook" width="20%"></a> Facebook
+            <a href="#"><img src="{{url ('imagenes/facebook.png')}}" alt="facebook" width="20%"></a> Facebook
           </p>
           <p>
-            <a href="#"><img src="imagenes/twitter.png" alt="twitter" width="20%"></a> Twitter
+            <a href="#"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
           </p>
 
         </div>

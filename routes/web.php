@@ -42,4 +42,3 @@ Route::view('/tours', 'tours');
 Route::view('/perfil', 'perfil');
 
 Route::view('/verify', 'Auth/verify');
-
