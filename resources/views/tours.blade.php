@@ -259,10 +259,17 @@
 
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
-                    <p><b>Lugar: </b>{{$tour->ciudad}} , {{$tour->comunidad}}</p>
-                    <p><b>Hora: </b>{{$tour->hora}}</p>
-                    <p><b>Idioma: </b>{{$tour->idioma_tour}}</p>
-                    <button class="btn mt-2" id="botonFormulario" onclick="window.location.href='{{ url('/register') }}'"><strong>Reservar Tour</strong></button>
+                <form action="{{ url('/reservar') }}" method="post">
+                  @csrf
+                  <p><b>Lugar: </b>{{$tour->ciudad}}, {{$tour->provincia}}, {{$tour->comunidad}}</p>
+                  <p><b>Hora: </b>{{$tour->hora}}</p>
+                  <p><b>Idioma: </b>{{$tour->idioma_tour}}</p>
+                  <input type="hidden" value="{{ $tour->id }}" name="id_tour">
+                  @if(Auth::user())
+                  <input type="hidden" value="{{ Auth::id() }}" name="id_usuario">
+                  @endif
+                  <button type="submit" class="btn mt-2" id="botonFormulario" onclick="window.location.href='{{ url('/reservar') }}'"><strong>Reservar Tour</strong></button>
+                </form>
               </div>
             </div>
           </div>

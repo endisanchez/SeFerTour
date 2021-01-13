@@ -11,12 +11,12 @@ class Guia extends Model
 
     public function usuario()
     {
-      return $this->belongsTo('App\Models\Usuario');
+      return $this->belongsTo('App\Models\User');
     }
 
     public function tour()
 	  {
     	return $this->hasMany('App\Models\Tour');
 	  }
-    
+
 }

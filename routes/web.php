@@ -42,3 +42,7 @@ Route::view('/tours', 'tours');
 Route::view('/perfil', 'perfil');
 
 Route::view('/verify', 'Auth/verify');
+
+Route::view('/reservar', 'reservas');
+
+Route::post('/reservar', 'App\Http\Controllers\ReservasController@crearReserva')->name('crearReserva');
