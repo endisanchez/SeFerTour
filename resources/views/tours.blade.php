@@ -265,10 +265,14 @@
                   <p><b>Hora: </b>{{$tour->hora}}</p>
                   <p><b>Idioma: </b>{{$tour->idioma_tour}}</p>
                   <input type="hidden" value="{{ $tour->id }}" name="id_tour">
-                  @if(Auth::user())
                   <input type="hidden" value="{{ Auth::id() }}" name="id_usuario">
+                  @if(Auth::user())
+                    <button type="submit" id="botonFormulario" class="btn mt-2" onclick="window.location.href='{{ url('/reservar') }}'"><strong>Reservar Tour</strong></button>
+                  @else
+                    <button type="button" style="background-color: #C40B0B;color: #ffffff;" class="btn mt-2" onclick="window.location.href='{{ url('/reservar') }}'" disabled><strong>Reservar Tour</strong></button>
+                    <p>*Debes iniciar sesión y verificar tu email para poder reservar un tour.</p>
                   @endif
-                  <button type="submit" class="btn mt-2" id="botonFormulario" onclick="window.location.href='{{ url('/reservar') }}'"><strong>Reservar Tour</strong></button>
+
                 </form>
               </div>
             </div>

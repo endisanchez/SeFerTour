@@ -43,6 +43,6 @@ Route::view('/perfil', 'perfil');
 
 Route::view('/verify', 'Auth/verify');
 
-Route::view('/reservar', 'reservas');
+Route::view('/reservar', 'reservas')->middleware('auth');
 
-Route::post('/reservar', 'App\Http\Controllers\ReservasController@crearReserva')->name('crearReserva');
+Route::post('/reservar', 'App\Http\Controllers\ReservasController@crearReserva')->name('crearReserva')->middleware('auth');
