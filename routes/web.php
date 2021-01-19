@@ -41,4 +41,23 @@ Route::view('/tours', 'tours');
 
 Route::view('/perfil', 'perfil');
 
+Route::view('/admin', 'admin');
+
 Route::view('/verify', 'Auth/verify');
+Route::delete('/eliminarUser/{lugar}', '\App\Http\Controllers\adminController@eliminar')->name('verSitio');
+
+Route::post('storage', '\App\Http\Controllers\Auth\RegisterController@save')->name('storage');
+
+Route::post('altaUsuario', '\App\Http\Controllers\adminController@create')->name('altaUsuario');
+
+Route::get('/eliminarFoto', '\App\Http\Controllers\PerfilController@eliminarFoto' )->name('eliminarFoto');
+
+Route::get('/admin', '\App\Http\Controllers\adminController@mostrarAdminBlade' )->middleware('auth');
+
+Route::delete('/eliminarUser/{id}', '\App\Http\Controllers\adminController@eliminar')->name('eliminarUsuario');
+
+Route::delete('/eliminar/{id}', '\App\Http\Controllers\adminController@eliminarTour')->name('eliminarTour');
+
+Route::get('/editar/{id}', '\App\Http\Controllers\adminController@editarUsuario')->name('editarUsuario');
+
+Route::post('/nuevaFoto', '\App\Http\Controllers\PerfilController@nuevaFoto')->name('nuevaFoto');

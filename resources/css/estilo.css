@@ -20,6 +20,17 @@
 
 }
 
+#sinEstilo {
+    background: none;
+    border: 0;
+    color: inherit;
+    /* cursor: default; */
+    font: inherit;
+    line-height: normal;
+    overflow: visible;
+    padding: 0;
+}
+
 nav{
     background-color: #C40B0B;
 }
@@ -38,6 +49,11 @@ nav{
 
 #botonFormulario {
     background-color: #C40B0B;
+    color: #ffffff;
+}
+
+#botonCancelar {
+    background-color: #636363;
     color: #ffffff;
 }
 

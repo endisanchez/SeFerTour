@@ -39,11 +39,15 @@
               <li class="nav-item dropdown d-flex flex-row-reverse">
                 @if(Auth::user())
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
-                    <img src="imagenes/{{ Auth::user()->foto }}" alt="logo" width="25px" class="rounded-circle">
+                    @if(Auth::user()->foto)
+                      <img src="../storage/app/{{ Auth::user()->foto }}" alt="logo" width="25" height="25" class="rounded-circle">
+                    @else
+                      <img src="{{ url('imagenes/perfil.png') }}" alt="logo" width="25px" class="rounded-circle">
+                    @endif
                   </a>
                 @else
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
-                    <img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
+                    <img src="{{ url('imagenes/perfil.png') }}" alt="logo" width="25px" class="rounded-circle">
                   </a>
                 @endif
                 <div class="dropdown-menu dropdown-menu-right">
@@ -79,14 +83,64 @@
     </nav>
   </header>
 
-    <div class="pt-3">
+    <div class="py-3">
+      
       @if(Auth::user()->foto)
-      <center><img src="imagenes/{{ Auth::user()->foto }}" alt="perfil" width="100" height="100" class="rounded-circle"></center>
+      <center>
+        <img src="../storage/app/{{ Auth::user()->foto }}" alt="perfil" width="150" height="150" class="rounded-circle">
+        <div class="col-12 my-2">
+          <div class="row justify-content-center">
+
+          <label class="mr-2">
+
+          <a href="{{ url('/eliminarFoto') }}">
+            @method('PUT')
+             <img src="{{ url('imagenes/eliminar.png') }}" alt="eliminar" width="20" height="20">
+          </a>
+          </label>
+
+          <form method="POST" action="{{ url('/nuevaFoto') }}" accept-charset="UTF-8" enctype="multipart/form-data" id="nuevaFotoUpload">
+            @csrf
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <label>
+              <input type="file" style="display: none;" name="foto" accept="image/*">
+              <img src="{{ url('imagenes/cambio.png') }}" alt="añadir" width="20" height="20">
+            </label>
+          </form>
+          </div>
+          <script>
+            document.getElementById("nuevaFotoUpload").onchange = function() {
+                document.getElementById("nuevaFotoUpload").submit();
+            };
+          </script>
+        </div>
+      </center>
+      
       @else
-      <center><img src="{{ url('imagenes/perfil.png') }}" alt="perfil" width="100" height="100" class="rounded-circle"></center>
+      <center>
+        <img src="{{ url('imagenes/perfil.png') }}" alt="perfil" width="150" height="150" class="rounded-circle">
+        <div class="col-12 my-2">
+
+          <form method="POST" action="{{ url('/nuevaFoto') }}" accept-charset="UTF-8" enctype="multipart/form-data" id="nuevaFotoUpload">
+            @csrf
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <label>
+              <input type="file" style="display: none;" name="foto" accept="image/*">
+              <img src="{{ url('imagenes/añadir.png') }}" alt="eliminar" width="20" height="20">
+           </label>
+          </form>
+
+          <script>
+            document.getElementById("nuevaFotoUpload").onchange = function() {
+                document.getElementById("nuevaFotoUpload").submit();
+            };
+          </script>
+          
+        </div>
+      </center>
       @endif
     </div>
-    <div class="card container my-5" id="infoperfil">
+    <div class="card container mt-3 mb-5" id="infoperfil">
         <div class="card-body">
 
             <h5 class="card-title text-center">{{ Auth::user()->usuario }}</h5>
@@ -102,7 +156,7 @@
             <p class="mb-3">{{ Auth::user()->tipo }}</p>
 
             <form class="mb-3">
-                <button type="button" onclick="muestraContenido()" class="btn mt-4 btn-primary">Editar</button>
+                <button type="button" onclick="muestraContenido()" class="btn mt-4" id="botonFormulario">Editar</button>
             </form>
         </div>
     </div>
@@ -113,6 +167,7 @@
           <form action="{{ route('editarPerfil') }}" method="POST" class="mb-3 mr-3">
             @method('PUT')
             @csrf
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id" value="{{ Auth::user()->id }}">
             <p class="text-muted text-small mb-2">Nombre</p>
             <input type="text" class="mb-3" name="nombre" value="{{ Auth::user()->name }}">
@@ -120,8 +175,6 @@
             <input type="text" class="mb-3" name="apellido" value="{{ Auth::user()->apellido }}">
             <p class="text-muted text-small mb-2">Usuario</p>
             <input type="text" class="mb-3" name="usuario" value="{{ Auth::user()->usuario }}">
-            <p class="text-muted text-small mb-2">Foto</p>
-            <input id="foto" type="file" name="foto" class="mb-3 form-control @error('foto') is-invalid @enderror" name="foto" value="{{ old('foto') }}" autocomplete="foto" accept="image/*" autofocus>
             <p class="text-muted text-small mb-2">DNI</p>
             <input type="text" class="mb-3" name="dni" value="{{ Auth::user()->dni }}">
             <p class="text-muted text-small mb-2">Email</p>
@@ -129,8 +182,8 @@
             <p class="text-muted text-small mb-2">Tipo</p>
             <input type="text" disabled class="mb-3" name="tipo" value="{{ Auth::user()->tipo }}">
 
-            <button type="submit" class="btn mt-4 btn-primary d-flex">Guardar</button>
-            <button type="button" onclick="muestraEdit()" class="btn mt-4 btn-primary">Cancelar</button>
+            <button type="submit" class="btn mt-4 d-flex" id="botonFormulario">Guardar</button>
+            <button type="button" onclick="muestraEdit()" class="btn mt-4" id="botonFormulario">Cancelar</button>
 
           </form>
       </div>
