@@ -14,4 +14,9 @@ class Tour extends Model
     	return $this->belongsToMany('App\Models\Cliente');
 	  }
 
+    public function guia()
+    {
+      return $this->belongsTo('App\Models\Guia', 'id_guia');
+    }
+
 }

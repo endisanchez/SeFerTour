@@ -42,3 +42,13 @@ Route::view('/tours', 'tours');
 Route::view('/perfil', 'perfil');
 
 Route::view('/verify', 'Auth/verify');
+
+Route::view('/reservar', 'reservas')->middleware('auth');
+
+Route::post('storage', '\App\Http\Controllers\Auth\RegisterController@save')->name('storage');
+
+Route::post('/reservar', 'App\Http\Controllers\ReservasController@crearReserva')->name('crearReserva')->middleware('auth');
+
+Route::get('/reservar', 'App\Http\Controllers\ReservasController@verReservas')->middleware('auth');
+
+Route::get('/cancelarReserva/{id}', 'App\Http\Controllers\ReservasController@cancelarReserva')->name('cancelarReserva')->middleware('auth');
