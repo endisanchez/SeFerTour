@@ -52,7 +52,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:5'],
+            'apellido' => ['required', 'string', 'max:25'],
+            'dni' => ['required', 'string', 'max:25'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -66,16 +68,38 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+       //dd($data);
         return User::create([
             'name' => $data['name'],
             'apellido' => $data['apellido'],
             'dni' => $data['dni'],
             'email' => $data['email'],
-            'foto' => $data['foto'],
+            'foto' => $data['originalName'],
             'usuario' => $data['usuario'],
             'password' => Hash::make($data['password']),
             'tipo' => $data['tipo'],
         ]);
+    }
+
+    public function save(Request $request)
+    {
+       //obtenemos el campo file definido en el formulario
+       $file = $request->file('foto');
+       
+       //dd($request);
+
+       //obtenemos el nombre del archivo
+       $nombre = $file->getClientOriginalName();
+       
+       //indicamos que queremos guardar un nuevo archivo en el disco local
+       \Storage::disk('local')->put($nombre,  \File::get($file));
+
+       $request->merge(['originalName'=> $nombre]);
+
+       $this->create($request->all());
+
+       return redirect('/verify');
+
     }
     
 }
