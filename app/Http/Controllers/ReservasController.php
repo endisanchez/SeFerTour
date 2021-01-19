@@ -10,12 +10,25 @@ class ReservasController extends Controller
 
     public function crearReserva(Request $request)
     {
-      $id_cliente = App\Models\User::find(Auth::id())->cliente()->get("id")[0]["id"];
-      $nuevaReserva = new App\Models\Reserva;
-      $nuevaReserva->id_tour = $request->id_tour;
-      $nuevaReserva->id_cliente = $id_cliente;
-      $nuevaReserva->save();
+      $cliente = Auth::user()->cliente;
+      $tour = App\Models\Tour::find($request->id_tour);
+      foreach ($cliente->tour as $reserva) {
+        if(strval($reserva->pivot->tour_id) == $request->id_tour) {
+          return redirect('/login');
+        }
+      }
+      $cliente->tour()->attach($tour->id);
+      return redirect('/reservar');
+    }
 
+    public function verReservas() {
+      $reservas = Auth::user()->cliente->tour()->get();
+      return view('reservas')->with(compact('reservas'));
+    }
+
+    public function cancelarReserva($tour_id) {
+      $cliente = Auth::user()->cliente;
+      $cliente->tour()->detach($tour_id);
       return redirect('/reservar');
     }
 

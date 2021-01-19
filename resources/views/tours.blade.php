@@ -214,25 +214,25 @@
                 <form>
                     <div class="rounded my-4">
                       <select onchange="window.location.href=this.value;" class="rounded col-8 p-2">
-                        <option value="Andalucia">Andalucia</option>
-                        <option value="Aragon">Aragon</option>
-                        <option value="Asturias">Asturias</option>
-                        <option value="IslasBaleares">Islas Baleares</option>
-                        <option value="Canarias">Canarias</option>
-                        <option value="Cantabria">Cantabria</option>
-                        <option value="CastillaYLeon">Castilla Y Leon</option>
-                        <option value="CastillaLaMancha">Castilla La Mancha</option>
-                        <option value="Cataluña">Cataluña</option>
-                        <option value="Valencia">Valencia</option>
-                        <option value="Extremadura">Extremadura</option>
-                        <option value="Galicia">Galicia</option>
-                        <option value="Madrid">Madrid</option>
-                        <option value="Murcia">Murcia</option>
-                        <option value="Navarra">Navarra</option>
-                        <option value="PaisVasco">Pais Vasco</option>
-                        <option value="LaRioja">La Rioja</option>
-                        <option value="Ceuta">Ceuta</option>
-                        <option value="Melilla">Melilla</option>
+                        <option value="{{url('/tours/Andalucia')}}">Andalucia</option>
+                        <option value="{{url('/tours/Aragon')}}">Aragon</option>
+                        <option value="{{url('/tours/Asturias')}}">Asturias</option>
+                        <option value="{{url('/tours/IslasBaleares')}}">Islas Baleares</option>
+                        <option value="{{url('/tours/Canarias')}}">Canarias</option>
+                        <option value="{{url('/tours/Cantabria')}}">Cantabria</option>
+                        <option value="{{url('/tours/CastillaYLeon')}}">Castilla Y Leon</option>
+                        <option value="{{url('/tours/CastillaLaMancha')}}">Castilla La Mancha</option>
+                        <option value="{{url('/tours/Cataluña')}}">Cataluña</option>
+                        <option value="{{url('/tours/Valencia')}}">Valencia</option>
+                        <option value="{{url('/tours/Extremadura')}}">Extremadura</option>
+                        <option value="{{url('/tours/Galicia')}}">Galicia</option>
+                        <option value="{{url('/tours/Madrid')}}">Madrid</option>
+                        <option value="{{url('/tours/Murcia')}}">Murcia</option>
+                        <option value="{{url('/tours/Navarra')}}">Navarra</option>
+                        <option value="{{url('/tours/PaisVasco')}}">Pais Vasco</option>
+                        <option value="{{url('/tours/LaRioja')}}">La Rioja</option>
+                        <option value="{{url('/tours/Ceuta')}}">Ceuta</option>
+                        <option value="{{url('/tours/Melilla')}}">Melilla</option>
                       </select>
                     </div>
                 </form>
@@ -250,10 +250,13 @@
           <div class="card my-5 container">
             <div class="card-header row" id="headingOne">
               <h5 class="mb-0 row col-12">
-                <button class="btn btn-link col-2" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="rounded-circle">
-                  <img src="../imagenes/{{ $tour->comunidad }}.png" width="100%" class="rounded-circle">
-                </button>
-                <p class="col-10 display-4 my-auto">{{$tour->nombre}}</p>
+                <div class="col-2">
+                  <img src="../imagenes/{{ $tour->comunidad }}.jpg" width="100" height="100" class="rounded-circle">
+                </div>
+                <p class="col-8 display-4 my-auto">{{$tour->nombre}}</p>
+              <button class="btn btn-link col-2" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="rounded-circle">
+                <img src="{{ url('imagenes/dropdowntours.png')}}" width="100" height="100" class="rounded-circle">
+              </button>
               </h5>
             </div>
 
@@ -262,17 +265,18 @@
                 <form action="{{ url('/reservar') }}" method="post">
                   @csrf
                   <p><b>Lugar: </b>{{$tour->ciudad}}, {{$tour->provincia}}, {{$tour->comunidad}}</p>
+                  <p><b>Fecha: </b>{{$tour->fecha}}</p>
                   <p><b>Hora: </b>{{$tour->hora}}</p>
                   <p><b>Idioma: </b>{{$tour->idioma_tour}}</p>
+                  <p><b>Guia: </b>{{$tour->guia->user->name}} {{$tour->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $tour->guia->user->foto)}}" /></p>
+
                   <input type="hidden" value="{{ $tour->id }}" name="id_tour">
                   <input type="hidden" value="{{ Auth::id() }}" name="id_usuario">
                   @if(Auth::user())
-                    <button type="submit" id="botonFormulario" class="btn mt-2" onclick="window.location.href='{{ url('/reservar') }}'"><strong>Reservar Tour</strong></button>
+                  <button type="submit" id="botonFormulario" class="btn mt-2" onclick="window.location.href='{{ url('/reservar') }}'"><strong>Reservar Tour</strong></button>
                   @else
-                    <button type="button" style="background-color: #C40B0B;color: #ffffff;" class="btn mt-2" onclick="window.location.href='{{ url('/reservar') }}'" disabled><strong>Reservar Tour</strong></button>
-                    <p>*Debes iniciar sesión y verificar tu email para poder reservar un tour.</p>
+                  <button type="submit" id="botonFormulario" class="btn mt-2" onclick="window.location.href='{{ url('/login') }}'"><strong>Reservar Tour</strong></button>
                   @endif
-
                 </form>
               </div>
             </div>

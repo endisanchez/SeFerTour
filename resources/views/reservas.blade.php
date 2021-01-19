@@ -80,7 +80,41 @@
     </nav>
   </header>
 
-  AQUI LAS RESEVAS DEL USUARIO AUNTENTICADO
+  <section>
+    <h1 class="text-center my-5">Mis Reservas</h1>
+    @foreach($reservas as $reserva)
+    <div class="card my-4 container">
+      <div class="card-body">
+          <div class="row">
+              <div class="col-6">
+                  <b><h5 class="card-text mb-4">{{ $reserva->nombre }}</h5></b>
+              </div>
+          </div>
+          <p class="card-text"><b>Lugar:</b> {{ $reserva->ciudad }}, {{ $reserva->provincia }}</p>
+          <p class="card-text"><b>Apellido:</b> {{ $reserva->idioma_tour }}</p>
+          <p class="card-text"><b>Hora:</b> {{ $reserva->hora }}</p>
+          <p class="card-text"><b>Fecha:</b> {{ $reserva->fecha }}</p>
+          </p>
+          <div class="row">
+            <div class="col-6">
+              <p><b>Guia: </b>{{$reserva->guia->user->name}} {{$reserva->guia->user->apellido}}
+                @if($reserva->guia->user->foto)
+                  <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $reserva->guia->user->foto)}}" />
+                @else
+                  <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/perfil.png')}}" />
+                @endif
+            </div>
+
+            <div class="col-6  d-flex justify-content-end">
+              <form action="{{ route('cancelarReserva', $reserva->id) }}" method="get">
+                <button type="submit" id="botonFormulario" class="btn mt-2" onclick="return confirm('Estas seguro de que quieres eliminar esta reseva?')"><strong>Cancelar Tour</strong></button>
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+    @endforeach
+  </section>
 
   <footer class="page-footer font-small bg-dark text-light">
 

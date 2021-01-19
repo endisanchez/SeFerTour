@@ -9,7 +9,7 @@ class Cliente extends Model
 {
     use HasFactory;
 
-    public function usuario()
+    public function user()
     {
       return $this->belongsTo('App\Models\User');
     }
