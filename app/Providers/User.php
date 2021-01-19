@@ -6,11 +6,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -49,7 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function guia()
     {
-      return $this->hasOne('App\Models\Guia');
+      return $this->hasOne('App\Models\Guia', 'id_usuario');
     }
 
     public function admin()

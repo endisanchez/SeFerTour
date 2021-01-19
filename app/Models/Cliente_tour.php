@@ -5,10 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reserva extends Model
+class Cliente_tour extends Model
 {
-    use HasFactory;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -18,4 +16,6 @@ class Reserva extends Model
         'tour_id',
         'cliente_id',
     ];
+
+    use HasFactory;
 }

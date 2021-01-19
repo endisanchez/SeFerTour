@@ -9,14 +9,14 @@ class Cliente extends Model
 {
     use HasFactory;
 
-    public function usuario()
+    public function user()
     {
-      return $this->belongsTo('App\Models\Usuario');
+      return $this->belongsTo('App\Models\User');
     }
 
     public function tour()
 	  {
     	return $this->belongsToMany('App\Models\Tour');
 	  }
-    
+
 }

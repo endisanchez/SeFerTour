@@ -9,14 +9,14 @@ class Guia extends Model
 {
     use HasFactory;
 
-    public function usuario()
+    public function user()
     {
-      return $this->belongsTo('App\Models\Usuario');
+      return $this->belongsTo('App\Models\User', 'id_usuario');
     }
 
     public function tour()
 	  {
     	return $this->hasMany('App\Models\Tour');
 	  }
-    
+
 }
