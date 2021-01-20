@@ -37,7 +37,7 @@
                 @if(Auth::user())
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
                     @if( Auth::user()->foto )
-                      <img src="../storage/app/{{ Auth::user()->foto }}" alt="logo" width="25px" class="rounded-circle">
+                      <img src="imagenes/{{ Auth::user()->foto }}" alt="logo" width="25px" class="rounded-circle">
                     @else
                       <img src="{{url('imagenes/perfil.png')}}" alt="logo" width="25px" class="rounded-circle">
                     @endif
@@ -120,7 +120,7 @@
       </div>
         <div class="row">
           <div class="col-lg-4 col-12 pt-2">
-            <a href="{{ route('provincia', 'Madrid') }}">
+            <a href="#">
               <div class="card bg-dark text-white" id="fondo">
                 <img class="card-img" src="{{url('imagenes/oficina2r.jpg')}}" alt="Card image"  width="110%"/>
                 <div class="card-img-overlay">
@@ -130,7 +130,7 @@
             </a>
           </div>
           <div class="col-lg-4 col-12 pt-2">
-            <a href="{{ route('provincia', 'Cataluña') }}">
+            <a href="#">
               <div class="card bg-dark text-white" id="fondo">
                 <img class="card-img" src="{{url('imagenes/oficina4r.jpg')}}" alt="Card image"/>
                 <div class="card-img-overlay">
@@ -140,7 +140,7 @@
             </a>
           </div>
           <div class="col-lg-4 col-12 pt-2">
-            <a href="{{ route('provincia', 'Andalucia') }}">
+            <a href="#">
               <div class="card bg-dark text-white" id="fondo">
                 <img class="card-img" src="{{url ('imagenes/oficina3r.jpg')}}" alt="Card image"/>
                 <div class="card-img-overlay">
