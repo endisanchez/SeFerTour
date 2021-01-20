@@ -13,14 +13,14 @@ class CreateReservasTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservas', function (Blueprint $table) {
+        Schema::create('cliente_tour', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_tour');
-            $table->unsignedBigInteger('id_cliente');
+            $table->unsignedBigInteger('tour_id');
+            $table->unsignedBigInteger('cliente_id');
             $table->datetime('created_at');
             $table->datetime('updated_at');
-            $table->foreign('id_tour')->references('id')->on('tours')->onDelete('cascade');
-            $table->foreign('id_cliente')->references('id')->on('clientes')->onDelete('cascade');
+            $table->foreign('tour_id')->references('id')->on('tours')->onDelete('cascade');
+            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
         });
     }
 
