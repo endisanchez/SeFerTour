@@ -66,7 +66,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+      $file = $data['foto'];
+
+      $nombre = $file->getClientOriginalName();
+
+      \Storage::disk('local')->put($nombre,  \File::get($file));
+
+      $data['foto'] = $nombre;
+
+      return User::create([
             'name' => $data['name'],
             'apellido' => $data['apellido'],
             'dni' => $data['dni'],
@@ -77,5 +86,7 @@ class RegisterController extends Controller
             'tipo' => $data['tipo'],
         ]);
     }
-    
+
+
+
 }

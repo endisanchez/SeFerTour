@@ -41,11 +41,19 @@ Route::view('/tours', 'tours');
 
 Route::view('/perfil', 'perfil');
 
+Route::view('/admin', 'admin');
+
 Route::view('/verify', 'Auth/verify');
 
 Route::delete('/eliminarUser/{lugar}', '\App\Http\Controllers\adminController@eliminar')->name('verSitio');
 
-Route::post('storage', '\App\Http\Controllers\Auth\RegisterController@save')->name('storage');
+Route::delete('/eliminar/{id}', '\App\Http\Controllers\adminController@eliminarTour')->name('eliminarTour');
+
+Route::get('/editar/{id}', '\App\Http\Controllers\adminController@editarUsuario')->name('editarUsuario');
+
+Route::post('/nuevaFoto', '\App\Http\Controllers\PerfilController@nuevaFoto')->name('nuevaFoto');
+
+Route::view('/reservar', 'reservas')->middleware('auth');
 
 Route::post('altaUsuario', '\App\Http\Controllers\adminController@create')->name('altaUsuario');
 
@@ -68,3 +76,5 @@ Route::post('/reservar', 'App\Http\Controllers\ReservasController@crearReserva')
 Route::get('/reservar', 'App\Http\Controllers\ReservasController@verReservas')->middleware('auth');
 
 Route::get('/cancelarReserva/{id}', 'App\Http\Controllers\ReservasController@cancelarReserva')->name('cancelarReserva')->middleware('auth');
+
+Route::post('register', 'App\Http\Controllers\Auth\RegisterController@register');
