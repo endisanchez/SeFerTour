@@ -24,8 +24,20 @@ return [
     'cuenta' => 'Acount',
     'contacto' => 'Contact',
     'salir' => 'Log Out',
-
-
+    'contraseña' => 'Password',
+    'olvidar_contra' => 'Forgot password?',
+    'recuerdame' => 'Remember',
+    'nombre' => 'Name',
+    'apellido' => 'Subname',
+    'dni' => 'DNI',
+    'foto' => 'Photo',
+    'usuario' => 'User',
+    'repetir' => 'Repeat Password',
+    'tipo' => 'Type',
+    'seleccion' => 'Select File',
+    'mis_reservas' => 'My reservations',
+    'mis_tours' => 'My tours',
+    'administrador' => 'manage',
 
 
 

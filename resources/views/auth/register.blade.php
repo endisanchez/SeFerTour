@@ -74,14 +74,14 @@
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="card">
-            <div class="card-header">{{ __('Registrarse') }}</div>
+            <div class="card-header">{{trans('texto.registrar') }}</div>
 
             <div class="card-body">
               <form method="POST" action="{{ route('register') }}">
                 @csrf
 
                 <div class="form-group row">
-                  <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+                  <label for="name" class="col-md-4 col-form-label text-md-right">{{ trans('texto.nombre') }}</label>
 
                   <div class="col-md-6">
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -95,7 +95,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="apellido" class="col-md-4 col-form-label text-md-right">{{ __('Apellido') }}</label>
+                  <label for="apellido" class="col-md-4 col-form-label text-md-right">{{ trans('texto.apellido') }}</label>
 
                   <div class="col-md-6">
                     <input id="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido" autofocus>
@@ -109,7 +109,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="dni" class="col-md-4 col-form-label text-md-right">{{ __('DNI') }}</label>
+                  <label for="dni" class="col-md-4 col-form-label text-md-right">{{ trans('texto.dni') }}</label>
 
                   <div class="col-md-6">
                     <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni" autofocus>
@@ -137,10 +137,10 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('Foto') }}</label>
+                  <label for="foto" class="col-md-4 col-form-label text-md-right">{{ trans('texto.foto') }}</label>
 
                   <div class="col-md-6">
-                    <input id="foto" type="file" class="form-control @error('foto') is-invalid @enderror" name="foto" value="{{ old('foto') }}" autocomplete="foto" accept="image/*" autofocus>
+                    <input id="foto" type="file" class="form-control @error('foto') is-invalid @enderror" name="foto" value="{{ old('foto') }}" autocomplete="foto" accept="image/*" autofocus >
 
                     @error('foto')
                     <span class="invalid-feedback" role="alert">
@@ -151,7 +151,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="usuario" class="col-md-4 col-form-label text-md-right">{{ __('Usuario') }}</label>
+                  <label for="usuario" class="col-md-4 col-form-label text-md-right">{{ trans('texto.usuario') }}</label>
 
                   <div class="col-md-6">
                     <input id="usuario" type="usuario" class="form-control @error('usuario') is-invalid @enderror" name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario">
@@ -165,7 +165,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+                  <label for="password" class="col-md-4 col-form-label text-md-right">{{ trans('texto.contraseña') }}</label>
 
                   <div class="col-md-6">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -179,7 +179,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Repetir Contraseña') }}</label>
+                  <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ trans('texto.repetir') }}</label>
 
                   <div class="col-md-6">
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -187,7 +187,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="tipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo') }}</label>
+                  <label for="tipo" class="col-md-4 col-form-label text-md-right">{{ trans('texto.tipo') }}</label>
 
                   <div class="col-md-6">
                     <input id="tipo" type="text" class="form-control @error('usuario') is-invalid @enderror" name="tipo" value="{{ old('tipo') }}" required autocomplete="tipo">
@@ -203,7 +203,7 @@
                 <div class="form-group row mb-0">
                   <div class="col-md-6 offset-md-4">
                     <button type="submit" class="btn btn-primary">
-                      {{ __('Registrarse') }}
+                      {{trans('texto.registrar') }}
                     </button>
                   </div>
                 </div>
@@ -227,38 +227,36 @@
 
           <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>Una empresa pequeña, dedicada a dar tours gartuitos por diferentes partes de españa y con la posibilidad
-            de darse a conocer como guia.
-          </p>
+          <p>{{ trans('texto.descripcion') }}</p>
 
         </div>
 
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 
 
-          <h6 class="text-uppercase font-weight-bold">Redes sociales</h6>
+          <h6 class="text-uppercase font-weight-bold">{{ trans('texto.redes') }}</h6>
           <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>
-            <a href="#"><img src="imagenes/insta.png" alt="insta" width="20%"></a> Instagram
+            <a href="#"><img src="{{url ('imagenes/insta.png')}}" alt="insta" width="20%"></a> Instagram
           </p>
           <p>
-            <a href="#"><img src="imagenes/facebook.png" alt="facebook" width="20%"></a> Facebook
+            <a href="#"><img src="{{url ('imagenes/facebook.png')}}" alt="facebook" width="20%"></a> Facebook
           </p>
           <p>
-            <a href="#"><img src="imagenes/twitter.png" alt="twitter" width="20%"></a> Twitter
+            <a href="#"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
           </p>
 
         </div>
 
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
 
-          <h6 class="text-uppercase font-weight-bold">Enlaces</h6>
+          <h6 class="text-uppercase font-weight-bold">{{ trans('texto.enlaces') }}</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>
-            <a href="#!">Cuenta</a>
+            <a href="#!">{{ trans('texto.cuenta') }}</a>
           </p>
           <p>
-            <a href="#!">Registrarse</a>
+            <a href="#!">{{ trans('texto.registrar') }}</a>
           </p>
 
         </div>
@@ -266,7 +264,7 @@
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
 
-          <h6 class="text-uppercase font-weight-bold">Contacto</h6>
+          <h6 class="text-uppercase font-weight-bold">{{ trans('texto.contacto') }}</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>Donostia, Gipuzkoa</p>
           <p>info@sefertour.com</p>
@@ -278,7 +276,7 @@
       </div>
     </div>
 
-    <div class="text-center py-3">� 2020 Copyright:
+    <div class="text-center py-3">© 2020 Copyright:
       <a href="#"> SeFerTour</a>
     </div>
 

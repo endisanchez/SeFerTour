@@ -37,6 +37,10 @@
               <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="imagenes/ingles.png" alt="unitedKingdom" width="25px" height="25px"></a></li>
 
               <li class="nav-item dropdown d-flex flex-row-reverse">
+                
+                
+                
+                
                 @if(Auth::user())
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
                     <img src="imagenes/{{ Auth::user()->foto }}" alt="logo" width="25px" class="rounded-circle">
@@ -48,6 +52,10 @@
                 @endif
                 <div class="dropdown-menu dropdown-menu-right">
 
+                 
+                 
+                 
+                 
                   @if(Auth::user())
                     <a class="dropdown-item" href="{{ url('perfil') }}">
 
@@ -55,7 +63,16 @@
 
                     </a>
 
+                    
+
                     <div class="dropdown-divider"></div>
+                    @if (Auth::user()->tipo =='cliente')
+                    <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.mis_reservas') }}</a>
+                    @elseif (Auth::user()->tipo =='guia')
+                     <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.mis_tours') }}</a>
+                    @elseif (Auth::user()->tipo =='administrador')
+                    <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.administrador') }}</a>
+                @endif
 
                     <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
@@ -71,6 +88,13 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ url('register') }}">{{ trans('texto.registrar') }}</a>
                   @endif
+
+
+                  
+                
+                
+                
+                
                 </div>
               </li>
             </ul>
@@ -80,7 +104,7 @@
   </header>
 
     <div class="pt-3">
-      @if(Auth::user()->foto)
+      @if(Auth::user()-> foto)
       <center><img src="imagenes/{{ Auth::user()->foto }}" alt="perfil" width="100" height="100" class="rounded-circle"></center>
       @else
       <center><img src="{{ url('imagenes/perfil.png') }}" alt="perfil" width="100" height="100" class="rounded-circle"></center>
