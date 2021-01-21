@@ -36,7 +36,11 @@
               <li class="nav-item dropdown d-flex flex-row-reverse">
                 @if(Auth::user())
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
-                    <img src="imagenes/{{ Auth::user()->foto }}" alt="logo" width="25px" class="rounded-circle">
+                    @if( Auth::user()->foto )
+                      <img src="{{ url('../storage/app/' . Auth::user()->foto) }}" alt="logo" width="25px" height="25px" class="rounded-circle">
+                    @else
+                      <img src="{{url('imagenes/perfil.png')}}" alt="logo" width="25px" class="rounded-circle">
+                    @endif
                   </a>
                 @else
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
@@ -251,16 +255,16 @@
             <div class="card-header row" id="headingOne">
               <h5 class="mb-0 row col-12">
                 <div class="col-2">
-                  <img src="../imagenes/{{ $tour->comunidad }}.jpg" width="100" height="100" class="rounded-circle">
+                  <img src="{{ url('imagenes/' . $tour->comunidad . '.jpg') }}" width="100" height="100" class="rounded-circle">
                 </div>
                 <p class="col-8 display-4 my-auto">{{$tour->nombre}}</p>
-              <button class="btn btn-link col-2" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="rounded-circle">
+              <button class="btn btn-link col-2" data-toggle="collapse" data-target="#collapseOne-{{ $tour->id }}" aria-expanded="true" aria-controls="collapseOne" class="rounded-circle">
                 <img src="{{ url('imagenes/dropdowntours.png')}}" width="100" height="100" class="rounded-circle">
               </button>
               </h5>
             </div>
 
-            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div id="collapseOne-{{ $tour->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
                 <form action="{{ url('/reservar') }}" method="post">
                   @csrf
