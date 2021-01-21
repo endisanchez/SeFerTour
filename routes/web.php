@@ -78,3 +78,5 @@ Route::get('/reservar', 'App\Http\Controllers\ReservasController@verReservas')->
 Route::get('/cancelarReserva/{id}', 'App\Http\Controllers\ReservasController@cancelarReserva')->name('cancelarReserva')->middleware('auth');
 
 Route::post('register', 'App\Http\Controllers\Auth\RegisterController@register');
+
+Route::post('/filtroTours', 'App\Http\Controllers\TourController@filtroTours')->name('filtrar');
