@@ -156,14 +156,14 @@
     <h4 class="card-title container">Alta de usuario</h4>
     <div class="card my-4 container">
     <div class="card-body">
-      <form method="POST" action="{{ route('register') }}" accept-charset="UTF-8" enctype="multipart/form-data">
+      <form method="POST" action="{{ route('altaUsuario') }}" accept-charset="UTF-8" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group row">
           <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
 
           <div class="col-md-6">
-            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+            <input id="name" required maxlength="25" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
             @error('name')
             <span class="invalid-feedback" role="alert">
@@ -177,7 +177,7 @@
           <label for="apellido" class="col-md-4 col-form-label text-md-right">{{ __('Apellido') }}</label>
 
           <div class="col-md-6">
-            <input id="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido" autofocus>
+            <input id="apellido" required maxlength="25" type="text" class="form-control @error('apellido') is-invalid @enderror" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido" autofocus>
 
             @error('apellido')
             <span class="invalid-feedback" role="alert">
@@ -191,7 +191,7 @@
           <label for="dni" class="col-md-4 col-form-label text-md-right">{{ __('DNI') }}</label>
 
           <div class="col-md-6">
-            <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni" autofocus>
+            <input id="dni" type="text" required class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni" autofocus>
 
             @error('dni')
             <span class="invalid-feedback" role="alert">
@@ -205,7 +205,7 @@
           <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
 
           <div class="col-md-6">
-            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+            <input id="email" type="email" required class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
             @error('email')
             <span class="invalid-feedback" role="alert">
@@ -219,7 +219,7 @@
           <label for="usuario" class="col-md-4 col-form-label text-md-right">{{ __('Usuario') }}</label>
 
           <div class="col-md-6">
-            <input id="usuario" type="usuario" class="form-control @error('usuario') is-invalid @enderror" name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario">
+            <input id="usuario" type="usuario" required maxlength="50" class="form-control @error('usuario') is-invalid @enderror" name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario">
 
             @error('usuario')
             <span class="invalid-feedback" role="alert">
@@ -233,7 +233,7 @@
           <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
           <div class="col-md-6">
-            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+            <input id="password" type="password" required class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
             @error('password')
             <span class="invalid-feedback" role="alert">
@@ -247,7 +247,7 @@
           <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Repetir Contraseña') }}</label>
 
           <div class="col-md-6">
-            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+            <input id="password-confirm" required type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
           </div>
         </div>
 
@@ -255,7 +255,7 @@
           <label for="tipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo') }}</label>
 
           <div class="col-md-6">
-            <input id="tipo" type="text" class="form-control @error('usuario') is-invalid @enderror" name="tipo" value="{{ old('tipo') }}" required autocomplete="tipo">
+            <input id="tipo" type="text" required maxlength="25" class="form-control @error('usuario') is-invalid @enderror" name="tipo" value="{{ old('tipo') }}" required autocomplete="tipo">
 
             @error('tipo')
             <span class="invalid-feedback" role="alert">
@@ -267,7 +267,7 @@
 
         <div class="form-group row mb-0">
           <div class="col-md-6 offset-md-4">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn" id="botonFormulario">
               {{ __('Registrarse') }}
             </button>
           </div>

@@ -11,7 +11,6 @@ use Illuminate\Auth\Events\Registered;
 
 class adminController extends Controller
 {
-    protected $redirectTo = '/verify';
 
     public function mostrarAdminBlade(){
 
@@ -47,7 +46,17 @@ class adminController extends Controller
 
     protected function create(Request $request)
     {
-        return App\Models\User::create([
+        $request->validate([
+            'name' => ['required', 'string', 'max:25'],
+            'apellido' => ['required', 'string', 'max:25'],
+            'dni' => ['required', 'string', 'max:9'],
+            'usuario' => ['required', 'string', 'max:25'],
+            'tipo' => ['required'],
+            'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        
+        App\Models\User::create([
             'name' => $request->name,
             'apellido' => $request->apellido,
             'dni' => $request->dni,
@@ -59,5 +68,6 @@ class adminController extends Controller
         ]);
 
         return back();
+
     }
 }

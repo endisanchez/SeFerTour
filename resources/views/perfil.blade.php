@@ -83,6 +83,17 @@
     </nav>
   </header>
 
+  @if ($errors->any())
+    <div class="errors">
+        <p><strong>Por favor corrige los siguientes errores<strong></p>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
     <div class="py-3">
       @if(Auth::user()->foto)
         <center>
@@ -102,8 +113,13 @@
               @csrf
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <label>
-                <input type="file" style="display: none;" name="foto" accept="image/*">
+                <input type="file" style="display: none;" name="foto" class="form-control @error('foto') is-invalid @enderror">
                 <img src="{{ url('imagenes/cambio.png') }}" alt="añadir" width="20" height="20">
+                  @error('foto')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
               </label>
             </form>
             </div>
@@ -168,20 +184,20 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id" value="{{ Auth::user()->id }}">
             <p class="text-muted text-small mb-2">Nombre</p>
-            <input type="text" class="mb-3" name="nombre" value="{{ Auth::user()->name }}">
+            <input type="text" required maxlength="25" class="mb-3" name="nombre" value="{{ Auth::user()->name }}">
             <p class="text-muted text-small mb-2">Apellido</p>
-            <input type="text" class="mb-3" name="apellido" value="{{ Auth::user()->apellido }}">
+            <input type="text" class="mb-3" required maxlength="25" name="apellido" value="{{ Auth::user()->apellido }}">
             <p class="text-muted text-small mb-2">Usuario</p>
-            <input type="text" class="mb-3" name="usuario" value="{{ Auth::user()->usuario }}">
+            <input type="text" class="mb-3" required maxlength="25" name="usuario" value="{{ Auth::user()->usuario }}">
             <p class="text-muted text-small mb-2">DNI</p>
-            <input type="text" class="mb-3" name="dni" value="{{ Auth::user()->dni }}">
+            <input type="text" class="mb-3" required name="dni" value="{{ Auth::user()->dni }}">
             <p class="text-muted text-small mb-2">Email</p>
-            <input type="email" class="mb-3" name="email" value="{{ Auth::user()->email }}">
+            <input type="email" class="mb-3" required maxlength="100" name="email" value="{{ Auth::user()->email }}">
             <p class="text-muted text-small mb-2">Tipo</p>
             <input type="text" disabled class="mb-3" name="tipo" value="{{ Auth::user()->tipo }}">
 
             <button type="submit" class="btn mt-4 d-flex" id="botonFormulario">Guardar</button>
-            <button type="button" onclick="muestraEdit()" class="btn mt-4" id="botonFormulario">Cancelar</button>
+            <button type="button" onclick="muestraEdit()" class="btn mt-4" id="botonCancelar">Cancelar</button>
 
           </form>
       </div>

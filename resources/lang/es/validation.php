@@ -55,7 +55,7 @@ return [
         'string'  => 'El campo :attribute debe tener como mínimo :value caracteres.',
         'array'   => 'El campo :attribute debe tener como mínimo :value elementos.',
     ],
-    'image'                => ':attribute debe ser una imagen.',
+    'image'                => 'La foto de perfil debe ser una imagen.',
     'in'                   => ':attribute es inválido.',
     'in_array'             => 'El campo :attribute no existe en :other.',
     'integer'              => ':attribute debe ser un número entero.',
