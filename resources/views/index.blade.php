@@ -37,7 +37,7 @@
                 @if(Auth::user())
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
                     @if( Auth::user()->foto )
-                      <img src="../storage/app/{{ Auth::user()->foto }}" alt="logo" width="25px" height="25px" class="rounded-circle">
+                      <img src="{{ url('../storage/app/' . Auth::user()->foto) }}" alt="logo" width="25px" height="25px" class="rounded-circle">
                     @else
                       <img src="{{url('imagenes/perfil.png')}}" alt="logo" width="25px" class="rounded-circle">
                     @endif
@@ -89,20 +89,45 @@
           </div>
         </div>
         <div id="formulario" class="col-8">
-          <form>
+          <form action="{{ route('filtrar') }}" method="post">
+            @csrf
             <div class="form-group">
               <label for="lugar">{{ trans('texto.donde') }}</label>
-              <input type="text" class="form-control" id="lugar" placeholder="Lugar">
+                <div class="rounded">
+                  <select name="comunidad" class="rounded col-12 p-2"   placeholder="Personas">
+                    <option disabled selected>Comunidad</option>
+                    <option value="Andalucia">Andalucia</option>
+                    <option value="Aragon">Aragon</option>
+                    <option value="Asturias">Asturias</option>
+                    <option value="IslasBaleares">Islas Baleares</option>
+                    <option value="Canarias">Canarias</option>
+                    <option value="Cantabria">Cantabria</option>
+                    <option value="CastillaYLeon">Castilla Y Leon</option>
+                    <option value="CastillaLaMancha">Castilla La Mancha</option>
+                    <option value="Cataluña">Cataluña</option>
+                    <option value="Valencia">Valencia</option>
+                    <option value="Extremadura">Extremadura</option>
+                    <option value="Galicia">Galicia</option>
+                    <option value="Madrid">Madrid</option>
+                    <option value="Murcia">Murcia</option>
+                    <option value="Navarra">Navarra</option>
+                    <option value="PaisVasco">Pais Vasco</option>
+                    <option value="LaRioja">La Rioja</option>
+                  </select>
+                </div>
             </div>
+
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="fecha">{{ trans('texto.cuando') }}</label>
-                <input type="date" class="form-control" id="fecha">
+                <input type="date" class="form-control" name="fecha"/>
               </div>
+
               <div class="form-group col-md-6">
                 <label for="personas">{{ trans('texto.cuantos') }}</label>
-                <input type="number" min="1" class="form-control" id="personas" placeholder="Personas">
+                <input type="number" min="1" class="form-control" id="personas" placeholder="Personas"/>
               </div>
+
             </div>
             <button type="submit" class="btn mt-2" id="botonFormulario"><strong>{{ trans('texto.buscar') }}</strong></button>
           </form>

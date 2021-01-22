@@ -36,7 +36,11 @@
               <li class="nav-item dropdown d-flex flex-row-reverse">
                 @if(Auth::user())
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
-                    <img src="imagenes/{{ Auth::user()->foto }}" alt="logo" width="25px" class="rounded-circle">
+                    @if( Auth::user()->foto )
+                      <img src="{{ url('../storage/app/' . Auth::user()->foto) }}" alt="logo" width="25px" height="25px" class="rounded-circle">
+                    @else
+                      <img src="{{url('imagenes/perfil.png')}}" alt="logo" width="25px" class="rounded-circle">
+                    @endif
                   </a>
                 @else
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
@@ -251,16 +255,16 @@
             <div class="card-header row" id="headingOne">
               <h5 class="mb-0 row col-12">
                 <div class="col-2">
-                  <img src="../imagenes/{{ $tour->comunidad }}.jpg" width="100" height="100" class="rounded-circle">
+                  <img src="{{ url('imagenes/' . $tour->comunidad . '.jpg') }}" width="100" height="100" class="rounded-circle">
                 </div>
                 <p class="col-8 display-4 my-auto">{{$tour->nombre}}</p>
-              <button class="btn btn-link col-2" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="rounded-circle">
+              <button class="btn btn-link col-2" data-toggle="collapse" data-target="#collapseOne-{{ $tour->id }}" aria-expanded="true" aria-controls="collapseOne" class="rounded-circle">
                 <img src="{{ url('imagenes/dropdowntours.png')}}" width="100" height="100" class="rounded-circle">
               </button>
               </h5>
             </div>
 
-            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div id="collapseOne-{{ $tour->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
                 <form action="{{ url('/reservar') }}" method="post">
                   @csrf
@@ -273,10 +277,36 @@
                   <input type="hidden" value="{{ $tour->id }}" name="id_tour">
                   <input type="hidden" value="{{ Auth::id() }}" name="id_usuario">
                   @if(Auth::user())
-                  <button type="submit" id="botonFormulario" class="btn mt-2" onclick="window.location.href='{{ url('/reservar') }}'"><strong>Reservar Tour</strong></button>
+                  <button type="button" id="botonFormulario" class="btn mt-2" data-toggle="modal" data-target="#modal"><strong>Reservar Tour</strong></button>
                   @else
                   <button type="submit" id="botonFormulario" class="btn mt-2" onclick="window.location.href='{{ url('/login') }}'"><strong>Reservar Tour</strong></button>
                   @endif
+
+                  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Guardar cambios</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p>¿Estas seguro de que quieres reservar el siguiente tour?</p>
+                          <p><b>Lugar: </b>{{$tour->ciudad}}, {{$tour->provincia}}, {{$tour->comunidad}}</p>
+                          <p><b>Fecha: </b>{{$tour->fecha}}</p>
+                          <p><b>Hora: </b>{{$tour->hora}}</p>
+                          <p><b>Idioma: </b>{{$tour->idioma_tour}}</p>
+                          <p><b>Guia: </b>{{$tour->guia->user->name}} {{$tour->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $tour->guia->user->foto)}}" /></p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                          <button type="submit" class="btn btn-primary" id="botonFormulario">Reservar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </form>
               </div>
             </div>
@@ -289,67 +319,70 @@
       </div>
     </section>
 
-  <footer class="page-footer font-small bg-dark text-light">
+    <footer class="page-footer font-small bg-dark text-light">
 
-    <div class="container text-center text-md-left d-flex">
+      <div class="container text-center text-md-left d-flex">
 
-      <div class="row mt-5">
+        <div class="row mt-5">
 
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-          <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
-          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>Una empresa pequeña, dedicada a dar tours gartuitos por diferentes partes de españa y con la posibilidad de darse a conocer como guia.</p>
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+            <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
+            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>{{ trans('texto.descripcion') }}</p>
+
+          </div>
+
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+
+            <h6 class="text-uppercase font-weight-bold">{{ trans('texto.redes') }}</h6>
+            <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>
+              <a href="#"><img src="{{url ('imagenes/insta.png')}}" alt="insta" width="20%"></a> Instagram
+            </p>
+            <p>
+              <a href="#"><img src="{{url ('imagenes/facebook.png')}}" alt="facebook" width="20%"></a> Facebook
+            </p>
+            <p>
+              <a href="#"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
+            </p>
+
+          </div>
+
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+            <h6 class="text-uppercase font-weight-bold">{{ trans('texto.enlaces') }}</h6>
+            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>
+              <a href="#!">{{ trans('texto.cuenta') }}</a>
+            </p>
+            <p>
+              <a href="#!">{{ trans('texto.registrar') }}</a>
+            </p>
+
+          </div>
+
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+
+            <h6 class="text-uppercase font-weight-bold">{{ trans('texto.contacto') }}</h6>
+            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>Donostia, Gipuzkoa</p>
+            <p>info@sefertour.com</p>
+            <p>+ 34 234 567 88</p>
+            <p>+ 34 234 567 89</p>
+
+          </div>
+
         </div>
-
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
-          <h6 class="text-uppercase font-weight-bold">Redes sociales</h6>
-          <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>
-            <a href="#"><img src="{{ url('imagenes/insta.png') }}" alt="insta" width="20%"></a> Instagram
-          </p>
-          <p>
-            <a href="#"><img src="{{ url('imagenes/facebook.png') }}" alt="facebook" width="20%"></a> Facebook
-          </p>
-          <p>
-            <a href="#"><img src="{{ url('imagenes/twitter.png') }}" alt="twitter" width="20%"></a> Twitter
-          </p>
-
-        </div>
-
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
-          <h6 class="text-uppercase font-weight-bold">Enlaces</h6>
-          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>
-            <a href="#!">Cuenta</a>
-          </p>
-          <p>
-            <a href="#!">Registrarse</a>
-          </p>
-
-        </div>
-
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
-
-          <h6 class="text-uppercase font-weight-bold">Contacto</h6>
-          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>Donostia, Gipuzkoa</p>
-          <p>info@sefertour.com</p>
-          <p>+ 34 234 567 88</p>
-          <p>+ 34 234 567 89</p>
-
-        </div>
-
       </div>
-    </div>
 
-    <div class="text-center py-3">� 2020 Copyright:
-      <a href="#"> SeFerTour</a>
-    </div>
+      <div class="text-center py-3">© 2020 Copyright:
+        <a href="#"> SeFerTour</a>
+      </div>
 
-  </footer>
+    </footer>
 
 </body>
 </html>
