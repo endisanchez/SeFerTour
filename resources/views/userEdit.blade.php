@@ -106,7 +106,7 @@
                 <input type="text" class="mb-3" name="tipo" value="{{ $usuario->tipo }}">
 
                 <button type="submit" class="btn mt-4 d-flex" id="botonFormulario">Guardar</button>
-                <button type="submit" class="btn mt-4 d-flex" style=" background-color: #636363;">Cancelar</button>
+                <button type="submit" class="btn mt-4 d-flex" id="botonCancelar">Cancelar</button>
 
               </form>
         </div>

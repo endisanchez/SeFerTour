@@ -84,7 +84,7 @@
                   <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
 
                   <div class="col-md-6">
-                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                    <input id="name" maxlength="25" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                     @error('name')
                     <span class="invalid-feedback" role="alert">
@@ -98,7 +98,7 @@
                   <label for="apellido" class="col-md-4 col-form-label text-md-right">{{ __('Apellido') }}</label>
 
                   <div class="col-md-6">
-                    <input id="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido" autofocus>
+                    <input id="apellido" maxlength="25" type="text" class="form-control @error('apellido') is-invalid @enderror" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido" autofocus>
 
                     @error('apellido')
                     <span class="invalid-feedback" role="alert">
@@ -140,7 +140,7 @@
                   <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('Foto') }}</label>
 
                   <div class="col-md-6">
-                    <input type="file" class="form-control" name="foto" >
+                    <input type="file" class="form-control @error('foto') is-invalid @enderror" name="foto" >
 
                     @error('foto')
                     <span class="invalid-feedback" role="alert">
@@ -190,8 +190,10 @@
                   <label for="tipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo') }}</label>
 
                   <div class="col-md-6">
-                    <input id="tipo" type="text" class="form-control @error('usuario') is-invalid @enderror" name="tipo" value="{{ old('tipo') }}" required autocomplete="tipo">
-
+                    <select name="tipo" id="tipo" class="form-control @error('usuario') is-invalid @enderror" value="{{ old('tipo') }}" autocomplete="tipo">
+                      <option value="Cliente" selected>Cliente</option>
+                      <option value="Guia">Guia</option>
+                    </select>
                     @error('tipo')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>

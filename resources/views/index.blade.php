@@ -135,13 +135,14 @@
       </div>
     </section>
 
+    @if(Auth::user())
     <section class="container-fluid text-center p-3" id="topVisitas">
       <div>
         <h1>{{ trans('texto.mejores') }}</h1>
         <div class="mt-4">
           <p>{{ trans('texto.mejores_texto') }}</p>
         </div>
-    </div>
+      </div>
       </div>
         <div class="row">
           <div class="col-lg-4 col-12 pt-2">
@@ -175,7 +176,73 @@
             </a>
           </div>
         </div>
-      </section>
+    </section>
+    @else
+    <section class="container-fluid mt-5 text-center">
+      <div>
+        <div>
+          <h3 class="display-3">Registrate!</h3>
+        </div>
+      </div>
+      <div class="row d-flex mt-5">
+        <div class="flip-card col-12 col-md-4 mb-5">
+          <div class="flip-card-inner">
+            <div class="flip-card-front mb-5 text-center">
+              <div class="card-body">
+                <h5 class="card-title font-weight-light">Descubre</h5>
+                <img class="img-fluid my-5" src="{{url('imagenes/libro.png')}}" alt="Card image cap" width="100">
+              </div>
+            </div>
+
+            <div class="flip-card-back text-dark text-center">
+              <div class="card-body">
+                <p class="card-text"><strong>Descubre sitios que te gusten en nuestra web.</strong></p>
+                <p>Visita la página de tours para descubrir nuevos lugares a los que viajar y de los que aprender.</p>
+                <img class="img-fluid mt-xl-3 rounded mb-2"  src="{{url('imagenes/sft1.jpg')}}" alt="Card image cap">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card col-12 col-md-4 mb-5">
+          <div class="flip-card-inner">
+            <div class="flip-card-front text-center">
+              <div class="card-body">
+                <h5 class="card-title font-weight-light">Aprende</h5>
+                <img class="img-fluid my-5"  src="{{url('imagenes/aprender.png')}}"alt="Card image cap" width="100">
+              </div>
+            </div>
+
+            <div class="flip-card-back text-dark text-center">
+              <div class="card-body">
+                <p class="card-text"><strong>Aprende todo lo posible de los sitios que visites.</strong></p>
+                <p>Dicen que cada día se aprende algo nuevo, ponlo en práctica reservando uno de nuestros tours.</p>
+                <img class="img-fluid mt-xl-3 rounded mb-2"  src="{{url('imagenes/sft2.jpg')}}" alt="Card image cap">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card col-12 col-md-4 mb-5">
+          <div class="flip-card-inner">
+            <div class="flip-card-front text-center">
+              <div class="card-body">
+                <h5 class="card-title font-weight-light">Explora</h5>
+                <img class="img-fluid my-5" src="{{url('imagenes/lupa.png')}}" alt="Card image cap" width="100">
+              </div>
+            </div>
+
+            <div class="flip-card-back text-dark text-center">
+              <div class="card-body">
+                <p class="card-text"><strong>Explora nuevos lugares que visitar.</strong></p>
+                <p>¿Quieres saber todo sobre el lugar al que vas a viajar? ¡Reserva tu tour ya y disfruta de la experiencia!</p>
+                <img class="img-fluid mt-xl-3 rounded mb-2" src="{{url('imagenes/sft3.jpg')}}" alt="Card image cap">
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    @endif
 
     <section id="video">
       <h1>{{ trans('texto.experiencias') }}</h1>
