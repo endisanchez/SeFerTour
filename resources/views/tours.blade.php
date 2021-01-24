@@ -253,15 +253,15 @@
           @foreach($tours as $tour)
           <div class="card my-5 container">
             <div class="card-header row" id="headingOne">
-              <h5 class="mb-0 row col-12">
-                <div class="col-2">
-                  <img src="{{ url('imagenes/' . $tour->comunidad . '.jpg') }}" width="100" height="100" class="rounded-circle">
+                <div class="col-0 col-md-2 my-auto d-none d-md-block">
+                  <img src="{{ url('imagenes/' . $tour->comunidad . '.jpg') }}" width="90" height="90" class="rounded-circle">
                 </div>
-                <p class="col-8 display-4 my-auto">{{$tour->nombre}}</p>
+                <div class="col-10 col-md-8 my-auto">
+                  <p style="font-size:4vw;" class="col-8 col-md-10 display-4">{{$tour->nombre}}</p>
+                </div>
               <button class="btn btn-link col-2" data-toggle="collapse" data-target="#collapseOne-{{ $tour->id }}" aria-expanded="true" aria-controls="collapseOne" class="rounded-circle">
-                <img src="{{ url('imagenes/dropdowntours.png')}}" width="100" height="100" class="rounded-circle">
+                <img src="{{ url('imagenes/dropdowntours.png')}}" width="50" height="50" class="img-fluid">
               </button>
-              </h5>
             </div>
 
             <div id="collapseOne-{{ $tour->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
