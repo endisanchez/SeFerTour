@@ -142,19 +142,19 @@
         <div class="card-body">
 
             <h5 class="card-title text-center">{{ Auth::user()->usuario }}</h5>
-            <p class="text-muted text-small mb-2">Nombre</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.nombre') }}</p>
             <p class="mb-3">{{ Auth::user()->name }}</p>
-            <p class="text-muted text-small mb-2">Apellido</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.apellido') }}</p>
             <p class="mb-3">{{ Auth::user()->apellido }}</p>
-            <p class="text-muted text-small mb-2">DNI</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.dni') }}</p>
             <p class="mb-3">{{ Auth::user()->dni }}</p>
             <p class="text-muted text-small mb-2">Email</p>
             <p class="mb-3">{{ Auth::user()->email }}</p>
-            <p class="text-muted text-small mb-2">Tipo</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.tipo') }}</p>
             <p class="mb-3">{{ Auth::user()->tipo }}</p>
 
             <form class="mb-3">
-                <button type="button" onclick="muestraContenido()" class="btn mt-4" id="botonFormulario">Editar</button>
+                <button type="button" onclick="muestraContenido()" class="btn mt-4" id="botonFormulario">{{ trans('texto.editar') }}</button>
             </form>
         </div>
     </div>
@@ -167,21 +167,21 @@
             @csrf
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id" value="{{ Auth::user()->id }}">
-            <p class="text-muted text-small mb-2">Nombre</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.nombre') }}</p>
             <input type="text" class="mb-3" name="nombre" value="{{ Auth::user()->name }}">
-            <p class="text-muted text-small mb-2">Apellido</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.apellido') }}</p>
             <input type="text" class="mb-3" name="apellido" value="{{ Auth::user()->apellido }}">
-            <p class="text-muted text-small mb-2">Usuario</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.usuario') }}</p>
             <input type="text" class="mb-3" name="usuario" value="{{ Auth::user()->usuario }}">
-            <p class="text-muted text-small mb-2">DNI</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.dni') }}</p>
             <input type="text" class="mb-3" name="dni" value="{{ Auth::user()->dni }}">
             <p class="text-muted text-small mb-2">Email</p>
             <input type="email" class="mb-3" name="email" value="{{ Auth::user()->email }}">
-            <p class="text-muted text-small mb-2">Tipo</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.tipo') }}</p>
             <input type="text" disabled class="mb-3" name="tipo" value="{{ Auth::user()->tipo }}">
 
-            <button type="submit" class="btn mt-4 d-flex" id="botonFormulario">Guardar</button>
-            <button type="button" onclick="muestraEdit()" class="btn mt-4" id="botonFormulario">Cancelar</button>
+            <button type="submit" class="btn mt-4 d-flex" id="botonFormulario">{{ trans('texto.guardar') }}</button>
+            <button type="button" onclick="muestraEdit()" class="btn mt-4" id="botonFormulario">{{ trans('texto.cancelar') }}</button>
 
           </form>
       </div>

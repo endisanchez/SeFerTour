@@ -79,8 +79,10 @@
   </header>
 
   <section class="container-fluid my-3">
-    <h1 class="text-center my-3">Administración</h1>
-    <h4 class="card-title container">Usuarios</h4>
+    <h1 class="text-center my-3">{{ trans('texto.administracion') }}</h1>
+    <h4 class="card-title container">{{ trans('texto.usuarios') }}</h4>
+   
+   
     @foreach ($usuarios as $item)
     <div class="card my-4 container">
         <div class="card-body">
@@ -96,22 +98,22 @@
                     @endif
                 </div>
             </div>
-            <p class="card-text">Nombre: {{ $item->name }}</p>
-            <p class="card-text">Apellido: {{ $item->apellido }}</p>
-            <p class="card-text">DNI: {{ $item->dni }}</p>
+            <p class="card-text">{{ trans('texto.nombre') }}: {{ $item->name }}</p>
+            <p class="card-text">{{ trans('texto.apellido') }}: {{ $item->apellido }}</p>
+            <p class="card-text">{{ trans('texto.dni') }}: {{ $item->dni }}</p>
             <p class="card-text">Email: {{ $item->email }}</p>
             <div class="row">
                 <div class="col-6">
-                    <p class="card-text">Tipo: {{ $item->tipo }}</p>
+                    <p class="card-text">{{ trans('texto.tipo') }}: {{ $item->tipo }}</p>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
-                    <form action="{{ route('eliminarUsuario', $item) }}" class="d-inline" method="POST">
+                    <form action="{{ route('eliminarUsuario', $item) }}" class="d-inline" method="POST" >
                         @method('DELETE')
                         @csrf
-                        <button type="submit" id="sinEstilo"><img src="{{ url('imagenes/eliminar.png') }}" alt="eliminar" width="30" height="30"></button>
+                        <button type="submit" id="sinEstilo"><img src="{{ url('imagenes/eliminar.png') }}" alt="{{ trans('texto.eliminar') }}" width="30" height="30"></button>
                     </form>
                     <a href="{{ route('editarUsuario', $item) }}" class="ml-2">
-                        <img src="{{ url('imagenes/editar.png') }}" alt="eliminar" width="30" height="30">
+                        <img src="{{ url('imagenes/editar.png') }}" alt="{{ trans('texto.eliminar') }}" width="30" height="30">
                     </a>
                 </div>
             </div>
@@ -122,27 +124,27 @@
   </section>
 
   <section class="container-fluid my-3 mt-5">
-    <h4 class="card-title container">Todos los tours</h4>
+    <h4 class="card-title container">{{ trans('texto.todos_los_tours') }}</h4>
 
     @foreach ($tours as $item)
     <div class="card my-4 container">
         <div class="card-body">
-            <b><h6 class="card-text mb-4">Guia: {{ $item->id_guia }}</h6></b>
-            <p class="card-text">Nombre del tour: {{ $item->nombre }}</p>
-            <p class="card-text">Fecha: {{ $item->fecha }}</p>
-            <p class="card-text">Hora: {{ $item->hora }}</p>
-            <p class="card-text">Comunidad: {{ $item->comunidad }}</p>
-            <p class="card-text">Provincia: {{ $item->provincia }}</p>
-            <p class="card-text">Ciudad: {{ $item->ciudad }}</p>
+            <b><h6 class="card-text mb-4">{{ trans('texto.guia') }}: {{$item->guia->user->name}} {{$item->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $tour->guia->user->foto)}}"></h6></b>
+            <p class="card-text">{{ trans('texto.nombre_tour') }}: {{ $item->nombre }}</p>
+            <p class="card-text">{{ trans('texto.fecha') }}: {{ $item->fecha }}</p>
+            <p class="card-text">{{ trans('texto.hora') }}: {{ $item->hora }}</p>
+            <p class="card-text">{{ trans('texto.comunidad') }}: {{ $item->comunidad }}</p>
+            <p class="card-text">{{ trans('texto.provincia') }}: {{ $item->provincia }}</p>
+            <p class="card-text">{{ trans('texto.ciudad') }}: {{ $item->ciudad }}</p>
             <div class="row">
                 <div class="col-6">
-                    <p class="card-text">Idioma: {{ $item->idioma_tour }}</p>
+                    <p class="card-text">{{ trans('texto.idioma') }}: {{ $item->idioma_tour }}</p>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
                     <form action="{{ route('eliminarTour', $item) }}" class="d-inline" method="POST">
                         @method('DELETE')
                         @csrf
-                        <button type="submit" id="sinEstilo"><img src="{{ url('imagenes/eliminar.png') }}" alt="eliminar" width="30" height="30"></button>
+                        <button type="submit" id="sinEstilo"><img src="{{ url('imagenes/eliminar.png') }}" alt="{{ trans('texto.eliminar') }}" width="30" height="30"></button>
                     </form>
                 </div>
             </div>
@@ -153,14 +155,14 @@
   </section>
 
   <section class="container-fluid my-3 mt-5">
-    <h4 class="card-title container">Alta de usuario</h4>
+    <h4 class="card-title container">{{ trans('texto.alta_usuario') }}</h4>
     <div class="card my-4 container">
     <div class="card-body">
       <form method="POST" action="{{ route('register') }}" accept-charset="UTF-8" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group row">
-          <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+          <label for="name" class="col-md-4 col-form-label text-md-right">{{ trans('texto.nombre') }}</label>
 
           <div class="col-md-6">
             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -174,7 +176,7 @@
         </div>
 
         <div class="form-group row">
-          <label for="apellido" class="col-md-4 col-form-label text-md-right">{{ __('Apellido') }}</label>
+          <label for="apellido" class="col-md-4 col-form-label text-md-right">{{ trans('texto.apellido') }}</label>
 
           <div class="col-md-6">
             <input id="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido" autofocus>
@@ -188,7 +190,7 @@
         </div>
 
         <div class="form-group row">
-          <label for="dni" class="col-md-4 col-form-label text-md-right">{{ __('DNI') }}</label>
+          <label for="dni" class="col-md-4 col-form-label text-md-right">{{ trans('texto.dni') }}</label>
 
           <div class="col-md-6">
             <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni" autofocus>
@@ -216,7 +218,7 @@
         </div>
 
         <div class="form-group row">
-          <label for="usuario" class="col-md-4 col-form-label text-md-right">{{ __('Usuario') }}</label>
+          <label for="usuario" class="col-md-4 col-form-label text-md-right">{{ trans('texto.usuario') }}</label>
 
           <div class="col-md-6">
             <input id="usuario" type="usuario" class="form-control @error('usuario') is-invalid @enderror" name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario">
@@ -230,7 +232,7 @@
         </div>
 
         <div class="form-group row">
-          <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+          <label for="password" class="col-md-4 col-form-label text-md-right">{{ trans('texto.contraseña') }}</label>
 
           <div class="col-md-6">
             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -244,7 +246,7 @@
         </div>
 
         <div class="form-group row">
-          <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Repetir Contraseña') }}</label>
+          <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ trans('texto.repetir') }}</label>
 
           <div class="col-md-6">
             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -252,7 +254,7 @@
         </div>
 
         <div class="form-group row">
-          <label for="tipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo') }}</label>
+          <label for="tipo" class="col-md-4 col-form-label text-md-right">{{ trans('texto.tipo') }}</label>
 
           <div class="col-md-6">
             <input id="tipo" type="text" class="form-control @error('usuario') is-invalid @enderror" name="tipo" value="{{ old('tipo') }}" required autocomplete="tipo">
@@ -268,7 +270,7 @@
         <div class="form-group row mb-0">
           <div class="col-md-6 offset-md-4">
             <button type="submit" class="btn btn-primary">
-              {{ __('Registrarse') }}
+             {{ trans('texto.registrar') }}
             </button>
           </div>
         </div>
