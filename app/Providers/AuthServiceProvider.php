@@ -21,10 +21,16 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-        $this->registerPolicies();
+     public function boot()
+     {
+         $this->registerPolicies();
 
-        //
-    }
+         Gate::define('edit-settings', function ($user) {
+             return $user->isAdmin;
+         });
+
+         Gate::define('update-post', function ($user, $post) {
+             return $user->id == $post->user_id;
+         });
+     }
 }
