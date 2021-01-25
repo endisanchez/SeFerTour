@@ -38,7 +38,6 @@ class adminController extends Controller
 
     public function editarUsuario($id){
 
-        //Aquí valida si existe sino redirije al 404
         $usuario = App\Models\User::findOrFail($id);
 
         return view('userEdit', compact('usuario'));
@@ -69,5 +68,28 @@ class adminController extends Controller
 
         return back();
 
+    }
+
+    public function editarPerfilAdmin(Request $data)
+    {
+        $updatePerfil = App\Models\User::find($data->id);
+        //dd($updatePerfil->id);
+        $data->validate([
+        'nombre' => ['required', 'string', 'max:25'],
+        'apellido' => ['required', 'string', 'max:25'],
+        'dni' => ['required', 'string', 'max:9'],
+        'usuario' => ['required', 'string', 'max:25'],
+        'email' => "unique:users,email,{$updatePerfil->id}"
+        ]);
+
+        //$updatePerfil = App\Models\User::find($data->id);
+        $updatePerfil->name = $data->nombre;
+        $updatePerfil->apellido = $data->apellido;
+        $updatePerfil->usuario = $data->usuario;
+        $updatePerfil->dni = $data->dni;
+        $updatePerfil->email = $data->email;
+
+        $updatePerfil->save();
+        return redirect('admin');
     }
 }

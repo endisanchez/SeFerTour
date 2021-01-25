@@ -60,6 +60,13 @@
                     </a>
 
                     <div class="dropdown-divider"></div>
+                    @if (Auth::user()->tipo =='Cliente')
+                    <a class="dropdown-item" href="{{ url('reservar') }}">{{ trans('texto.mis_reservas') }}</a>
+                    @elseif (Auth::user()->tipo =='Guia')
+                     <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.mis_tours') }}</a>
+                    @elseif (Auth::user()->tipo =='Admin')
+                    <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.administrador') }}</a>
+                    @endif
 
                     <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
@@ -82,17 +89,6 @@
         </div>
     </nav>
   </header>
-
-  @if ($errors->any())
-    <div class="errors">
-        <p><strong>Por favor corrige los siguientes errores<strong></p>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 
     <div class="py-3">
       @if(Auth::user()->foto)

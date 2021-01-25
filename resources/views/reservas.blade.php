@@ -57,6 +57,13 @@
                     </a>
 
                     <div class="dropdown-divider"></div>
+                    @if (Auth::user()->tipo =='Cliente')
+                    <a class="dropdown-item" href="{{ url('reservar') }}">{{ trans('texto.mis_reservas') }}</a>
+                    @elseif (Auth::user()->tipo =='Guia')
+                     <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.mis_tours') }}</a>
+                    @elseif (Auth::user()->tipo =='Admin')
+                    <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.administrador') }}</a>
+                    @endif
 
                     <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
@@ -82,6 +89,7 @@
 
   <section>
     <h1 class="text-center my-5">Mis Reservas</h1>
+    @if(isset($reservas))    
     @foreach($reservas as $reserva)
     <div class="card my-4 container">
       <div class="card-body">
@@ -134,6 +142,9 @@
       </div>
     </div>
     @endforeach
+    @else
+    <h5 class="text-center mb-5">No hay ninguna reserva asignada a tu usuario.</h5>
+    @endif
   </section>
 
   <footer class="page-footer font-small bg-dark text-light">

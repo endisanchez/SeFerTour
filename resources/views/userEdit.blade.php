@@ -59,6 +59,13 @@
                     </a>
 
                     <div class="dropdown-divider"></div>
+                    @if (Auth::user()->tipo =='Cliente')
+                    <a class="dropdown-item" href="{{ url('reservar') }}">{{ trans('texto.mis_reservas') }}</a>
+                    @elseif (Auth::user()->tipo =='Guia')
+                     <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.mis_tours') }}</a>
+                    @elseif (Auth::user()->tipo =='Admin')
+                    <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.administrador') }}</a>
+                    @endif
 
                     <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
@@ -87,7 +94,7 @@
     <h4 class="card-title">Editar usuario</h4>
     <div class="card my-4">
         <div class="card-body">
-            <form action="{{ route('editarPerfil') }}" method="POST" class="mb-3 mr-3">
+            <form action="{{ route('editarperfiladmin') }}" method="POST" class="mb-3 mr-3">
                 @method('PUT')
                 @csrf
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -106,7 +113,7 @@
                 <input type="text" class="mb-3" name="tipo" value="{{ $usuario->tipo }}">
 
                 <button type="submit" class="btn mt-4 d-flex" id="botonFormulario">Guardar</button>
-                <button type="submit" class="btn mt-4 d-flex" id="botonCancelar">Cancelar</button>
+                <button type="submit" onclick="window.location.href = '/admin'" class="btn mt-4 d-flex" id="botonCancelar">Cancelar</button>
 
               </form>
         </div>
