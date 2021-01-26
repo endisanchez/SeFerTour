@@ -13,9 +13,9 @@ class TourController extends Controller
   }
 
   public function filtroTours(Request $request) {
-    if($request->fecha && $request->comunidad) {
+      if($request->fecha && $request->comunidad) {
       $tours = App\Models\Tour::where([
-        ['comunidad', '=', $request->comunidad],
+        ['comunidad', '=', str_replace(" ", "",$request->comunidad)],
         ['fecha', '=', $request->fecha],
         ])->get();
     }
@@ -28,7 +28,7 @@ class TourController extends Controller
 
     if(!$request->fecha && $request->comunidad) {
       $tours = App\Models\Tour::where([
-        ['comunidad', '=', $request->comunidad],
+        ['comunidad', '=', str_replace(" ", "",$request->comunidad)],
       ])->get();
     }
 
