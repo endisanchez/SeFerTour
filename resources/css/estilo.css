@@ -68,7 +68,16 @@ nav{
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.4);
+    transition: transform .2s; 
+    
+}
+
+.zoom {
+}
+ 
+#fondo:hover {
+    transform: scale(1.5); 
 }
  
   .flip-card {
@@ -157,10 +166,11 @@ hr {
 }
 
 #bodyregistro, #bodylogin {
-      background-image: url("../../public/imagenes/rio.gif");
-      background-position: center;
+      background-image: url("../../public/imagenes/descarga.jfif");
       background-repeat: no-repeat;
-      background-size: 100%;
+      width: 100%;
+      height: 100%;
+
 }
 
  @media only screen and (min-width: 0px) and (max-width: 900px) {
