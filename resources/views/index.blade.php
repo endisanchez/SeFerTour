@@ -12,6 +12,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="{{ url('../resources/js/peticionComunidades.js') }}"></script>
+
 
 <script src='jquery.zoom.js'></script>
 <script>
@@ -108,25 +110,8 @@
             <div class="form-group">
               <label for="lugar">{{ trans('texto.donde') }}</label>
                 <div class="rounded">
-                  <select name="comunidad" class="rounded col-12 p-2"   placeholder="Personas">
+                  <select id="desp" name="comunidad" class="rounded col-12 p-2" placeholder="Personas">
                     <option disabled selected>Comunidad</option>
-                    <option value="Andalucia">Andalucia</option>
-                    <option value="Aragon">Aragon</option>
-                    <option value="Asturias">Asturias</option>
-                    <option value="IslasBaleares">Islas Baleares</option>
-                    <option value="Canarias">Canarias</option>
-                    <option value="Cantabria">Cantabria</option>
-                    <option value="CastillaYLeon">Castilla Y Leon</option>
-                    <option value="CastillaLaMancha">Castilla La Mancha</option>
-                    <option value="Cataluña">Cataluña</option>
-                    <option value="Valencia">Valencia</option>
-                    <option value="Extremadura">Extremadura</option>
-                    <option value="Galicia">Galicia</option>
-                    <option value="Madrid">Madrid</option>
-                    <option value="Murcia">Murcia</option>
-                    <option value="Navarra">Navarra</option>
-                    <option value="PaisVasco">Pais Vasco</option>
-                    <option value="LaRioja">La Rioja</option>
                   </select>
                 </div>
             </div>

@@ -14,6 +14,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+<script src="{{ url('../resources/js/peticionComunidades.js') }}"></script>
 
 <body>
   <header>
@@ -220,35 +221,16 @@
 
         </map>
 
-        <form method="post">
+        <form method="post" action="{{ route('filtrar') }}">
           @csrf
             <div class="row my-5 d-block d-xl-none">
               <div id="formulario">
-                <form>
-                    <div class="rounded my-4">
-                      <select onchange="window.location.href=this.value;" class="rounded col-8 p-2">
-                        <option value="{{url('/tours/Andalucia')}}">Andalucia</option>
-                        <option value="{{url('/tours/Aragon')}}">Aragon</option>
-                        <option value="{{url('/tours/Asturias')}}">Asturias</option>
-                        <option value="{{url('/tours/IslasBaleares')}}">Islas Baleares</option>
-                        <option value="{{url('/tours/Canarias')}}">Canarias</option>
-                        <option value="{{url('/tours/Cantabria')}}">Cantabria</option>
-                        <option value="{{url('/tours/CastillaYLeon')}}">Castilla Y Leon</option>
-                        <option value="{{url('/tours/CastillaLaMancha')}}">Castilla La Mancha</option>
-                        <option value="{{url('/tours/Cataluña')}}">Cataluña</option>
-                        <option value="{{url('/tours/Valencia')}}">Valencia</option>
-                        <option value="{{url('/tours/Extremadura')}}">Extremadura</option>
-                        <option value="{{url('/tours/Galicia')}}">Galicia</option>
-                        <option value="{{url('/tours/Madrid')}}">Madrid</option>
-                        <option value="{{url('/tours/Murcia')}}">Murcia</option>
-                        <option value="{{url('/tours/Navarra')}}">Navarra</option>
-                        <option value="{{url('/tours/PaisVasco')}}">Pais Vasco</option>
-                        <option value="{{url('/tours/LaRioja')}}">La Rioja</option>
-                        <option value="{{url('/tours/Ceuta')}}">Ceuta</option>
-                        <option value="{{url('/tours/Melilla')}}">Melilla</option>
-                      </select>
-                    </div>
-                </form>
+                  <div class="rounded my-4">
+                    <select id="desp" name="comunidad" class="rounded col-8 p-2">
+                      <option disabled selected>Comunidad</option>
+                    </select>
+                  </div>
+                  <button id="botonFormulario" class="btn mt-1" type="submit" name="button">Buscar</button>
               </div>
             </div>
         </form>
