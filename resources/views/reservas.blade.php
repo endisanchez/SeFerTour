@@ -89,7 +89,7 @@
 
   <section>
     <h1 class="text-center my-5">Mis Reservas</h1>
-    @if(($reservas == null))    
+    @if($reservas != null)  
     @foreach($reservas as $reserva)
     <div class="card my-4 container">
       <div class="card-body">

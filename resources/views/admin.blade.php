@@ -138,7 +138,8 @@
     @foreach ($tours as $item)
     <div class="card my-4 container">
         <div class="card-body">
-            <b><h6 class="card-text mb-4">Guia: {{$item->guia->user->name}} {{$item->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $item->guia->user->foto)}}" /></h6></b>
+            <b><h6 class="card-text mb-4">Guia: {{$item->guia->user->name}} {{$item->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $item->guia->user->foto)}}" />
+            </h6></b>
             <p class="card-text">Nombre del tour: {{ $item->nombre }}</p>
             <p class="card-text">Fecha: {{ $item->fecha }}</p>
             <p class="card-text">Hora: {{ $item->hora }}</p>
@@ -286,6 +287,51 @@
       </form>
     </div>
   </div>
+  </section>
+
+  <section class="container-fluid my-3 mt-5">
+    <h4 class="card-title container">Recuperar usuario</h4>
+    <div class="card my-4 container">
+      <div class="card-body text-center">
+        @if(isset($error))
+        <p>{{$error}}</p>
+        @endif
+        <form action="{{ route('recuperarUser') }}" class="d-inline" method="POST">
+          @csrf
+          <p>Introduce un email:        
+            <input id="email" type="email" required class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+            @error('email')
+            <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+          </p>
+              <button class="btn mt-2" id="botonFormulario" type="button" data-toggle="modal" data-target="#modal">Recuperar</button>
+              <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Guardar cambios</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>¿Estas seguro de que quieres recuperar el usuario?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <button type="submit" class="btn btn-primary" id="botonFormulario">Recuperar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+      </div>
+    </div>
+
+    
+    
   </section>
 
 

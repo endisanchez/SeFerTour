@@ -72,12 +72,11 @@ nav{
     transition: transform .2s; 
     
 }
-
-.zoom {
-}
  
 #fondo:hover {
-    transform: scale(1.5); 
+    -webkit-transform:scale(1.1);
+    transform:scale(1.1);
+    filter: brightness(0.6); 
 }
  
   .flip-card {

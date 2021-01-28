@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../resources/css/estilo.css">
+    <link rel="stylesheet" href="{{ asset('../resources/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('../resources/css/estilo.css') }}">
 
     <title>SeFerTour</title>
 </head>
@@ -172,7 +172,7 @@
           <div class="col-lg-4 col-12 pt-2">
             <a href="{{ route('provincia', 'Cataluña') }}">
               <div class="card bg-dark text-white" id="fondo">
-                <img class="card-img" src="{{url('imagenes/oficina4r.jpg')}}" alt="Card image"/>
+                <img class="card-img" src="{{url('imagenes/oficina4r.jpg')}}" alt="Card image" />
                 <div class="card-img-overlay">
                   <p class="letrasCard">BARCELONA</p>
                 </div>

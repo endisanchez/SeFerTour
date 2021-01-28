@@ -6,12 +6,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="{{ url('../resources/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url('../resources/css/estilo.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
     <title>Tours</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 
 <body>
   <header>
@@ -275,11 +277,51 @@
               <div class="card-body">
                 <form action="{{ url('/reservar') }}" method="post">
                   @csrf
-                  <p><b>Lugar: </b>{{$tour->ciudad}}, {{$tour->provincia}}, {{$tour->comunidad}}</p>
-                  <p><b>Fecha: </b>{{$tour->fecha}}</p>
-                  <p><b>Hora: </b>{{$tour->hora}}</p>
-                  <p><b>Idioma: </b>{{$tour->idioma_tour}}</p>
-                  <p><b>Guia: </b>{{$tour->guia->user->name}} {{$tour->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $tour->guia->user->foto)}}" /></p>
+                  <div class="row">
+
+                    <div class="col-6">
+                      <p><b>Lugar: </b>{{$tour->ciudad}}, {{$tour->provincia}}, {{$tour->comunidad}}</p>
+                      <p><b>Fecha: </b>{{$tour->fecha}}</p>
+                      <p><b>Hora: </b>{{$tour->hora}}</p>
+                      <p><b>Idioma: </b>{{$tour->idioma_tour}}</p>
+                      <p><b>Guia: </b>{{$tour->guia->user->name}} {{$tour->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $tour->guia->user->foto)}}" /></p>
+                    </div>
+                    
+
+                    <div id="mapid" class="col-6">
+                      
+                    </div>
+                  </div>
+                
+                  
+                  <script>
+
+                    var mymap = L.map('mapid').setView(["{{ $tour->latitud }}", "{{ $tour->longitud }}"], 12);
+                  
+                    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                      maxZoom: 18,
+                      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+                        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                      id: 'mapbox/streets-v11',
+                      tileSize: 512,
+                      zoomOffset: -1
+                    }).addTo(mymap);
+                  
+                    L.marker(["{{ $tour->latitud }}", "{{ $tour->longitud }}"]).addTo(mymap)
+                      .bindPopup("{{ $tour->nombre }}").openPopup();
+                  
+                  
+                    var popup = L.popup();
+                  
+                    function onMapClick(e) {
+                      popup
+                        .setLatLng(e.latlng)
+                        .openOn(mymap);
+                    }
+                  
+                    mymap.on('click', onMapClick);
+                  
+                  </script>
 
                   <input type="hidden" value="{{ $tour->id }}" name="id_tour">
                   <input type="hidden" value="{{ Auth::id() }}" name="id_usuario">
