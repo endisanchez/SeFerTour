@@ -16,7 +16,7 @@
 <script src="{{ url('../resources/js/perfilEditar.js') }}"></script>
 
 
-<body>
+<body id="bodylogin">
   <header>
     <nav class="navbar navbar-expand-sm navbar-dark static-top">
         <div class="container-fluid">
@@ -111,11 +111,6 @@
               <label>
                 <input type="file" style="display: none;" name="foto" class="form-control @error('foto') is-invalid @enderror">
                 <img src="{{ url('imagenes/cambio.png') }}" alt="añadir" width="20" height="20">
-                  @error('foto')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                  @enderror
               </label>
             </form>
             </div>
@@ -150,8 +145,14 @@
         </center>
       @endif
     </div>
+
     <div class="card container mt-3 mb-5" id="infoperfil">
         <div class="card-body">
+          <div class="container">
+            @foreach ($errors->all() as $error)
+                <b><p style="color: red;">*{{ $error }}</p></b>
+            @endforeach
+          </div>
 
             <h5 class="card-title text-center">{{ Auth::user()->usuario }}</h5>
             <p class="text-muted text-small mb-2">Nombre</p>
@@ -171,7 +172,7 @@
         </div>
     </div>
 
-    <div class="card container my-5" id="editPerfil">
+    <div class="card container my-4" id="editPerfil">
       <div class="card-body">
 
           <form action="{{ route('editarPerfil') }}" method="POST" class="mb-3 mr-3">
@@ -191,9 +192,11 @@
             <input type="email" class="mb-3" required maxlength="100" name="email" value="{{ Auth::user()->email }}">
             <p class="text-muted text-small mb-2">Tipo</p>
             <input type="text" disabled class="mb-3" name="tipo" value="{{ Auth::user()->tipo }}">
-            
-            <button type="button" class="btn mt-4 d-flex" id="botonFormulario" data-toggle="modal" data-target="#modal">Guardar</button>
-            <button type="button" onclick="muestraEdit()" class="btn mt-4" id="botonCancelar">Cancelar</button>
+            <div class="row">
+              <button type="button" class="btn mt-4 d-flex mr-2" id="botonFormulario" data-toggle="modal" data-target="#modal">Guardar</button>
+              <button type="button" onclick="muestraEdit()" class="btn mt-4" id="botonCancelar">Cancelar</button>
+              
+            </div>
             
             <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">

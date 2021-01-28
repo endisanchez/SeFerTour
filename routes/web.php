@@ -49,6 +49,8 @@ Route::view('/verify', 'Auth/verify');
 
 Route::delete('/eliminarUser/{lugar}', '\App\Http\Controllers\adminController@eliminar')->name('verSitio');
 
+Route::post('/recuperarUser', '\App\Http\Controllers\adminController@recuperarUser')->name('recuperarUser');
+
 Route::delete('/eliminar/{id}', '\App\Http\Controllers\adminController@eliminarTour')->name('eliminarTour');
 
 Route::get('/editar/{id}', '\App\Http\Controllers\adminController@editarUsuario')->name('editarUsuario');
