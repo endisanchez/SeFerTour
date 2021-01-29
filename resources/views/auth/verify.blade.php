@@ -91,20 +91,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Verifica tu email') }}</div>
+                <div class="card-header">{{ trans('texto.verificar_tu_email') }}</div>
 
                 <div class="card-body">
                     @if (session('resent'))
                         <div class="alert alert-success" role="alert">
-                            {{ __('Se ha enviado un link de verificación a tu email.') }}
+                        {{ trans('texto.no_hay') }}
                         </div>
                     @endif
 
-                    {{ __('Antes de continuar, revisa tu email y entra en el link de verificación.') }}
-                    {{ __('Si no recibiste el email,') }},
+                    {{ trans('texto.antes_de') }}
+                    {{ trans('texto.si_no') }},
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                         @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('Pulsa aquí para recibir otro') }}</button>.
+                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ trans('texto.pulsa_aqui') }}</button>.
                     </form>
                 </div>
             </div>
@@ -114,9 +114,9 @@
 
 <footer class="page-footer font-small bg-dark text-light">
 
-  <div class="container text-center text-md-left d-flex">
+    <div class="container text-center text-md-left d-flex">
 
-    <div class="row mt-5">
+      <div class="row mt-5">
 
       <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
 
@@ -125,9 +125,6 @@
         <p>{{ trans('texto.descripcion') }}</p>
 
       </div>
-
-      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
 
         <h6 class="text-uppercase font-weight-bold">{{ trans('texto.redes') }}</h6>
         <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
@@ -141,9 +138,8 @@
           <a href="https://twitter.com/?lang=es"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
         </p>
 
-      </div>
 
-      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 
         <h6 class="text-uppercase font-weight-bold">{{ trans('texto.enlaces') }}</h6>
         <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
@@ -170,10 +166,18 @@
           </p>
         @endif
 
-      </div>
+        </div>
 
-      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
 
+          <h6 class="text-uppercase font-weight-bold">{{ trans('texto.enlaces') }}</h6>
+          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+          <p>
+            <a href="#!">{{ trans('texto.cuenta') }}</a>
+          </p>
+          <p>
+            <a href="#!">{{ trans('texto.registrar') }}</a>
+          </p>
 
         <h6 class="text-uppercase font-weight-bold">{{ trans('texto.contacto') }}</h6>
         <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
@@ -182,16 +186,15 @@
         <p>+ 34 234 567 88</p>
         <p>+ 34 234 567 89</p>
 
-      </div>
-
-    </div>
-  </div>
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
   <div class="text-center py-3">© 2020 Copyright:
     <a href="#"> SeFerTour</a>
   </div>
 
-</footer>
+      </div>
+    </div>
 
+  </footer>
 </body>
 </html>

@@ -92,14 +92,14 @@
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="card">
-            <div class="card-header">{{ __('Registrarse') }}</div>
+            <div class="card-header">{{ trans('texto.registrar') }}</div>
 
             <div class="card-body">
               <form method="POST" action="{{ route('register') }}" accept-charset="UTF-8" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group row">
-                  <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+                  <label for="name" class="col-md-4 col-form-label text-md-right">{{ trans('texto.nombre') }}</label>
 
                   <div class="col-md-6">
                     <input id="name" maxlength="25" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -113,7 +113,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="apellido" class="col-md-4 col-form-label text-md-right">{{ __('Apellido') }}</label>
+                  <label for="apellido" class="col-md-4 col-form-label text-md-right">{{ trans('texto.apellido') }}</label>
 
                   <div class="col-md-6">
                     <input id="apellido" maxlength="25" type="text" class="form-control @error('apellido') is-invalid @enderror" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido" autofocus>
@@ -127,7 +127,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="dni" class="col-md-4 col-form-label text-md-right">{{ __('DNI') }}</label>
+                  <label for="dni" class="col-md-4 col-form-label text-md-right">{{ trans('texto.dni') }}</label>
 
                   <div class="col-md-6">
                     <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni" autofocus>
@@ -155,7 +155,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('Foto') }}</label>
+                  <label for="foto" class="col-md-4 col-form-label text-md-right">{{ trans('texto.foto') }}</label>
 
                   <div class="col-md-6">
                     <input type="file" class="form-control @error('foto') is-invalid @enderror" name="foto" >
@@ -169,7 +169,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="usuario" class="col-md-4 col-form-label text-md-right">{{ __('Usuario') }}</label>
+                  <label for="usuario" class="col-md-4 col-form-label text-md-right">{{ trans('texto.usuario') }}</label>
 
                   <div class="col-md-6">
                     <input id="usuario" type="usuario" class="form-control @error('usuario') is-invalid @enderror" name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario">
@@ -183,7 +183,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+                  <label for="password" class="col-md-4 col-form-label text-md-right">{{ trans('texto.contraseña') }}</label>
 
                   <div class="col-md-6">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -197,7 +197,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Repetir Contraseña') }}</label>
+                  <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ trans('texto.repetir') }}</label>
 
                   <div class="col-md-6">
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -205,12 +205,12 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="tipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo') }}</label>
+                  <label for="tipo" class="col-md-4 col-form-label text-md-right">{{ trans('texto.tipo') }}</label>
 
                   <div class="col-md-6">
                     <select name="tipo" id="tipo" class="form-control @error('usuario') is-invalid @enderror" value="{{ old('tipo') }}" autocomplete="tipo">
-                      <option value="Cliente" selected>Cliente</option>
-                      <option value="Guia">Guia</option>
+                      <option value="Cliente" selected>{{ trans('texto.cliente') }}</option>
+                      <option value="Guia">{{ trans('texto.guia') }}</option>
                     </select>
                     @error('tipo')
                     <span class="invalid-feedback" role="alert">
@@ -223,7 +223,7 @@
                 <div class="form-group row mb-0">
                   <div class="col-md-6 offset-md-4">
                     <button type="submit" class="btn btn-primary">
-                      {{ __('Registrarse') }}
+                    {{ trans('texto.registrar') }}
                     </button>
                   </div>
                 </div>
@@ -272,6 +272,7 @@
 
           <h6 class="text-uppercase font-weight-bold">{{ trans('texto.enlaces') }}</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+
           @if(Auth::user())
             <p>
               <a href="{{ url('perfil') }}">{{ trans('texto.cuenta') }}</a>

@@ -11,7 +11,10 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
 <script src="{{ url('../resources/js/peticionComunidades.js') }}"></script>
 
 
@@ -180,7 +183,7 @@
     <section class="container-fluid mt-5 text-center">
       <div>
         <div>
-          <h3 class="display-3">Registrate!</h3>
+          <h3 class="display-3">{{ trans('texto.registrar') }}!</h3>
         </div>
       </div>
       <div class="row d-flex mt-5">
@@ -188,15 +191,15 @@
           <div class="flip-card-inner">
             <div class="flip-card-front mb-5 text-center">
               <div class="card-body">
-                <h5 class="card-title font-weight-light">Descubre</h5>
+                <h5 class="card-title font-weight-light">{{ trans('texto.descubre') }}</h5>
                 <img class="img-fluid my-5" src="{{url('imagenes/libro.png')}}" alt="Card image cap" width="100">
               </div>
             </div>
 
             <div class="flip-card-back text-dark text-center">
               <div class="card-body">
-                <p class="card-text"><strong>Descubre sitios que te gusten en nuestra web.</strong></p>
-                <p>Visita la página de tours para descubrir nuevos lugares a los que viajar y de los que aprender.</p>
+                <p class="card-text"><strong>{{ trans('texto.descubre_sitios') }}</strong></p>
+                <p>{{ trans('texto.visita_la') }}</p>
                 <img class="img-fluid mt-xl-3 rounded mb-2"  src="{{url('imagenes/sft1.jpg')}}" alt="Card image cap">
               </div>
             </div>
@@ -207,15 +210,15 @@
           <div class="flip-card-inner">
             <div class="flip-card-front text-center">
               <div class="card-body">
-                <h5 class="card-title font-weight-light">Aprende</h5>
+                <h5 class="card-title font-weight-light">{{ trans('texto.aprende') }}</h5>
                 <img class="img-fluid my-5"  src="{{url('imagenes/aprender.png')}}"alt="Card image cap" width="100">
               </div>
             </div>
 
             <div class="flip-card-back text-dark text-center">
               <div class="card-body">
-                <p class="card-text"><strong>Aprende todo lo posible de los sitios que visites.</strong></p>
-                <p>Dicen que cada día se aprende algo nuevo, ponlo en práctica reservando uno de nuestros tours.</p>
+                <p class="card-text"><strong>{{ trans('texto.aprende_todo') }}</strong></p>
+                <p>{{ trans('texto.dicen_que') }}</p>
                 <img class="img-fluid mt-xl-3 rounded mb-2"  src="{{url('imagenes/sft2.jpg')}}" alt="Card image cap">
               </div>
             </div>
@@ -226,15 +229,15 @@
           <div class="flip-card-inner">
             <div class="flip-card-front text-center">
               <div class="card-body">
-                <h5 class="card-title font-weight-light">Explora</h5>
+                <h5 class="card-title font-weight-light">{{ trans('texto.explora') }}</h5>
                 <img class="img-fluid my-5" src="{{url('imagenes/lupa.png')}}" alt="Card image cap" width="100">
               </div>
             </div>
 
             <div class="flip-card-back text-dark text-center">
               <div class="card-body">
-                <p class="card-text"><strong>Explora nuevos lugares que visitar.</strong></p>
-                <p>¿Quieres saber todo sobre el lugar al que vas a viajar? ¡Reserva tu tour ya y disfruta de la experiencia!</p>
+                <p class="card-text"><strong>{{ trans('texto.explora_nuevos') }}</strong></p>
+                <p>{{ trans('texto.quieres_saber') }}</p>
                 <img class="img-fluid mt-xl-3 rounded mb-2" src="{{url('imagenes/sft3.jpg')}}" alt="Card image cap">
               </div>
             </div>

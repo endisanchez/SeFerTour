@@ -97,7 +97,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card my-5">
-                <div class="card-header">{{ __('Cambiar contraseña') }}</div>
+                <div class="card-header">{{ trans('texto.cambiar_contra') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.update') }}">
@@ -120,7 +120,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ trans('texto.contraseña') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -134,7 +134,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar contraseña') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ trans('texto.confirmar_contra') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -144,7 +144,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary" id="botonFormulario">
-                                    {{ __('Cambiar Contraseña') }}
+                                {{ trans('texto.cambiar_contra') }}
                                 </button>
                             </div>
                         </div>

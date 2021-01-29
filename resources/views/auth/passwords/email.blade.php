@@ -94,7 +94,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card my-5">
-                <div class="card-header">{{ __('Cambiar contraseña') }}</div>
+                <div class="card-header">{{ trans('texto.cambiar_contra') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -123,7 +123,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary" id="botonFormulario">
-                                    {{ __('Enviar link de verificación') }}
+                                {{ trans('texto.enviar_link') }}
                                 </button>
                             </div>
                         </div>
