@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../resources/css/estilo.css">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/estilo.css') }}">
 
     <title>SeFerTour</title>
 </head>
@@ -142,13 +142,13 @@
           <h6 class="text-uppercase font-weight-bold">{{ trans('texto.redes') }}</h6>
           <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>
-            <a href="#"><img src="{{url ('imagenes/insta.png')}}" alt="insta" width="20%"></a> Instagram
+            <a href="https://www.instagram.com/"><img src="{{url ('imagenes/insta.png')}}" alt="insta" width="20%"></a> Instagram
           </p>
           <p>
-            <a href="#"><img src="{{url ('imagenes/facebook.png')}}" alt="facebook" width="20%"></a> Facebook
+            <a href="https://es-es.facebook.com/"><img src="{{url ('imagenes/facebook.png')}}" alt="facebook" width="20%"></a> Facebook
           </p>
           <p>
-            <a href="#"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
+            <a href="https://twitter.com/?lang=es"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
           </p>
 
         </div>
@@ -157,12 +157,28 @@
 
           <h6 class="text-uppercase font-weight-bold">{{ trans('texto.enlaces') }}</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>
-            <a href="#!">{{ trans('texto.cuenta') }}</a>
-          </p>
-          <p>
-            <a href="#!">{{ trans('texto.registrar') }}</a>
-          </p>
+          @if(Auth::user())
+            <p>
+              <a href="{{ url('perfil') }}">{{ trans('texto.cuenta') }}</a>
+            </p>
+            <p>
+              <a href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                      {{ trans('texto.salir') }}
+              </a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+              </form>
+            </p>
+          @else
+            <p>
+              <a href="{{ url('login') }}">{{ trans('texto.inicio_sesion') }}</a>
+            </p>
+            <p>
+              <a href="{{ url('register') }}">{{ trans('texto.registrar') }}</a>
+            </p>
+          @endif
 
         </div>
 
