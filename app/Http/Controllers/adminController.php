@@ -92,4 +92,21 @@ class adminController extends Controller
         $updatePerfil->save();
         return redirect('admin');
     }
+
+    public function recuperarUser(Request $request){
+
+        $error = "El email ya esta en uso o no se ha encontrado";
+        //dd(App\Models\User::onlyTrashed()->get());
+        if(count(App\Models\User::onlyTrashed()->get()) != 0)
+        {
+            App\Models\User::onlyTrashed()->get()[0]->restore();
+            return back();
+        }
+        else
+        {
+            //return view("admin")->with("error", $error);
+            return back();
+        }
+
+    }
 }

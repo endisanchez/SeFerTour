@@ -9,7 +9,11 @@ class TourController extends Controller
 
   public function toursProvincia($provincia) {
     $tours = App\Models\Tour::where('comunidad', '=', $provincia)->get();
-    return $tours;
+
+   
+
+    return view('tours')->with('tours', $tours);
+
   }
 
   public function filtroTours(Request $request) {

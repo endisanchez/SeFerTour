@@ -17,8 +17,8 @@ class CreateReservasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('tour_id');
             $table->unsignedBigInteger('cliente_id');
-            $table->datetime('created_at');
-            $table->datetime('updated_at');
+            $table->datetime('created_at')->nullable();
+            $table->datetime('updated_at')->nullable();
             $table->foreign('tour_id')->references('id')->on('tours')->onDelete('cascade');
             $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
         });
