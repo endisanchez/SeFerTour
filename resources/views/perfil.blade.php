@@ -155,19 +155,19 @@
           </div>
 
             <h5 class="card-title text-center">{{ Auth::user()->usuario }}</h5>
-            <p class="text-muted text-small mb-2">Nombre</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.nombre') }}</p>
             <p class="mb-3">{{ Auth::user()->name }}</p>
-            <p class="text-muted text-small mb-2">Apellido</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.apellido') }}</p>
             <p class="mb-3">{{ Auth::user()->apellido }}</p>
-            <p class="text-muted text-small mb-2">DNI</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.dni') }}</p>
             <p class="mb-3">{{ Auth::user()->dni }}</p>
             <p class="text-muted text-small mb-2">Email</p>
             <p class="mb-3">{{ Auth::user()->email }}</p>
-            <p class="text-muted text-small mb-2">Tipo</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.tipo') }}</p>
             <p class="mb-3">{{ Auth::user()->tipo }}</p>
 
             <form class="mb-3">
-                <button type="button" onclick="muestraContenido()" class="btn mt-4" id="botonFormulario">Editar</button>
+                <button type="button" onclick="muestraContenido()" class="btn mt-4" id="botonFormulario">{{ trans('texto.editar') }}</button>
             </form>
         </div>
     </div>
@@ -180,39 +180,44 @@
             @csrf
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="id" value="{{ Auth::user()->id }}">
-            <p class="text-muted text-small mb-2">Nombre</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.nombre') }}</p>
             <input type="text" required maxlength="25" class="mb-3" name="nombre" value="{{ Auth::user()->name }}">
-            <p class="text-muted text-small mb-2">Apellido</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.apellido') }}</p>
             <input type="text" class="mb-3" required maxlength="25" name="apellido" value="{{ Auth::user()->apellido }}">
-            <p class="text-muted text-small mb-2">Usuario</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.usuario') }}</p>
             <input type="text" class="mb-3" required maxlength="25" name="usuario" value="{{ Auth::user()->usuario }}">
-            <p class="text-muted text-small mb-2">DNI</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.dni') }}</p>
             <input type="text" class="mb-3" required name="dni" value="{{ Auth::user()->dni }}">
             <p class="text-muted text-small mb-2">Email</p>
             <input type="email" class="mb-3" required maxlength="100" name="email" value="{{ Auth::user()->email }}">
-            <p class="text-muted text-small mb-2">Tipo</p>
+            <p class="text-muted text-small mb-2">{{ trans('texto.tipo') }}</p>
             <input type="text" disabled class="mb-3" name="tipo" value="{{ Auth::user()->tipo }}">
+
+            
+            
+
             <div class="row">
-              <button type="button" class="btn mt-4 d-flex mr-2" id="botonFormulario" data-toggle="modal" data-target="#modal">Guardar</button>
-              <button type="button" onclick="muestraEdit()" class="btn mt-4" id="botonCancelar">Cancelar</button>
+              <button type="button" class="btn mt-4 d-flex mr-2" id="botonFormulario" data-toggle="modal" data-target="#modal">{{ trans('texto.guardar') }}</button>
+              <button type="button" onclick="muestraEdit()" class="btn mt-4" id="botonCancelar">{{ trans('texto.cancelar') }}</button>
               
             </div>
+
             
             <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Guardar cambios</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ trans('texto.guardar_cambios') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
-                    ¿Estas seguro de que quieres guardar los cambios?
+                  {{ trans('texto.seguro_guardar') }}
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary" id="botonFormulario">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('texto.cerrar') }}</button>
+                    <button type="submit" class="btn btn-primary" id="botonFormulario">{{ trans('texto.guardar') }}</button>
                   </div>
                 </div>
               </div>
