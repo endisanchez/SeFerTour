@@ -3,7 +3,11 @@ let peticion_http = new XMLHttpRequest();
 window.onload = peticion, muestraContenido;
 
 function peticion() {
-  peticion_http.open('GET', "http://localhost/comunidades.json", true);
+
+  peticion_http.open('GET', "comunidades.json", true);
+
+  //peticion_http.open('GET', "http://localhost/comunidades.json", true);
+
   peticion_http.onreadystatechange = muestraContenido;
   peticion_http.send(null);
 }

@@ -1,0 +1,99 @@
+{
+  "comunidades": [
+    {
+      "id": 1,
+      "nombre": "Andalucia",
+      "query": "Andalucia"
+    },
+    {
+      "id": 2,
+      "nombre": "Aragon",
+"query": "Aragon"
+    },
+    {
+      "id": 3,
+      "nombre": "Asturias",
+"query": "Asturias"
+    },
+    {
+      "id": 4,
+      "nombre": "Islas Baleares",
+"query": "IslasBaleares"
+    },
+    {
+      "id": 5,
+      "nombre": "Canarias",
+"query": "Canarias"
+    },
+    {
+      "id": 6,
+      "nombre": "Cantabria",
+"query": "Cantabria"
+    },
+    {
+      "id": 7,
+      "nombre": "Castilla Y Leon",
+"query": "CastillaYLeon"
+    },
+
+{
+      "id": 8,
+      "nombre": "Castilla La Mancha",
+"query": "CastillaLaMancha"
+    },
+
+{
+      "id": 9,
+      "nombre": "Cataluna",
+"query": "Catalua"
+    },
+
+{
+      "id": 10,
+      "nombre": "Extremadura",
+"query": "Extremadura"
+    },
+
+{
+      "id": 11,
+      "nombre": "Galicia",
+"query": "Galicia"
+    },
+
+{
+      "id": 12,
+      "nombre": "Madrid",
+"query": "Madrid"
+    },
+
+{
+      "id": 13,
+      "nombre": "Murcia",
+"query": "Murcia"
+    },
+
+{
+      "id": 14,
+      "nombre": "Navarra",
+"query": "Navarra"
+    },
+
+{
+      "id": 15,
+      "nombre": "Pais Vasco",
+"query": "Pais Vasco"
+    },
+
+{
+      "id": 16,
+      "nombre": "Castilla y Leon",
+"query": "CastillaYLeon"
+    },
+
+      {
+      "id": 17,
+      "nombre": "La Rioja",
+"query": "LaRioja"
+    }
+  ]
+}
