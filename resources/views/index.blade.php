@@ -3,16 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('css/estilo.css') }}" rel="stylesheet" type="text/css" >
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/estilo.css') }}">
 
     <title>SeFerTour</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 <script src="{{ asset('/js/peticionComunidades.js') }}"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+
+
+<script src='jquery.zoom.js'></script>
+<script>
+    $(document).ready(function(){
+        $('#ex1').zoom();
+    });
+</script>
 
 <body>
   <header>
@@ -61,9 +72,9 @@
                     @if (Auth::user()->tipo =='Cliente')
                     <a class="dropdown-item" href="{{ url('reservar') }}">{{ trans('texto.mis_reservas') }}</a>
                     @elseif (Auth::user()->tipo =='Guia')
-                     <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.mis_tours') }}</a>
+                     <a class="dropdown-item" href="{{ url('tours') }}">{{ trans('texto.mis_tours') }}</a>
                     @elseif (Auth::user()->tipo =='Admin')
-                    <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.administrador') }}</a>
+                    <a class="dropdown-item" href="{{ url('admin') }}">{{ trans('texto.administrador') }}</a>
                     @endif
 
                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -154,7 +165,7 @@
       </div>
         <div class="row">
           <div class="col-lg-4 col-12 pt-2">
-            <a href="{{ route('provincia', 'Madrid') }}">
+            <a href="{{ route('provincia', 'Madrid') }}" class="zoom">
               <div class="card bg-dark text-white" id="fondo">
                 <img class="card-img" src="{{url('imagenes/oficina2r.jpg')}}" alt="Card image"  width="110%"/>
                 <div class="card-img-overlay">
@@ -166,7 +177,7 @@
           <div class="col-lg-4 col-12 pt-2">
             <a href="{{ route('provincia', 'Cataluña') }}">
               <div class="card bg-dark text-white" id="fondo">
-                <img class="card-img" src="{{url('imagenes/oficina4r.jpg')}}" alt="Card image"/>
+                <img class="card-img" src="{{url('imagenes/oficina4r.jpg')}}" alt="Card image" />
                 <div class="card-img-overlay">
                   <p class="letrasCard">BARCELONA</p>
                 </div>
@@ -189,7 +200,7 @@
     <section class="container-fluid mt-5 text-center">
       <div>
         <div>
-          <h3 class="display-3">Registrate!</h3>
+          <h3 class="display-3">{{ trans('texto.registrar') }}!</h3>
         </div>
       </div>
       <div class="row d-flex mt-5">
@@ -197,15 +208,15 @@
           <div class="flip-card-inner">
             <div class="flip-card-front mb-5 text-center">
               <div class="card-body">
-                <h5 class="card-title font-weight-light">Descubre</h5>
+                <h5 class="card-title font-weight-light">{{ trans('texto.descubre') }}</h5>
                 <img class="img-fluid my-5" src="{{url('imagenes/libro.png')}}" alt="Card image cap" width="100">
               </div>
             </div>
 
             <div class="flip-card-back text-dark text-center">
               <div class="card-body">
-                <p class="card-text"><strong>Descubre sitios que te gusten en nuestra web.</strong></p>
-                <p>Visita la página de tours para descubrir nuevos lugares a los que viajar y de los que aprender.</p>
+                <p class="card-text"><strong>{{ trans('texto.descubre_sitios') }}</strong></p>
+                <p>{{ trans('texto.visita_la') }}</p>
                 <img class="img-fluid mt-xl-3 rounded mb-2"  src="{{url('imagenes/sft1.jpg')}}" alt="Card image cap">
               </div>
             </div>
@@ -216,15 +227,15 @@
           <div class="flip-card-inner">
             <div class="flip-card-front text-center">
               <div class="card-body">
-                <h5 class="card-title font-weight-light">Aprende</h5>
+                <h5 class="card-title font-weight-light">{{ trans('texto.aprende') }}</h5>
                 <img class="img-fluid my-5"  src="{{url('imagenes/aprender.png')}}"alt="Card image cap" width="100">
               </div>
             </div>
 
             <div class="flip-card-back text-dark text-center">
               <div class="card-body">
-                <p class="card-text"><strong>Aprende todo lo posible de los sitios que visites.</strong></p>
-                <p>Dicen que cada día se aprende algo nuevo, ponlo en práctica reservando uno de nuestros tours.</p>
+                <p class="card-text"><strong>{{ trans('texto.aprende_todo') }}</strong></p>
+                <p>{{ trans('texto.dicen_que') }}</p>
                 <img class="img-fluid mt-xl-3 rounded mb-2"  src="{{url('imagenes/sft2.jpg')}}" alt="Card image cap">
               </div>
             </div>
@@ -235,15 +246,15 @@
           <div class="flip-card-inner">
             <div class="flip-card-front text-center">
               <div class="card-body">
-                <h5 class="card-title font-weight-light">Explora</h5>
+                <h5 class="card-title font-weight-light">{{ trans('texto.explora') }}</h5>
                 <img class="img-fluid my-5" src="{{url('imagenes/lupa.png')}}" alt="Card image cap" width="100">
               </div>
             </div>
 
             <div class="flip-card-back text-dark text-center">
               <div class="card-body">
-                <p class="card-text"><strong>Explora nuevos lugares que visitar.</strong></p>
-                <p>¿Quieres saber todo sobre el lugar al que vas a viajar? ¡Reserva tu tour ya y disfruta de la experiencia!</p>
+                <p class="card-text"><strong>{{ trans('texto.explora_nuevos') }}</strong></p>
+                <p>{{ trans('texto.quieres_saber') }}</p>
                 <img class="img-fluid mt-xl-3 rounded mb-2" src="{{url('imagenes/sft3.jpg')}}" alt="Card image cap">
               </div>
             </div>
@@ -279,13 +290,13 @@
           <h6 class="text-uppercase font-weight-bold">{{ trans('texto.redes') }}</h6>
           <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>
-            <a href="#"><img src="{{url ('imagenes/insta.png')}}" alt="insta" width="20%"></a> Instagram
+            <a href="https://www.instagram.com/"><img src="{{url ('imagenes/insta.png')}}" alt="insta" width="20%"></a> Instagram
           </p>
           <p>
-            <a href="#"><img src="{{url ('imagenes/facebook.png')}}" alt="facebook" width="20%"></a> Facebook
+            <a href="https://es-es.facebook.com/"><img src="{{url ('imagenes/facebook.png')}}" alt="facebook" width="20%"></a> Facebook
           </p>
           <p>
-            <a href="#"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
+            <a href="https://twitter.com/?lang=es"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
           </p>
 
         </div>
@@ -294,12 +305,28 @@
 
           <h6 class="text-uppercase font-weight-bold">{{ trans('texto.enlaces') }}</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>
-            <a href="#!">{{ trans('texto.cuenta') }}</a>
-          </p>
-          <p>
-            <a href="#!">{{ trans('texto.registrar') }}</a>
-          </p>
+          @if(Auth::user())
+            <p>
+              <a href="{{ url('perfil') }}">{{ trans('texto.cuenta') }}</a>
+            </p>
+            <p>
+              <a href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                      {{ trans('texto.salir') }}
+              </a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+              </form>
+            </p>
+          @else
+            <p>
+              <a href="{{ url('login') }}">{{ trans('texto.inicio_sesion') }}</a>
+            </p>
+            <p>
+              <a href="{{ url('register') }}">{{ trans('texto.registrar') }}</a>
+            </p>
+          @endif
 
         </div>
 

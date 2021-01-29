@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="stylesheet" href="{{ url('../resources/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url('../resources/css/estilo.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/estilo.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
     <title>Tours</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
 <script src="{{ url('../resources/js/peticionComunidades.js') }}"></script>
 
 <body>
@@ -91,7 +96,7 @@
   <!-- mapa -->
   <section>
       <center>
-        <h1 class="my-4">Selecciona el lugar que quieres descubrir</h1>
+        <h1 class="my-4">{{ trans('texto.seleccion') }}</h1>
         <map name="idx30_map" class="d-none d-xl-block">
           <area shape="POLY" href=".\COMUNIDAD\INDEX-999.HTML" coords="614,707,614,612,810,612,810,707,614,707,810,707,810,612,614,612 ">
 
@@ -225,10 +230,13 @@
               <div id="formulario">
                   <div class="rounded my-4">
                     <select id="desp" name="comunidad" class="rounded col-8 p-2">
-                      <option disabled selected>Comunidad</option>
+
+
+                      <option disabled selected>{{ trans('texto.comunidad') }}</option>
                     </select>
                   </div>
-                  <button id="botonFormulario" class="btn mt-1" type="submit" name="button">Buscar</button>
+                  <button id="botonFormulario" class="btn mt-1" type="submit" name="button">{{ trans('texto.buscar') }}</button>
+
               </div>
             </div>
         </form>
@@ -257,40 +265,84 @@
               <div class="card-body">
                 <form action="{{ url('/reservar') }}" method="post">
                   @csrf
-                  <p><b>Lugar: </b>{{$tour->ciudad}}, {{$tour->provincia}}, {{$tour->comunidad}}</p>
-                  <p><b>Fecha: </b>{{$tour->fecha}}</p>
-                  <p><b>Hora: </b>{{$tour->hora}}</p>
-                  <p><b>Idioma: </b>{{$tour->idioma_tour}}</p>
-                  <p><b>Guia: </b>{{$tour->guia->user->name}} {{$tour->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $tour->guia->user->foto)}}" /></p>
+
+                  
+
+                  <div class="row">
+
+                    <div class="col-6">
+                      <p><b>{{ trans('texto.lugar') }}: </b>{{$tour->ciudad}}, {{$tour->provincia}}, {{$tour->comunidad}}</p>
+                      <p><b>{{ trans('texto.fecha') }}: </b>{{$tour->fecha}}</p>
+                      <p><b>{{ trans('texto.hora') }}: </b>{{$tour->hora}}</p>
+                      <p><b>{{ trans('texto.idioma') }}: </b>{{$tour->idioma_tour}}</p>
+                      <p><b>{{ trans('texto.guia') }}: </b>{{$tour->guia->user->name}} {{$tour->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $tour->guia->user->foto)}}" /></p>
+                    </div>
+                    
+
+                    <div id="mapid" class="col-6">
+                      
+                    </div>
+                  </div>
+                
+                  
+                  <script>
+
+                    var mymap = L.map('mapid').setView(["{{ $tour->latitud }}", "{{ $tour->longitud }}"], 12);
+                  
+                    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                      maxZoom: 18,
+                      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+                        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                      id: 'mapbox/streets-v11',
+                      tileSize: 512,
+                      zoomOffset: -1
+                    }).addTo(mymap);
+                  
+                    L.marker(["{{ $tour->latitud }}", "{{ $tour->longitud }}"]).addTo(mymap)
+                      .bindPopup("{{ $tour->nombre }}").openPopup();
+                  
+                  
+                    var popup = L.popup();
+                  
+                    function onMapClick(e) {
+                      popup
+                        .setLatLng(e.latlng)
+                        .openOn(mymap);
+                    }
+                  
+                    mymap.on('click', onMapClick);
+                  
+                  </script>
+
 
                   <input type="hidden" value="{{ $tour->id }}" name="id_tour">
                   <input type="hidden" value="{{ Auth::id() }}" name="id_usuario">
                   @if(Auth::user())
-                  <button type="button" id="botonFormulario" class="btn mt-2" data-toggle="modal" data-target="#modal"><strong>Reservar Tour</strong></button>
+                  <button type="button" id="botonFormulario" class="btn mt-2" data-toggle="modal" data-target="#modal"><strong>{{ trans('texto.reservar_tour') }}</strong></button>
                   @else
-                  <button type="submit" id="botonFormulario" class="btn mt-2" onclick="window.location.href='{{ url('/login') }}'"><strong>Reservar Tour</strong></button>
+                  <button type="submit" id="botonFormulario" class="btn mt-2" onclick="window.location.href='{{ url('/login') }}'"><strong>{{ trans('texto.reservar_tour') }}</strong></button>
                   @endif
 
                   <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Guardar cambios</h5>
+                          <h5 class="modal-title" id="exampleModalLabel">{{ trans('texto.guardar_cambios') }}</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
                         <div class="modal-body">
-                          <p>¿Estas seguro de que quieres reservar el siguiente tour?</p>
-                          <p><b>Lugar: </b>{{$tour->ciudad}}, {{$tour->provincia}}, {{$tour->comunidad}}</p>
-                          <p><b>Fecha: </b>{{$tour->fecha}}</p>
-                          <p><b>Hora: </b>{{$tour->hora}}</p>
-                          <p><b>Idioma: </b>{{$tour->idioma_tour}}</p>
-                          <p><b>Guia: </b>{{$tour->guia->user->name}} {{$tour->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $tour->guia->user->foto)}}" /></p>
+                          <p>{{ trans('texto.estas_seguro') }}</p>
+                          <p><b>{{ trans('texto.lugar') }}: </b>{{$tour->ciudad}}, {{$tour->provincia}}, {{$tour->comunidad}}</p>
+                          <p><b>{{ trans('texto.fecha') }}: </b>{{$tour->fecha}}</p>
+                          <p><b>{{ trans('texto.hora') }}: </b>{{$tour->hora}}</p>
+                          <p><b>{{ trans('texto.idioma') }}: </b>{{$tour->idioma_tour}}</p>
+                          <p><b>{{ trans('texto.guia') }}: </b>{{$tour->guia->user->name}} {{$tour->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $tour->guia->user->foto)}}" /></p>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                          <button type="submit" class="btn btn-primary" id="botonFormulario">Reservar</button>
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('texto.cerrar') }}</button>
+                          <button type="submit" class="btn btn-primary" id="botonFormulario">{{ trans('texto.reservar') }}</button>
                         </div>
                       </div>
                     </div>
@@ -302,7 +354,7 @@
           </div>
           @endforeach
           @empty($tours)
-          <p>No hay tours</p>
+          <p>{{ trans('texto.no_hay') }}</p>
           @endempty
         @endif
       </div>
@@ -311,66 +363,82 @@
     <footer class="page-footer font-small bg-dark text-light">
 
       <div class="container text-center text-md-left d-flex">
-
+  
         <div class="row mt-5">
-
+  
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-
+  
             <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
             <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
             <p>{{ trans('texto.descripcion') }}</p>
-
+  
           </div>
-
+  
           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
-
+  
+  
             <h6 class="text-uppercase font-weight-bold">{{ trans('texto.redes') }}</h6>
             <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
             <p>
-              <a href="#"><img src="{{url ('imagenes/insta.png')}}" alt="insta" width="20%"></a> Instagram
+              <a href="https://www.instagram.com/"><img src="{{url ('imagenes/insta.png')}}" alt="insta" width="20%"></a> Instagram
             </p>
             <p>
-              <a href="#"><img src="{{url ('imagenes/facebook.png')}}" alt="facebook" width="20%"></a> Facebook
+              <a href="https://es-es.facebook.com/"><img src="{{url ('imagenes/facebook.png')}}" alt="facebook" width="20%"></a> Facebook
             </p>
             <p>
-              <a href="#"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
+              <a href="https://twitter.com/?lang=es"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
             </p>
-
+  
           </div>
-
+  
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
+  
             <h6 class="text-uppercase font-weight-bold">{{ trans('texto.enlaces') }}</h6>
             <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-            <p>
-              <a href="#!">{{ trans('texto.cuenta') }}</a>
-            </p>
-            <p>
-              <a href="#!">{{ trans('texto.registrar') }}</a>
-            </p>
-
+            @if(Auth::user())
+              <p>
+                <a href="{{ url('perfil') }}">{{ trans('texto.cuenta') }}</a>
+              </p>
+              <p>
+                <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
+                        {{ trans('texto.salir') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+                </form>
+              </p>
+            @else
+              <p>
+                <a href="{{ url('login') }}">{{ trans('texto.inicio_sesion') }}</a>
+              </p>
+              <p>
+                <a href="{{ url('register') }}">{{ trans('texto.registrar') }}</a>
+              </p>
+            @endif
+  
           </div>
-
+  
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
-
+  
+  
             <h6 class="text-uppercase font-weight-bold">{{ trans('texto.contacto') }}</h6>
             <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
             <p>Donostia, Gipuzkoa</p>
             <p>info@sefertour.com</p>
             <p>+ 34 234 567 88</p>
             <p>+ 34 234 567 89</p>
-
+  
           </div>
-
+  
         </div>
       </div>
-
+  
       <div class="text-center py-3">© 2020 Copyright:
         <a href="#"> SeFerTour</a>
       </div>
-
+  
     </footer>
 
 </body>

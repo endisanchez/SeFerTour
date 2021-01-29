@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../resources/css/estilo.css">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/estilo.css') }}">
     <title>Login</title>
 </head>
+
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -91,7 +93,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header">{{ trans('texto.inicio_sesion') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -112,7 +114,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ trans('texto.contraseña') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -131,7 +133,7 @@
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Recuerdame') }}
+                                    {{ trans('texto.recuerdame') }}
                                     </label>
                                 </div>
                             </div>
@@ -140,12 +142,12 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Iniciar sesión') }}
+                                {{ trans('texto.inicio_sesion') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Olvidaste la contraseña?') }}
+                                    {{ trans('texto.olvidar_contra') }}
                                     </a>
                                 @endif
                             </div>
@@ -160,72 +162,86 @@
 
 
 
-  <footer class="page-footer font-small bg-dark text-light">
+                <footer class="page-footer font-small bg-dark text-light">
 
-    <div class="container text-center text-md-left d-flex">
-
-      <div class="row mt-5">
-
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-
-          <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
-          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>Una empresa pequeña, dedicada a dar tours gartuitos por diferentes partes de españa y con la posibilidad
-            de darse a conocer como guia.
-          </p>
-
-        </div>
-
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
-
-          <h6 class="text-uppercase font-weight-bold">Redes sociales</h6>
-          <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>
-            <a href="#"><img src="imagenes/insta.png" alt="insta" width="20%"></a> Instagram
-          </p>
-          <p>
-            <a href="#"><img src="imagenes/facebook.png" alt="facebook" width="20%"></a> Facebook
-          </p>
-          <p>
-            <a href="#"><img src="imagenes/twitter.png" alt="twitter" width="20%"></a> Twitter
-          </p>
-
-        </div>
-
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
-          <h6 class="text-uppercase font-weight-bold">Enlaces</h6>
-          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>
-            <a href="#!">Cuenta</a>
-          </p>
-          <p>
-            <a href="#!">Registrarse</a>
-          </p>
-
-        </div>
-
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
-
-          <h6 class="text-uppercase font-weight-bold">Contacto</h6>
-          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>Donostia, Gipuzkoa</p>
-          <p>info@sefertour.com</p>
-          <p>+ 34 234 567 88</p>
-          <p>+ 34 234 567 89</p>
-
-        </div>
-
-      </div>
-    </div>
-
-    <div class="text-center py-3">� 2020 Copyright:
-      <a href="#"> SeFerTour</a>
-    </div>
-
-  </footer>
+                  <div class="container text-center text-md-left d-flex">
+              
+                    <div class="row mt-5">
+              
+                      <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              
+                        <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p>{{ trans('texto.descripcion') }}</p>
+              
+                      </div>
+              
+                      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              
+              
+                        <h6 class="text-uppercase font-weight-bold">{{ trans('texto.redes') }}</h6>
+                        <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p>
+                          <a href="https://www.instagram.com/"><img src="{{url ('imagenes/insta.png')}}" alt="insta" width="20%"></a> Instagram
+                        </p>
+                        <p>
+                          <a href="https://es-es.facebook.com/"><img src="{{url ('imagenes/facebook.png')}}" alt="facebook" width="20%"></a> Facebook
+                        </p>
+                        <p>
+                          <a href="https://twitter.com/?lang=es"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
+                        </p>
+              
+                      </div>
+              
+                      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+              
+                        <h6 class="text-uppercase font-weight-bold">{{ trans('texto.enlaces') }}</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        @if(Auth::user())
+                          <p>
+                            <a href="{{ url('perfil') }}">{{ trans('texto.cuenta') }}</a>
+                          </p>
+                          <p>
+                            <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();">
+                                    {{ trans('texto.salir') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                              @csrf
+                            </form>
+                          </p>
+                        @else
+                          <p>
+                            <a href="{{ url('login') }}">{{ trans('texto.inicio_sesion') }}</a>
+                          </p>
+                          <p>
+                            <a href="{{ url('register') }}">{{ trans('texto.registrar') }}</a>
+                          </p>
+                        @endif
+              
+                      </div>
+              
+                      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              
+              
+                        <h6 class="text-uppercase font-weight-bold">{{ trans('texto.contacto') }}</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p>Donostia, Gipuzkoa</p>
+                        <p>info@sefertour.com</p>
+                        <p>+ 34 234 567 88</p>
+                        <p>+ 34 234 567 89</p>
+              
+                      </div>
+              
+                    </div>
+                  </div>
+              
+                  <div class="text-center py-3">© 2020 Copyright:
+                    <a href="#"> SeFerTour</a>
+                  </div>
+              
+                </footer>
 
 </body>
 </html>
