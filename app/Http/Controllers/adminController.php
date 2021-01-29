@@ -11,7 +11,6 @@ use Illuminate\Auth\Events\Registered;
 
 class adminController extends Controller
 {
-    protected $redirectTo = '/verify';
 
     public function mostrarAdminBlade(){
 
@@ -39,7 +38,6 @@ class adminController extends Controller
 
     public function editarUsuario($id){
 
-        //Aquí valida si existe sino redirije al 404
         $usuario = App\Models\User::findOrFail($id);
 
         return view('userEdit', compact('usuario'));
@@ -47,7 +45,17 @@ class adminController extends Controller
 
     protected function create(Request $request)
     {
-        return App\Models\User::create([
+        $request->validate([
+            'name' => ['required', 'string', 'max:25'],
+            'apellido' => ['required', 'string', 'max:25'],
+            'dni' => ['required', 'string', 'max:9'],
+            'usuario' => ['required', 'string', 'max:25'],
+            'tipo' => ['required'],
+            'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        
+        App\Models\User::create([
             'name' => $request->name,
             'apellido' => $request->apellido,
             'dni' => $request->dni,
@@ -59,5 +67,29 @@ class adminController extends Controller
         ]);
 
         return back();
+
+    }
+
+    public function editarPerfilAdmin(Request $data)
+    {
+        $updatePerfil = App\Models\User::find($data->id);
+        //dd($updatePerfil->id);
+        $data->validate([
+        'nombre' => ['required', 'string', 'max:25'],
+        'apellido' => ['required', 'string', 'max:25'],
+        'dni' => ['required', 'string', 'max:9'],
+        'usuario' => ['required', 'string', 'max:25'],
+        'email' => "unique:users,email,{$updatePerfil->id}"
+        ]);
+
+        //$updatePerfil = App\Models\User::find($data->id);
+        $updatePerfil->name = $data->nombre;
+        $updatePerfil->apellido = $data->apellido;
+        $updatePerfil->usuario = $data->usuario;
+        $updatePerfil->dni = $data->dni;
+        $updatePerfil->email = $data->email;
+
+        $updatePerfil->save();
+        return redirect('admin');
     }
 }

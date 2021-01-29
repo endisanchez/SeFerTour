@@ -37,7 +37,7 @@
                 @if(Auth::user())
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
                     @if( Auth::user()->foto )
-                      <img src="imagenes/{{ Auth::user()->foto }}" alt="logo" width="25px" class="rounded-circle">
+                      <img src="{{ url('../storage/app/' . Auth::user()->foto) }}" alt="logo" width="25px" height="25px" class="rounded-circle">
                     @else
                       <img src="{{url('imagenes/perfil.png')}}" alt="logo" width="25px" class="rounded-circle">
                     @endif
@@ -57,6 +57,13 @@
                     </a>
 
                     <div class="dropdown-divider"></div>
+                    @if (Auth::user()->tipo =='Cliente')
+                    <a class="dropdown-item" href="{{ url('reservar') }}">{{ trans('texto.mis_reservas') }}</a>
+                    @elseif (Auth::user()->tipo =='Guia')
+                     <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.mis_tours') }}</a>
+                    @elseif (Auth::user()->tipo =='Admin')
+                    <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.administrador') }}</a>
+                    @endif
 
                     <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
@@ -82,6 +89,7 @@
 
   <section>
     <h1 class="text-center my-5">Mis Reservas</h1>
+    @if(isset($reservas))    
     @foreach($reservas as $reserva)
     <div class="card my-4 container">
       <div class="card-body">
@@ -107,13 +115,36 @@
 
             <div class="col-6  d-flex justify-content-end">
               <form action="{{ route('cancelarReserva', $reserva->id) }}" method="get">
-                <button type="submit" id="botonFormulario" class="btn mt-2" onclick="return confirm('Estas seguro de que quieres eliminar esta reseva?')"><strong>Cancelar Tour</strong></button>
+                <button type="button" id="botonFormulario" class="btn mt-2" data-toggle="modal" data-target="#modal"><strong>Cancelar Tour</strong></button>
+
+                <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Guardar cambios</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        ¿Estas seguro de que quieres cancelar el tour?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" id="botonFormulario">Aceptar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </form>
             </div>
         </div>
       </div>
     </div>
     @endforeach
+    @else
+    <h5 class="text-center mb-5">No hay ninguna reserva asignada a tu usuario.</h5>
+    @endif
   </section>
 
   <footer class="page-footer font-small bg-dark text-light">

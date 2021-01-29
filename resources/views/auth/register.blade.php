@@ -17,9 +17,9 @@
   <header>
     <nav class="navbar navbar-expand-sm navbar-dark static-top">
         <div class="container-fluid">
-            <img src="imagenes/logoanimado_blanco.gif" alt="logo" width="25%">
+            <img src="{{url ('imagenes/logoanimado_blanco.gif') }}" alt="logo" width="25%">
             <button class="navbar-toggler text-black" type="button" data-toggle="collapse" data-target="#opciones">
-              <img class="img-fluid "src="imagenes/menu.png" alt="menu" width="30">
+              <img class="img-fluid "src="{{ url('imagenes/menu.png') }}" alt="menu" width="30">
             </button>
           <div class="collapse navbar-collapse " id="opciones">
             <ul class="navbar-nav ml-auto d-flex float-right text-right">
@@ -30,22 +30,40 @@
                 <a class="nav-link text-white" href="{{ url('/tours') }}" id="link"><strong>{{ trans('texto.visit_guiadas') }}</strong></a>
               </li>
 
-              <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="imagenes/espania.png" alt="españa" width="25px" height="25px"></a></li>
-              <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="imagenes/ingles.png" alt="unitedKingdom" width="25px" height="25px"></a></li>
+              <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="{{url ('imagenes/espania.png')}}" alt="españa" width="25px" height="25px"></a></li>
+              <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="{{url ('imagenes/ingles.png')}}" alt="unitedKingdom" width="25px" height="25px"></a></li>
 
               <li class="nav-item dropdown d-flex flex-row-reverse">
-                <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" ><img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
-                </a>
+                @if(Auth::user())
+                  <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
+                    @if( Auth::user()->foto )
+                      <img src="{{ url('../storage/app/' . Auth::user()->foto) }}" alt="logo" width="25px" height="25px" class="rounded-circle">
+                    @else
+                      <img src="{{url('imagenes/perfil.png')}}" alt="logo" width="25px" class="rounded-circle">
+                    @endif
+                  </a>
+                @else
+                  <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
+                    <img src="{{url('imagenes/perfil.png')}}" alt="logo" width="25px" class="rounded-circle">
+                  </a>
+                @endif
                 <div class="dropdown-menu dropdown-menu-right">
 
                   @if(Auth::user())
-                    <a class="dropdown-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <a class="dropdown-item" href="{{ url('perfil') }}">
 
                       <b>{{ Auth::user()->usuario }}</b>
 
                     </a>
 
                     <div class="dropdown-divider"></div>
+                    @if (Auth::user()->tipo =='Cliente')
+                    <a class="dropdown-item" href="{{ url('reservar') }}">{{ trans('texto.mis_reservas') }}</a>
+                    @elseif (Auth::user()->tipo =='Guia')
+                     <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.mis_tours') }}</a>
+                    @elseif (Auth::user()->tipo =='Admin')
+                    <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.administrador') }}</a>
+                    @endif
 
                     <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
@@ -74,17 +92,17 @@
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="card">
-            <div class="card-header">{{ __('Registrarse') }}</div>
+            <div class="card-header">{{ trans('texto.registrar') }}</div>
 
             <div class="card-body">
               <form method="POST" action="{{ route('register') }}" accept-charset="UTF-8" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group row">
-                  <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+                  <label for="name" class="col-md-4 col-form-label text-md-right">{{ trans('texto.nombre') }}</label>
 
                   <div class="col-md-6">
-                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                    <input id="name" maxlength="25" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                     @error('name')
                     <span class="invalid-feedback" role="alert">
@@ -95,10 +113,10 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="apellido" class="col-md-4 col-form-label text-md-right">{{ __('Apellido') }}</label>
+                  <label for="apellido" class="col-md-4 col-form-label text-md-right">{{ trans('texto.apellido') }}</label>
 
                   <div class="col-md-6">
-                    <input id="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido" autofocus>
+                    <input id="apellido" maxlength="25" type="text" class="form-control @error('apellido') is-invalid @enderror" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido" autofocus>
 
                     @error('apellido')
                     <span class="invalid-feedback" role="alert">
@@ -109,7 +127,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="dni" class="col-md-4 col-form-label text-md-right">{{ __('DNI') }}</label>
+                  <label for="dni" class="col-md-4 col-form-label text-md-right">{{ trans('texto.dni') }}</label>
 
                   <div class="col-md-6">
                     <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni" autofocus>
@@ -137,10 +155,10 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('Foto') }}</label>
+                  <label for="foto" class="col-md-4 col-form-label text-md-right">{{ trans('texto.foto') }}</label>
 
                   <div class="col-md-6">
-                    <input type="file" class="form-control" name="foto" >
+                    <input type="file" class="form-control @error('foto') is-invalid @enderror" name="foto" >
 
                     @error('foto')
                     <span class="invalid-feedback" role="alert">
@@ -151,7 +169,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="usuario" class="col-md-4 col-form-label text-md-right">{{ __('Usuario') }}</label>
+                  <label for="usuario" class="col-md-4 col-form-label text-md-right">{{ trans('texto.usuario') }}</label>
 
                   <div class="col-md-6">
                     <input id="usuario" type="usuario" class="form-control @error('usuario') is-invalid @enderror" name="usuario" value="{{ old('usuario') }}" required autocomplete="usuario">
@@ -165,7 +183,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+                  <label for="password" class="col-md-4 col-form-label text-md-right">{{ trans('texto.contraseña') }}</label>
 
                   <div class="col-md-6">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -179,7 +197,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Repetir Contraseña') }}</label>
+                  <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ trans('texto.repetir') }}</label>
 
                   <div class="col-md-6">
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -187,11 +205,13 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="tipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo') }}</label>
+                  <label for="tipo" class="col-md-4 col-form-label text-md-right">{{ trans('texto.tipo') }}</label>
 
                   <div class="col-md-6">
-                    <input id="tipo" type="text" class="form-control @error('usuario') is-invalid @enderror" name="tipo" value="{{ old('tipo') }}" required autocomplete="tipo">
-
+                    <select name="tipo" id="tipo" class="form-control @error('usuario') is-invalid @enderror" value="{{ old('tipo') }}" autocomplete="tipo">
+                      <option value="Cliente" selected>{{ trans('texto.cliente') }}</option>
+                      <option value="Guia">{{ trans('texto.guia') }}</option>
+                    </select>
                     @error('tipo')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -203,7 +223,7 @@
                 <div class="form-group row mb-0">
                   <div class="col-md-6 offset-md-4">
                     <button type="submit" class="btn btn-primary">
-                      {{ __('Registrarse') }}
+                    {{ trans('texto.registrar') }}
                     </button>
                   </div>
                 </div>
@@ -227,16 +247,14 @@
 
           <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>Una empresa pequeña, dedicada a dar tours gartuitos por diferentes partes de españa y con la posibilidad
-            de darse a conocer como guia.
-          </p>
+          <p>{{ trans('texto.descripcion') }}</p>
 
         </div>
 
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 
 
-          <h6 class="text-uppercase font-weight-bold">Redes sociales</h6>
+          <h6 class="text-uppercase font-weight-bold">{{ trans('texto.redes') }}</h6>
           <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>
             <a href="#"><img src="imagenes/insta.png" alt="insta" width="20%"></a> Instagram
@@ -252,13 +270,13 @@
 
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
 
-          <h6 class="text-uppercase font-weight-bold">Enlaces</h6>
+          <h6 class="text-uppercase font-weight-bold">{{ trans('texto.enlaces') }}</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>
-            <a href="#!">Cuenta</a>
+            <a href="#!">{{ trans('texto.cuenta') }}</a>
           </p>
           <p>
-            <a href="#!">Registrarse</a>
+            <a href="#!">{{ trans('texto.registrar') }}</a>
           </p>
 
         </div>
@@ -266,7 +284,7 @@
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
 
-          <h6 class="text-uppercase font-weight-bold">Contacto</h6>
+          <h6 class="text-uppercase font-weight-bold">{{ trans('texto.contacto') }}</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>Donostia, Gipuzkoa</p>
           <p>info@sefertour.com</p>
@@ -278,7 +296,7 @@
       </div>
     </div>
 
-    <div class="text-center py-3">� 2020 Copyright:
+    <div class="text-center py-3">© 2020 Copyright:
       <a href="#"> SeFerTour</a>
     </div>
 

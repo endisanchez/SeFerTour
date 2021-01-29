@@ -19,9 +19,9 @@
   <header>
     <nav class="navbar navbar-expand-sm navbar-dark static-top">
         <div class="container-fluid">
-            <img src="../imagenes/logoanimado_blanco.gif" alt="logo" width="25%">
+            <img src="{{url ('imagenes/logoanimado_blanco.gif') }}" alt="logo" width="25%">
             <button class="navbar-toggler text-black" type="button" data-toggle="collapse" data-target="#opciones">
-              <img class="img-fluid "src="../imagenes/menu.png" alt="menu" width="30">
+              <img class="img-fluid "src="{{ url('imagenes/menu.png') }}" alt="menu" width="30">
             </button>
           <div class="collapse navbar-collapse " id="opciones">
             <ul class="navbar-nav ml-auto d-flex float-right text-right">
@@ -32,17 +32,21 @@
                 <a class="nav-link text-white" href="{{ url('/tours') }}" id="link"><strong>{{ trans('texto.visit_guiadas') }}</strong></a>
               </li>
 
-              <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="../imagenes/espania.png" alt="españa" width="25px" height="25px"></a></li>
-              <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="../imagenes/ingles.png" alt="unitedKingdom" width="25px" height="25px"></a></li>
+              <li><a class="m-3" href="{{ url('lang', ['es']) }}"><img class="img-fluid mt-3 border border-dark" src="{{url ('imagenes/espania.png')}}" alt="españa" width="25px" height="25px"></a></li>
+              <li><a href="{{ url('lang', ['en']) }}"><img class="img-fluid mt-3 border border-dark mr-2" src="{{url ('imagenes/ingles.png')}}" alt="unitedKingdom" width="25px" height="25px"></a></li>
 
               <li class="nav-item dropdown d-flex flex-row-reverse">
                 @if(Auth::user())
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
-                    <img src="../../storage/app/{{ Auth::user()->foto }}" alt="logo" width="25" height="25" class="rounded-circle">
+                    @if( Auth::user()->foto )
+                      <img src="{{ url('../storage/app/' . Auth::user()->foto) }}" alt="logo" width="25px" height="25px" class="rounded-circle">
+                    @else
+                      <img src="{{url('imagenes/perfil.png')}}" alt="logo" width="25px" class="rounded-circle">
+                    @endif
                   </a>
                 @else
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
-                    <img src="imagenes/perfil.png" alt="logo" width="25px" class="rounded-circle">
+                    <img src="{{url('imagenes/perfil.png')}}" alt="logo" width="25px" class="rounded-circle">
                   </a>
                 @endif
                 <div class="dropdown-menu dropdown-menu-right">
@@ -55,6 +59,13 @@
                     </a>
 
                     <div class="dropdown-divider"></div>
+                    @if (Auth::user()->tipo =='Cliente')
+                    <a class="dropdown-item" href="{{ url('reservar') }}">{{ trans('texto.mis_reservas') }}</a>
+                    @elseif (Auth::user()->tipo =='Guia')
+                     <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.mis_tours') }}</a>
+                    @elseif (Auth::user()->tipo =='Admin')
+                    <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.administrador') }}</a>
+                    @endif
 
                     <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
@@ -83,7 +94,7 @@
     <h4 class="card-title">Editar usuario</h4>
     <div class="card my-4">
         <div class="card-body">
-            <form action="{{ route('editarPerfil') }}" method="POST" class="mb-3 mr-3">
+            <form action="{{ route('editarperfiladmin') }}" method="POST" class="mb-3 mr-3">
                 @method('PUT')
                 @csrf
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -102,7 +113,7 @@
                 <input type="text" class="mb-3" name="tipo" value="{{ $usuario->tipo }}">
 
                 <button type="submit" class="btn mt-4 d-flex" id="botonFormulario">Guardar</button>
-                <button type="submit" class="btn mt-4 d-flex" style=" background-color: #636363;">Cancelar</button>
+                <button type="submit" onclick="window.location.href = '/admin'" class="btn mt-4 d-flex" id="botonCancelar">Cancelar</button>
 
               </form>
         </div>
@@ -131,13 +142,13 @@
           <h6 class="text-uppercase font-weight-bold">{{ trans('texto.redes') }}</h6>
           <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>
-            <a href="#"><img src="../imagenes/insta.png" alt="insta" width="20%"></a> Instagram
+            <a href="#"><img src="{{url ('imagenes/insta.png')}}" alt="insta" width="20%"></a> Instagram
           </p>
           <p>
-            <a href="#"><img src="../imagenes/facebook.png" alt="facebook" width="20%"></a> Facebook
+            <a href="#"><img src="{{url ('imagenes/facebook.png')}}" alt="facebook" width="20%"></a> Facebook
           </p>
           <p>
-            <a href="#"><img src="../imagenes/twitter.png" alt="twitter" width="20%"></a> Twitter
+            <a href="#"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
           </p>
 
         </div>

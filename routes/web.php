@@ -37,6 +37,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::put('/perfil', '\App\Http\Controllers\PerfilController@editarPerfil' )->name('editarPerfil');
 
+Route::put('/admin', '\App\Http\Controllers\adminController@editarPerfilAdmin' )->name('editarperfiladmin');
+
 Route::view('/tours', 'tours');
 
 Route::view('/perfil', 'perfil');
@@ -78,3 +80,5 @@ Route::get('/reservar', 'App\Http\Controllers\ReservasController@verReservas')->
 Route::get('/cancelarReserva/{id}', 'App\Http\Controllers\ReservasController@cancelarReserva')->name('cancelarReserva')->middleware('auth');
 
 Route::post('register', 'App\Http\Controllers\Auth\RegisterController@register');
+
+Route::post('/filtroTours', 'App\Http\Controllers\TourController@filtroTours')->name('filtrar');

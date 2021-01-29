@@ -22,7 +22,14 @@ class ReservasController extends Controller
     }
 
     public function verReservas() {
-      $reservas = Auth::user()->cliente->tour()->get();
+      if(Auth::user()->cliente)
+      {
+        $reservas = Auth::user()->cliente->tour()->get();
+      }
+      else
+      {
+        return view('reservas');
+      }
       return view('reservas')->with(compact('reservas'));
     }
 

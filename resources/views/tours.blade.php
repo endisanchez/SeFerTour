@@ -12,6 +12,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="{{ url('../resources/js/peticionComunidades.js') }}"></script>
 
 <body>
   <header>
@@ -36,7 +37,11 @@
               <li class="nav-item dropdown d-flex flex-row-reverse">
                 @if(Auth::user())
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
-                    <img src="imagenes/{{ Auth::user()->foto }}" alt="logo" width="25px" class="rounded-circle">
+                    @if( Auth::user()->foto )
+                      <img src="{{ url('../storage/app/' . Auth::user()->foto) }}" alt="logo" width="25px" height="25px" class="rounded-circle">
+                    @else
+                      <img src="{{url('imagenes/perfil.png')}}" alt="logo" width="25px" class="rounded-circle">
+                    @endif
                   </a>
                 @else
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
@@ -53,6 +58,13 @@
                     </a>
 
                     <div class="dropdown-divider"></div>
+                    @if (Auth::user()->tipo =='Cliente')
+                    <a class="dropdown-item" href="{{ url('reservar') }}">{{ trans('texto.mis_reservas') }}</a>
+                    @elseif (Auth::user()->tipo =='Guia')
+                     <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.mis_tours') }}</a>
+                    @elseif (Auth::user()->tipo =='Admin')
+                    <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.administrador') }}</a>
+                    @endif
 
                     <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();
@@ -79,7 +91,7 @@
   <!-- mapa -->
   <section>
       <center>
-        <h1 class="my-4">Selecciona el lugar que quieres descubrir</h1>
+        <h1 class="my-4">{{ trans('texto.seleccion') }}</h1>
         <map name="idx30_map" class="d-none d-xl-block">
           <area shape="POLY" href=".\COMUNIDAD\INDEX-999.HTML" coords="614,707,614,612,810,612,810,707,614,707,810,707,810,612,614,612 ">
 
@@ -207,35 +219,16 @@
 
         </map>
 
-        <form method="post">
+        <form method="post" action="{{ route('filtrar') }}">
           @csrf
             <div class="row my-5 d-block d-xl-none">
               <div id="formulario">
-                <form>
-                    <div class="rounded my-4">
-                      <select onchange="window.location.href=this.value;" class="rounded col-8 p-2">
-                        <option value="{{url('/tours/Andalucia')}}">Andalucia</option>
-                        <option value="{{url('/tours/Aragon')}}">Aragon</option>
-                        <option value="{{url('/tours/Asturias')}}">Asturias</option>
-                        <option value="{{url('/tours/IslasBaleares')}}">Islas Baleares</option>
-                        <option value="{{url('/tours/Canarias')}}">Canarias</option>
-                        <option value="{{url('/tours/Cantabria')}}">Cantabria</option>
-                        <option value="{{url('/tours/CastillaYLeon')}}">Castilla Y Leon</option>
-                        <option value="{{url('/tours/CastillaLaMancha')}}">Castilla La Mancha</option>
-                        <option value="{{url('/tours/Cataluña')}}">Cataluña</option>
-                        <option value="{{url('/tours/Valencia')}}">Valencia</option>
-                        <option value="{{url('/tours/Extremadura')}}">Extremadura</option>
-                        <option value="{{url('/tours/Galicia')}}">Galicia</option>
-                        <option value="{{url('/tours/Madrid')}}">Madrid</option>
-                        <option value="{{url('/tours/Murcia')}}">Murcia</option>
-                        <option value="{{url('/tours/Navarra')}}">Navarra</option>
-                        <option value="{{url('/tours/PaisVasco')}}">Pais Vasco</option>
-                        <option value="{{url('/tours/LaRioja')}}">La Rioja</option>
-                        <option value="{{url('/tours/Ceuta')}}">Ceuta</option>
-                        <option value="{{url('/tours/Melilla')}}">Melilla</option>
-                      </select>
-                    </div>
-                </form>
+                  <div class="rounded my-4">
+                    <select id="desp" name="comunidad" class="rounded col-8 p-2">
+                      <option disabled selected>{{ trans('texto.comunidad') }}</option>
+                    </select>
+                  </div>
+                  <button id="botonFormulario" class="btn mt-1" type="submit" name="button">{{ trans('texto.buscar') }}</button>
               </div>
             </div>
         </form>
@@ -249,107 +242,136 @@
           @foreach($tours as $tour)
           <div class="card my-5 container">
             <div class="card-header row" id="headingOne">
-              <h5 class="mb-0 row col-12">
-                <div class="col-2">
-                  <img src="../imagenes/{{ $tour->comunidad }}.jpg" width="100" height="100" class="rounded-circle">
+                <div class="col-0 col-md-2 my-auto d-none d-md-block">
+                  <img src="{{ url('imagenes/' . $tour->comunidad . '.jpg') }}" width="90" height="90" class="rounded-circle">
                 </div>
-                <p class="col-8 display-4 my-auto">{{$tour->nombre}}</p>
-              <button class="btn btn-link col-2" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="rounded-circle">
-                <img src="{{ url('imagenes/dropdowntours.png')}}" width="100" height="100" class="rounded-circle">
+                <div class="col-10 col-md-8 my-auto">
+                  <p style="font-size:4vw;" class="col-8 col-md-10 display-4">{{$tour->nombre}}</p>
+                </div>
+              <button class="btn btn-link col-2" data-toggle="collapse" data-target="#collapseOne-{{ $tour->id }}" aria-expanded="true" aria-controls="collapseOne" class="rounded-circle">
+                <img src="{{ url('imagenes/dropdowntours.png')}}" width="50" height="50" class="img-fluid">
               </button>
-              </h5>
             </div>
 
-            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div id="collapseOne-{{ $tour->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
                 <form action="{{ url('/reservar') }}" method="post">
                   @csrf
-                  <p><b>Lugar: </b>{{$tour->ciudad}}, {{$tour->provincia}}, {{$tour->comunidad}}</p>
-                  <p><b>Fecha: </b>{{$tour->fecha}}</p>
-                  <p><b>Hora: </b>{{$tour->hora}}</p>
-                  <p><b>Idioma: </b>{{$tour->idioma_tour}}</p>
-                  <p><b>Guia: </b>{{$tour->guia->user->name}} {{$tour->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $tour->guia->user->foto)}}" /></p>
+                  <p><b>{{ trans('texto.lugar') }}: </b>{{$tour->ciudad}}, {{$tour->provincia}}, {{$tour->comunidad}}</p>
+                  <p><b>{{ trans('texto.fecha') }}: </b>{{$tour->fecha}}</p>
+                  <p><b>{{ trans('texto.hora') }}: </b>{{$tour->hora}}</p>
+                  <p><b>{{ trans('texto.idioma') }}: </b>{{$tour->idioma_tour}}</p>
+                  <p><b>{{ trans('texto.guia') }}: </b>{{$tour->guia->user->name}} {{$tour->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $tour->guia->user->foto)}}" /></p>
 
                   <input type="hidden" value="{{ $tour->id }}" name="id_tour">
                   <input type="hidden" value="{{ Auth::id() }}" name="id_usuario">
                   @if(Auth::user())
-                  <button type="submit" id="botonFormulario" class="btn mt-2" onclick="window.location.href='{{ url('/reservar') }}'"><strong>Reservar Tour</strong></button>
+                  <button type="button" id="botonFormulario" class="btn mt-2" data-toggle="modal" data-target="#modal"><strong>{{ trans('texto.reservar_tour') }}</strong></button>
                   @else
-                  <button type="submit" id="botonFormulario" class="btn mt-2" onclick="window.location.href='{{ url('/login') }}'"><strong>Reservar Tour</strong></button>
+                  <button type="submit" id="botonFormulario" class="btn mt-2" onclick="window.location.href='{{ url('/login') }}'"><strong>{{ trans('texto.reservar_tour') }}</strong></button>
                   @endif
+
+                  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">{{ trans('texto.guardar_cambios') }}</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p>{{ trans('texto.estas_seguro') }}</p>
+                          <p><b>{{ trans('texto.lugar') }}: </b>{{$tour->ciudad}}, {{$tour->provincia}}, {{$tour->comunidad}}</p>
+                          <p><b>{{ trans('texto.fecha') }}: </b>{{$tour->fecha}}</p>
+                          <p><b>{{ trans('texto.hora') }}: </b>{{$tour->hora}}</p>
+                          <p><b>{{ trans('texto.idioma') }}: </b>{{$tour->idioma_tour}}</p>
+                          <p><b>{{ trans('texto.guia') }}: </b>{{$tour->guia->user->name}} {{$tour->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $tour->guia->user->foto)}}" /></p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('texto.cerrar') }}</button>
+                          <button type="submit" class="btn btn-primary" id="botonFormulario">{{ trans('texto.reservar') }}</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </form>
               </div>
             </div>
           </div>
           @endforeach
           @empty($tours)
-          <p>No hay tours</p>
+          <p>{{ trans('texto.no_hay') }}</p>
           @endempty
         @endif
       </div>
     </section>
 
-  <footer class="page-footer font-small bg-dark text-light">
+    <footer class="page-footer font-small bg-dark text-light">
 
-    <div class="container text-center text-md-left d-flex">
+      <div class="container text-center text-md-left d-flex">
 
-      <div class="row mt-5">
+        <div class="row mt-5">
 
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-          <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
-          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>Una empresa pequeña, dedicada a dar tours gartuitos por diferentes partes de españa y con la posibilidad de darse a conocer como guia.</p>
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+            <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
+            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>{{ trans('texto.descripcion') }}</p>
+
+          </div>
+
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+
+            <h6 class="text-uppercase font-weight-bold">{{ trans('texto.redes') }}</h6>
+            <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>
+              <a href="#"><img src="{{url ('imagenes/insta.png')}}" alt="insta" width="20%"></a> Instagram
+            </p>
+            <p>
+              <a href="#"><img src="{{url ('imagenes/facebook.png')}}" alt="facebook" width="20%"></a> Facebook
+            </p>
+            <p>
+              <a href="#"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
+            </p>
+
+          </div>
+
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+            <h6 class="text-uppercase font-weight-bold">{{ trans('texto.enlaces') }}</h6>
+            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>
+              <a href="#!">{{ trans('texto.cuenta') }}</a>
+            </p>
+            <p>
+              <a href="#!">{{ trans('texto.registrar') }}</a>
+            </p>
+
+          </div>
+
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+
+            <h6 class="text-uppercase font-weight-bold">{{ trans('texto.contacto') }}</h6>
+            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>Donostia, Gipuzkoa</p>
+            <p>info@sefertour.com</p>
+            <p>+ 34 234 567 88</p>
+            <p>+ 34 234 567 89</p>
+
+          </div>
+
         </div>
-
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-
-          <h6 class="text-uppercase font-weight-bold">Redes sociales</h6>
-          <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>
-            <a href="#"><img src="{{ url('imagenes/insta.png') }}" alt="insta" width="20%"></a> Instagram
-          </p>
-          <p>
-            <a href="#"><img src="{{ url('imagenes/facebook.png') }}" alt="facebook" width="20%"></a> Facebook
-          </p>
-          <p>
-            <a href="#"><img src="{{ url('imagenes/twitter.png') }}" alt="twitter" width="20%"></a> Twitter
-          </p>
-
-        </div>
-
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
-          <h6 class="text-uppercase font-weight-bold">Enlaces</h6>
-          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>
-            <a href="#!">Cuenta</a>
-          </p>
-          <p>
-            <a href="#!">Registrarse</a>
-          </p>
-
-        </div>
-
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
-
-          <h6 class="text-uppercase font-weight-bold">Contacto</h6>
-          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>Donostia, Gipuzkoa</p>
-          <p>info@sefertour.com</p>
-          <p>+ 34 234 567 88</p>
-          <p>+ 34 234 567 89</p>
-
-        </div>
-
       </div>
-    </div>
 
-    <div class="text-center py-3">� 2020 Copyright:
-      <a href="#"> SeFerTour</a>
-    </div>
+      <div class="text-center py-3">© 2020 Copyright:
+        <a href="#"> SeFerTour</a>
+      </div>
 
-  </footer>
+    </footer>
 
 </body>
 </html>
