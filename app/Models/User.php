@@ -49,7 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function guia()
     {
-      return $this->hasOne('App\Models\Guia');
+      return $this->hasOne('App\Models\Guia', 'id_usuario');
     }
 
     public function admin()

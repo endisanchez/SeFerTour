@@ -84,3 +84,9 @@ Route::post('register', 'App\Http\Controllers\Auth\RegisterController@register')
 Route::post('/filtroTours', 'App\Http\Controllers\TourController@filtroTours')->name('filtrar');
 
 Route::view('/misTours', 'misTours')->middleware('auth');
+
+Route::post('/misTours', 'App\Http\Controllers\TourController@nuevoTour')->middleware('auth')->name('nuevoTour');
+
+Route::get('/misTours', 'App\Http\Controllers\TourController@toursGuia')->middleware('auth');
+
+Route::get('/misTours/{id}', 'App\Http\Controllers\TourController@eliminarTourguia')->middleware('auth')->name('eliminarTourguia');

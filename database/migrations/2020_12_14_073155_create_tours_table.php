@@ -23,6 +23,8 @@ class CreateToursTable extends Migration
             $table->string('ciudad');
             $table->string('idioma_tour');
             $table->unsignedBigInteger('id_guia');
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
             $table->foreign('id_guia')->references('id')->on('guias')->onDelete('cascade');
         });
     }
