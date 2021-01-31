@@ -63,7 +63,7 @@
                     @if (Auth::user()->tipo =='Cliente')
                     <a class="dropdown-item" href="{{ url('reservar') }}">{{ trans('texto.mis_reservas') }}</a>
                     @elseif (Auth::user()->tipo =='Guia')
-                     <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.mis_tours') }}</a>
+                     <a class="dropdown-item" href="{{ url('misTours') }}">{{ trans('texto.mis_tours') }}</a>
                     @elseif (Auth::user()->tipo =='Admin')
                     <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.administrador') }}</a>
                     @endif
@@ -193,16 +193,16 @@
             <p class="text-muted text-small mb-2">{{ trans('texto.tipo') }}</p>
             <input type="text" disabled class="mb-3" name="tipo" value="{{ Auth::user()->tipo }}">
 
-            
-            
+
+
 
             <div class="row">
               <button type="button" class="btn mt-4 d-flex mr-2" id="botonFormulario" data-toggle="modal" data-target="#modal">{{ trans('texto.guardar') }}</button>
               <button type="button" onclick="muestraEdit()" class="btn mt-4" id="botonCancelar">{{ trans('texto.cancelar') }}</button>
-              
+
             </div>
 
-            
+
             <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">

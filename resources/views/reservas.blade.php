@@ -60,7 +60,7 @@
                     @if (Auth::user()->tipo =='Cliente')
                     <a class="dropdown-item" href="{{ url('reservar') }}">{{ trans('texto.mis_reservas') }}</a>
                     @elseif (Auth::user()->tipo =='Guia')
-                     <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.mis_tours') }}</a>
+                     <a class="dropdown-item" href="{{ url('misTours') }}">{{ trans('texto.mis_tours') }}</a>
                     @elseif (Auth::user()->tipo =='Admin')
                     <a class="dropdown-item" href="{{ url('login') }}">{{ trans('texto.administrador') }}</a>
                     @endif
@@ -89,7 +89,7 @@
 
   <section>
     <h1 class="text-center my-5">Mis Reservas</h1>
-    @if($reservas != null)  
+    @if($reservas != null)
     @foreach($reservas as $reserva)
     <div class="card my-4 container">
       <div class="card-body">

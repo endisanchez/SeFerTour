@@ -72,7 +72,7 @@
                     @if (Auth::user()->tipo =='Cliente')
                     <a class="dropdown-item" href="{{ url('reservar') }}">{{ trans('texto.mis_reservas') }}</a>
                     @elseif (Auth::user()->tipo =='Guia')
-                     <a class="dropdown-item" href="{{ url('tours') }}">{{ trans('texto.mis_tours') }}</a>
+                     <a class="dropdown-item" href="{{ url('misTours') }}">{{ trans('texto.mis_tours') }}</a>
                     @elseif (Auth::user()->tipo =='Admin')
                     <a class="dropdown-item" href="{{ url('admin') }}">{{ trans('texto.administrador') }}</a>
                     @endif
@@ -113,25 +113,8 @@
             <div class="form-group">
               <label for="lugar">{{ trans('texto.donde') }}</label>
                 <div class="rounded">
-                  <select name="comunidad" class="rounded col-12 p-2"   placeholder="Personas">
+                  <select id="desp" name="comunidad" class="rounded col-12 p-2"   placeholder="Personas">
                     <option disabled selected>Comunidad</option>
-                    <option value="Andalucia">Andalucia</option>
-                    <option value="Aragon">Aragon</option>
-                    <option value="Asturias">Asturias</option>
-                    <option value="IslasBaleares">Islas Baleares</option>
-                    <option value="Canarias">Canarias</option>
-                    <option value="Cantabria">Cantabria</option>
-                    <option value="CastillaYLeon">Castilla Y Leon</option>
-                    <option value="CastillaLaMancha">Castilla La Mancha</option>
-                    <option value="Cataluña">Cataluña</option>
-                    <option value="Valencia">Valencia</option>
-                    <option value="Extremadura">Extremadura</option>
-                    <option value="Galicia">Galicia</option>
-                    <option value="Madrid">Madrid</option>
-                    <option value="Murcia">Murcia</option>
-                    <option value="Navarra">Navarra</option>
-                    <option value="PaisVasco">Pais Vasco</option>
-                    <option value="LaRioja">La Rioja</option>
                   </select>
                 </div>
             </div>
