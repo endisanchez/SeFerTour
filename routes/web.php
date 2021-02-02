@@ -45,7 +45,7 @@ Route::view('/perfil', 'perfil');
 
 Route::view('/admin', 'admin');
 
-Route::view('/verify', 'Auth/verify');
+Route::view('/verify', 'auth/verify');
 
 Route::delete('/eliminarUser/{lugar}', '\App\Http\Controllers\adminController@eliminar')->name('verSitio');
 
