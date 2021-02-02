@@ -141,12 +141,12 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn" id="botonFormulario">
                                 {{ trans('texto.inicio_sesion') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <a class="btn btn-link text-dark" href="{{ route('password.request') }}">
                                     {{ trans('texto.olvidar_contra') }}
                                     </a>
                                 @endif
@@ -165,20 +165,20 @@
                 <footer class="page-footer font-small bg-dark text-light">
 
                   <div class="container text-center text-md-left d-flex">
-              
+
                     <div class="row mt-5">
-              
+
                       <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-              
+
                         <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
                         <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                         <p>{{ trans('texto.descripcion') }}</p>
-              
+
                       </div>
-              
+
                       <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-              
-              
+
+
                         <h6 class="text-uppercase font-weight-bold">{{ trans('texto.redes') }}</h6>
                         <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                         <p>
@@ -190,11 +190,11 @@
                         <p>
                           <a href="https://twitter.com/?lang=es"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
                         </p>
-              
+
                       </div>
-              
+
                       <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-              
+
                         <h6 class="text-uppercase font-weight-bold">{{ trans('texto.enlaces') }}</h6>
                         <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                         @if(Auth::user())
@@ -219,28 +219,28 @@
                             <a href="{{ url('register') }}">{{ trans('texto.registrar') }}</a>
                           </p>
                         @endif
-              
+
                       </div>
-              
+
                       <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-              
-              
+
+
                         <h6 class="text-uppercase font-weight-bold">{{ trans('texto.contacto') }}</h6>
                         <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                         <p>Donostia, Gipuzkoa</p>
                         <p>info@sefertour.com</p>
                         <p>+ 34 234 567 88</p>
                         <p>+ 34 234 567 89</p>
-              
+
                       </div>
-              
+
                     </div>
                   </div>
-              
+
                   <div class="text-center py-3">© 2020 Copyright:
                     <a href="#"> SeFerTour</a>
                   </div>
-              
+
                 </footer>
 
 </body>

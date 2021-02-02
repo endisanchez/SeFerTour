@@ -24,14 +24,35 @@ function muestraContenido() {
   var inputCom = document.getElementById('inputComunidad');
   var inputPro = document.getElementById('inputProvincia');
   var inputMun = document.getElementById('inputMunicipio');
+  var inputDir = document.getElementById('inputdireccion');
+
+  inputCom.value = '';
+  inputPro.value = '';
+  inputMun.value = '';
+  inputDir.value = '';
 
   if(peticion_http2.readyState == 4) {
     if(peticion_http2.status == 200) {
       var respuesta = peticion_http2.responseText;
       var json = JSON.parse(peticion_http2.responseText);
+
+      if(json.results[0].components['city']) {
+        inputMun.value = json.results[0].components['city'];
+      } else if(json.results[0].components['village']) {
+        inputMun.value = json.results[0].components['village'];
+      } else if(json.results[0].components['town']) {
+        inputMun.value = json.results[0].components['town'];
+      }
+
       inputCom.value = json.results[0].components['state'];
-      inputPro.value = json.results[0].components['province'];
-      inputMun.value = json.results[0].components['city'];
+
+      if(json.results[0].components['province']) {
+        inputPro.value = json.results[0].components['province'];
+      } else if(json.results[0].components['county']) {
+        inputPro.value = json.results[0].components['county'];
+      }
+
+      inputDir.value = json.results[0].formatted;
     }
   }
 

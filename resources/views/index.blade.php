@@ -148,7 +148,7 @@
       </div>
         <div class="row">
           <div class="col-lg-4 col-12 pt-2">
-            <a href="{{ route('provincia', 'Madrid') }}" class="zoom">
+            <a href="{{ route('provincia', 'ComunidaddeMadrid') }}" class="zoom">
               <div class="card bg-dark text-white" id="fondo">
                 <img class="card-img" src="{{url('imagenes/oficina2r.jpg')}}" alt="Card image"  width="110%"/>
                 <div class="card-img-overlay">

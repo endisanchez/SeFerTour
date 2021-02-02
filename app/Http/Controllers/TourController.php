@@ -49,6 +49,7 @@ class TourController extends Controller
     $nuevoTour->comunidad = $parseoComunidad;
     $nuevoTour->provincia = $parseoProvincia;
     $nuevoTour->ciudad = $parseoMunicipio;
+    $nuevoTour->direccion = $request->direccion;
     $nuevoTour->fecha = $request->fecha;
     $nuevoTour->hora = $request->hora;
     $nuevoTour->latitud = $request->latitud;

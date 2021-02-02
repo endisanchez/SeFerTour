@@ -21,6 +21,7 @@ class CreateToursTable extends Migration
           $table->string('comunidad');
           $table->string('provincia');
           $table->string('ciudad');
+          $table->string('direccion');
           $table->string('idioma_tour');
           $table->string('latitud')->nullable();;
           $table->string('longitud')->nullable();;

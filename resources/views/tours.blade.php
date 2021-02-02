@@ -270,6 +270,7 @@
 
                     <div class="col-6">
                       <p><b>{{ trans('texto.lugar') }}: </b>{{$tour->ciudad}}, {{$tour->provincia}}, {{$tour->comunidad}}</p>
+                      <p><b>Direccion: </b>{{$tour->direccion}}</p>
                       <p><b>{{ trans('texto.fecha') }}: </b>{{$tour->fecha}}</p>
                       <p><b>{{ trans('texto.hora') }}: </b>{{$tour->hora}}</p>
                       <p><b>{{ trans('texto.idioma') }}: </b>{{$tour->idioma_tour}}</p>
@@ -277,7 +278,7 @@
                     </div>
 
 
-                    <div id="mapid" class="col-6">
+                    <div id="map-{{ $tour->id }}" class="col-6">
 
                     </div>
                   </div>
@@ -285,7 +286,7 @@
 
                   <script>
 
-                    var mymap = L.map('mapid').setView(["{{ $tour->latitud }}", "{{ $tour->longitud }}"], 12);
+                    var mymap = L.map('map-{{ $tour->id }}').setView(["{{ $tour->latitud }}", "{{ $tour->longitud }}"], 12);
 
                     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
                       maxZoom: 18,
@@ -296,17 +297,7 @@
                       zoomOffset: -1
                     }).addTo(mymap);
 
-                    L.marker(["{{ $tour->latitud }}", "{{ $tour->longitud }}"]).addTo(mymap)
-                      .bindPopup("{{ $tour->nombre }}").openPopup();
-
-
-                    var popup = L.popup();
-
-                    function onMapClick(e) {
-                      popup
-                        .setLatLng(e.latlng)
-                        .openOn(mymap);
-                    }
+                    L.marker(["{{ $tour->latitud }}", "{{ $tour->longitud }}"]).addTo(mymap);
 
                     mymap.on('click', onMapClick);
 
@@ -315,13 +306,13 @@
 
                   <input type="hidden" value="{{ $tour->id }}" name="id_tour">
                   <input type="hidden" value="{{ Auth::id() }}" name="id_usuario">
-                  @if(Auth::user())
-                  <button type="button" id="botonFormulario" class="btn mt-2" data-toggle="modal" data-target="#modal"><strong>{{ trans('texto.reservar_tour') }}</strong></button>
+                  @if(Auth::user() && Auth::user()->tipo == 'Cliente')
+                  <button type="button" id="botonFormulario" class="btn mt-2" data-toggle="modal" data-target="#modal-{{$tour->id}}"><strong>{{ trans('texto.reservar_tour') }}</strong></button>
                   @else
-                  <button type="submit" id="botonFormulario" class="btn mt-2" onclick="window.location.href='{{ url('/login') }}'"><strong>{{ trans('texto.reservar_tour') }}</strong></button>
+                  <button type="button" id="botonFormulario" class="btn mt-2" data-toggle="modal" data-target="#modal-{{$tour->id}}" disabled><strong>{{ trans('texto.reservar_tour') }}</strong></button>
                   @endif
 
-                  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="modal-{{$tour->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -333,6 +324,7 @@
                         <div class="modal-body">
                           <p>{{ trans('texto.estas_seguro') }}</p>
                           <p><b>{{ trans('texto.lugar') }}: </b>{{$tour->ciudad}}, {{$tour->provincia}}, {{$tour->comunidad}}</p>
+                          <p><b>Direccion: </b>{{$tour->direccion}}</p>
                           <p><b>{{ trans('texto.fecha') }}: </b>{{$tour->fecha}}</p>
                           <p><b>{{ trans('texto.hora') }}: </b>{{$tour->hora}}</p>
                           <p><b>{{ trans('texto.idioma') }}: </b>{{$tour->idioma_tour}}</p>
@@ -340,7 +332,11 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('texto.cerrar') }}</button>
+                          @if(Auth::user()->tipo == 'Guia')
+                          <button type="submit" class="btn btn-primary" id="botonFormulario" disabled>{{ trans('texto.reservar') }}</button>
+                          @else
                           <button type="submit" class="btn btn-primary" id="botonFormulario">{{ trans('texto.reservar') }}</button>
+                          @endif
                         </div>
                       </div>
                     </div>

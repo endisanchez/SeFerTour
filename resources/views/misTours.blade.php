@@ -114,6 +114,7 @@
           <div id="collapseOne-{{ $tour->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
                 <p><b>Lugar: </b>{{$tour->ciudad}}, {{$tour->provincia}}, {{$tour->comunidad}}</p>
+                <p><b>Direccion: </b>{{$tour->direccion}}</p>
                 <p><b>Fecha: </b>{{$tour->fecha}}</p>
                 <p><b>Hora: </b>{{$tour->hora}}</p>
                 <p><b>Idioma: </b>{{$tour->idioma_tour}}</p>
@@ -121,13 +122,13 @@
                 <input type="hidden" value="{{ $tour->id }}" name="id_tour">
                 <input type="hidden" value="{{ Auth::id() }}" name="id_usuario">
 
-                <button type="button" id="botonFormulario" class="btn mt-2" data-toggle="modal" data-target="#modal2"><strong>Eliminar tour</strong></button>
+                <button type="button" id="botonFormulario" class="btn mt-2" data-toggle="modal" data-target="#modal-{{$tour->id}}"><strong>Eliminar tour</strong></button>
 
                 <form action="{{route('eliminarTourguia', $tour->id)}}">
                   @csrf
                   @method('DELETE')
 
-                  <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="modal-{{$tour->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -215,6 +216,20 @@
 
                   <div class="col-md-6">
                     <input id="inputMunicipio" type="text" class="form-control @error('provincia') is-invalid @enderror" name="municipio" value="{{ old('provincia') }}" required autocomplete="provincia" autofocus>
+                    @error('name')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                  </div>
+
+                </div>
+
+                <div class="form-group row">
+                  <label for="inputdireccion" class="col-md-4 col-form-label text-md-right">{{ __('Dirección') }}</label>
+
+                  <div class="col-md-6">
+                    <input id="inputdireccion" type="text" class="form-control @error('provincia') is-invalid @enderror" name="direccion" value="{{ old('provincia') }}" required autocomplete="provincia" autofocus>
                     @error('name')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
