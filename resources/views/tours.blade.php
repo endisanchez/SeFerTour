@@ -332,10 +332,12 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('texto.cerrar') }}</button>
+                          @if(Auth::user())
                           @if(Auth::user()->tipo == 'Guia')
                           <button type="submit" class="btn btn-primary" id="botonFormulario" disabled>{{ trans('texto.reservar') }}</button>
                           @else
                           <button type="submit" class="btn btn-primary" id="botonFormulario">{{ trans('texto.reservar') }}</button>
+                          @endif
                           @endif
                         </div>
                       </div>

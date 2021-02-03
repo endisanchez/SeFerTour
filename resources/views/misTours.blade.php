@@ -19,7 +19,7 @@
 
 <script src="{{ asset('/js/peticionDatos.js') }}"></script>
 
-<body>
+<body id="bodyregistro">
   <header>
     <nav class="navbar navbar-expand-sm navbar-dark static-top">
         <div class="container-fluid">
