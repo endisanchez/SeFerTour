@@ -274,7 +274,7 @@
                       <p><b>{{ trans('texto.fecha') }}: </b>{{$tour->fecha}}</p>
                       <p><b>{{ trans('texto.hora') }}: </b>{{$tour->hora}}</p>
                       <p><b>{{ trans('texto.idioma') }}: </b>{{$tour->idioma_tour}}</p>
-                      <p><b>{{ trans('texto.guia') }}: </b>{{$tour->guia->user->name}} {{$tour->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $tour->guia->user->foto)}}" /></p>
+                      <p><b>{{ trans('texto.guia') }}: </b>{{$tour->guia->user->name}} {{$tour->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ asset('storage/' . $tour->guia->user->foto )}}" /></p>
                     </div>
 
 
@@ -328,7 +328,7 @@
                           <p><b>{{ trans('texto.fecha') }}: </b>{{$tour->fecha}}</p>
                           <p><b>{{ trans('texto.hora') }}: </b>{{$tour->hora}}</p>
                           <p><b>{{ trans('texto.idioma') }}: </b>{{$tour->idioma_tour}}</p>
-                          <p><b>{{ trans('texto.guia') }}: </b>{{$tour->guia->user->name}} {{$tour->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ url('imagenes/' . $tour->guia->user->foto)}}" /></p>
+                          <p><b>{{ trans('texto.guia') }}: </b>{{$tour->guia->user->name}} {{$tour->guia->user->apellido}} <img class="rounded-circle" width="20" height="20" src="{{ asset('storage/' . $tour->guia->user->foto )}}" /></p>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('texto.cerrar') }}</button>
