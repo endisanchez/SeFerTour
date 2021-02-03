@@ -39,7 +39,7 @@
                 @if(Auth::user())
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
                     @if( Auth::user()->foto )
-                      <img src="{{ url('../storage/app/' . Auth::user()->foto) }}" alt="logo" width="25px" height="25px" class="rounded-circle">
+                      <img src="{{ asset('storage/' . Auth::user()->foto )}}" alt="logo" width="25px" height="25px" class="rounded-circle">
                     @else
                       <img src="{{url('imagenes/perfil.png')}}" alt="logo" width="25px" class="rounded-circle">
                     @endif

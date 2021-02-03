@@ -40,7 +40,7 @@
                 @if(Auth::user())
                   <a class="nav-link text-white" data-toggle="dropdown" href="{{ url('/') }}" role="button" >
                     @if( Auth::user()->foto )
-                      <img src="{{ url('../storage/app/' . Auth::user()->foto) }}" alt="logo" width="25px" height="25px" class="rounded-circle">
+                      <img src="{{ asset('storage/' . Auth::user()->foto )}}" alt="logo" width="25px" height="25px" class="rounded-circle">
                     @else
                       <img src="{{url('imagenes/perfil.png')}}" alt="logo" width="25px" class="rounded-circle">
                     @endif
@@ -93,7 +93,7 @@
     <div class="py-3">
       @if(Auth::user()->foto)
         <center>
-          <img src="../storage/app/{{ Auth::user()->foto }}" alt="perfil" width="150" height="150" class="rounded-circle">
+          <img src="{{ asset('storage/' . Auth::user()->foto )}}" alt="perfil" width="150" height="150" class="rounded-circle">
           <div class="col-12 my-2">
             <div class="row justify-content-center">
 
