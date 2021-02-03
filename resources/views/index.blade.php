@@ -16,15 +16,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
-
-
-<script src='jquery.zoom.js'></script>
-<script>
-    $(document).ready(function(){
-        $('#ex1').zoom();
-    });
-</script>
-
 <body>
   <header>
     <nav class="navbar navbar-expand-sm navbar-dark static-top">
