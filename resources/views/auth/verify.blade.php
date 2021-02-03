@@ -118,53 +118,28 @@
 
       <div class="row mt-5">
 
-      <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
 
-        <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
-        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-        <p>{{ trans('texto.descripcion') }}</p>
+          <h6 class="text-uppercase font-weight-bold">SeFerTour</h6>
+          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+          <p>{{ trans('texto.descripcion') }}</p>
 
-      </div>
-
-        <h6 class="text-uppercase font-weight-bold">{{ trans('texto.redes') }}</h6>
-        <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-        <p>
-          <a href="https://www.instagram.com/"><img src="{{url ('imagenes/insta.png')}}" alt="insta" width="20%"></a> Instagram
-        </p>
-        <p>
-          <a href="https://es-es.facebook.com/"><img src="{{url ('imagenes/facebook.png')}}" alt="facebook" width="20%"></a> Facebook
-        </p>
-        <p>
-          <a href="https://twitter.com/?lang=es"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
-        </p>
-
+        </div>
 
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 
-        <h6 class="text-uppercase font-weight-bold">{{ trans('texto.enlaces') }}</h6>
-        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-        @if(Auth::user())
+
+          <h6 class="text-uppercase font-weight-bold">{{ trans('texto.redes') }}</h6>
+          <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>
-            <a href="{{ url('perfil') }}">{{ trans('texto.cuenta') }}</a>
+            <a href="https://www.instagram.com/"><img src="{{url ('imagenes/insta.png')}}" alt="insta" width="20%"></a> Instagram
           </p>
           <p>
-            <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                      document.getElementById('logout-form').submit();">
-                    {{ trans('texto.salir') }}
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-              @csrf
-            </form>
-          </p>
-        @else
-          <p>
-            <a href="{{ url('login') }}">{{ trans('texto.inicio_sesion') }}</a>
+            <a href="https://es-es.facebook.com/"><img src="{{url ('imagenes/facebook.png')}}" alt="facebook" width="20%"></a> Facebook
           </p>
           <p>
-            <a href="{{ url('register') }}">{{ trans('texto.registrar') }}</a>
+            <a href="https://twitter.com/?lang=es"><img src="{{url ('imagenes/twitter.png')}}" alt="twitter" width="20%"></a> Twitter
           </p>
-        @endif
 
         </div>
 
@@ -172,27 +147,48 @@
 
           <h6 class="text-uppercase font-weight-bold">{{ trans('texto.enlaces') }}</h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-          <p>
-            <a href="#!">{{ trans('texto.cuenta') }}</a>
-          </p>
-          <p>
-            <a href="#!">{{ trans('texto.registrar') }}</a>
-          </p>
+          @if(Auth::user())
+            <p>
+              <a href="{{ url('perfil') }}">{{ trans('texto.cuenta') }}</a>
+            </p>
+            <p>
+              <a href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                      {{ trans('texto.salir') }}
+              </a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+              </form>
+            </p>
+          @else
+            <p>
+              <a href="{{ url('login') }}">{{ trans('texto.inicio_sesion') }}</a>
+            </p>
+            <p>
+              <a href="{{ url('register') }}">{{ trans('texto.registrar') }}</a>
+            </p>
+          @endif
 
-        <h6 class="text-uppercase font-weight-bold">{{ trans('texto.contacto') }}</h6>
-        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-        <p>Donostia, Gipuzkoa</p>
-        <p>info@sefertour.com</p>
-        <p>+ 34 234 567 88</p>
-        <p>+ 34 234 567 89</p>
+        </div>
 
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
-  <div class="text-center py-3">© 2020 Copyright:
-    <a href="#"> SeFerTour</a>
-  </div>
+
+          <h6 class="text-uppercase font-weight-bold">{{ trans('texto.contacto') }}</h6>
+          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+          <p>Donostia, Gipuzkoa</p>
+          <p>info@sefertour.com</p>
+          <p>+ 34 234 567 88</p>
+          <p>+ 34 234 567 89</p>
+
+        </div>
 
       </div>
+    </div>
+
+    <div class="text-center py-3">© 2020 Copyright:
+      <a href="#"> SeFerTour</a>
     </div>
 
   </footer>
